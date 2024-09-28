@@ -52,25 +52,25 @@
         <br>
 
         <!-- 计算器的按钮，点击不同按钮调用不同的函数 -->
-        <button onclick="clearDisplay()">C</button> <!-- 清除显示器的按钮 -->
         <button onclick="appendNumber('1')">1</button> <!-- 添加数字1 -->
         <button onclick="appendNumber('2')">2</button> <!-- 添加数字2 -->
         <button onclick="appendNumber('3')">3</button> <!-- 添加数字3 -->
-        <button onclick="setOperation('+')">+</button> <!-- 设置加法操作 -->
+        <button onclick="clearDisplay()">C</button> <!-- 清除显示器的按钮 -->
         <br>
         <button onclick="appendNumber('4')">4</button> <!-- 添加数字4 -->
         <button onclick="appendNumber('5')">5</button> <!-- 添加数字5 -->
         <button onclick="appendNumber('6')">6</button> <!-- 添加数字6 -->
-        <button onclick="setOperation('-')">-</button> <!-- 设置减法操作 -->
+        <button onclick="setOperation('+')">+</button> <!-- 设置加法操作 -->
         <br>
         <button onclick="appendNumber('7')">7</button> <!-- 添加数字7 -->
         <button onclick="appendNumber('8')">8</button> <!-- 添加数字8 -->
         <button onclick="appendNumber('9')">9</button> <!-- 添加数字9 -->
-        <button onclick="setOperation('*')">*</button> <!-- 设置乘法操作 -->
+        <button onclick="setOperation('-')">-</button> <!-- 设置减法操作 -->
         <br>
         <button onclick="appendNumber('0')">0</button> <!-- 添加数字0 -->
-        <button onclick="calculate()">=</button> <!-- 计算结果 -->
+        <button onclick="setOperation('*')">*</button> <!-- 设置乘法操作 -->
         <button onclick="setOperation('/')">/</button> <!-- 设置除法操作 -->
+        <button onclick="calculate()">=</button> <!-- 计算结果 -->
     </div>
 
     <!-- JavaScript 用于计算器功能的实现 -->
