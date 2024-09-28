@@ -78,7 +78,6 @@
         let display = document.getElementById('display'); // 获取显示器输入框元素
         let currentOperation = null; // 当前的操作符（如 +, -, *, /）
         let firstNumber = null; // 存储输入的第一个数字
-        let secondNumber = null;
 
         // 函数：向显示器中添加数字
         function appendNumber(number) {
@@ -90,13 +89,13 @@
         function setOperation(operation) {
             firstNumber = parseFloat(display.value); // 将显示器中的值存储为第一个数字，并转换为浮点数
             currentOperation = operation; // 设置当前的操作符
-            display.value += currentOperation; // 清空显示器，准备输入下一个数字
+            display.value += ' ' + operation + ' '; // 显示运算符
         }
 
         // 函数：执行计算并显示结果
         function calculate() {
             if (currentOperation !== null && firstNumber !== null) { // 确保操作符和第一个数字已被设置
-                //let secondNumber = parseFloat(display.value); // 将显示器中的值作为第二个数字
+                let secondNumber = parseFloat(display.value.split(' ')[2]); // 将显示器中的值作为第二个数字
                 let result; // 用于存储计算结果
                 // 根据操作符选择合适的计算
                 switch (currentOperation) {
