@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+            background-color: #f0f0f0;
+        }
+        #calculator {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+        }
+        #calculator input {
+            width: 200px;
+            height: 40px;
+            font-size: 24px;
+            margin-bottom: 10px;
+            text-align: right;
+        }
+        #calculator button {
+            width: 50px;
+            height: 50px;
+            font-size: 24px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Simple Calculator</h1>
+    <div id="calculator">
+        <input type="text" id="display" disabled>
+        <br>
+        <button onclick="clearDisplay()">C</button>
+        <button onclick="appendNumber('1')">1</button>
+        <button onclick="appendNumber('2')">2</button>
+        <button onclick="appendNumber('3')">3</button>
+        <button onclick="setOperation('+')">+</button>
+        <br>
+        <button onclick="appendNumber('4')">4</button>
+        <button onclick="appendNumber('5')">5</button>
+        <button onclick="appendNumber('6')">6</button>
+        <button onclick="setOperation('-')">-</button>
+        <br>
+        <button onclick="appendNumber('7')">7</button>
+        <button onclick="appendNumber('8')">8</button>
+        <button onclick="appendNumber('9')">9</button>
+        <button onclick="setOperation('*')">*</button>
+        <br>
+        <button onclick="appendNumber('0')">0</button>
+        <button onclick="calculate()">=</button>
+        <button onclick="setOperation('/')">/</button>
+    </div>
+
+    <script>
+        let display = document.getElementById('display');
+        let currentOperation = null;
+        let firstNumber = null;
+
+        function appendNumber(number) {
+            if (display.value === "0") {
+                display.value = number;
+            } else {
+                display.value += number;
+            }
+        }
+
+        function setOperation(operation) {
+            firstNumber = parseFloat(display.value);
+            currentOperation = operation;
+            display.value = '';
+        }
+
+        function calculate() {
+            if (currentOperation !== null && firstNumber !== null) {
+                let secondNumber = parseFloat(display.value);
+                let result;
+                switch (currentOperation) {
+                    case '+':
+                        result = firstNumber + secondNumber;
+                        break;
+                    case '-':
+                        result = firstNumber - secondNumber;
+                        break;
+                    case '*':
+                        result = firstNumber * secondNumber;
+                        break;
+                    case '/':
+                        result = firstNumber / secondNumber;
+                        break;
+                }
+                display.value = result;
+                currentOperation = null;
+                firstNumber = null;
+            }
+        }
+
+        function clearDisplay() {
+            display.value = '';
+            currentOperation = null;
+            firstNumber = null;
+        }
+    </script>
+</body>
+</html>
