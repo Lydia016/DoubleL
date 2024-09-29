@@ -3,82 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Multi-function Calculator</title>
-    <!-- 引用外部CSS样式文件 -->
-    <link rel="stylesheet" href="style.css">
+    <title>Multi-Function Calculator</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- 网页容器，包含普通计算器和货币换算器 -->
-    <div class="calculator-container">
-        <h1>Multi-function Calculator</h1>
+    <h1>多功能计算器</h1>
 
-        <!-- 普通计算器部分 -->
-        <div class="basic-calculator">
-            <h2>Basic Calculator</h2>
-            <!-- 显示屏，用于展示计算输入和结果 -->
-            <input type="text" id="display" disabled>
-            <div class="buttons">
-                <!-- 各个按钮实现不同的计算功能 -->
-                <button onclick="clearDisplay()">C</button>
-                <button onclick="deleteLast()">DEL</button>
-                <button onclick="appendToDisplay('/')">/</button>
-                <button onclick="appendToDisplay('*')">*</button>
-
-                <button onclick="appendToDisplay('7')">7</button>
-                <button onclick="appendToDisplay('8')">8</button>
-                <button onclick="appendToDisplay('9')">9</button>
-                <button onclick="appendToDisplay('-')">-</button>
-
-                <button onclick="appendToDisplay('4')">4</button>
-                <button onclick="appendToDisplay('5')">5</button>
-                <button onclick="appendToDisplay('6')">6</button>
-                <button onclick="appendToDisplay('+')">+</button>
-
-                <button onclick="appendToDisplay('1')">1</button>
-                <button onclick="appendToDisplay('2')">2</button>
-                <button onclick="appendToDisplay('3')">3</button>
-                <!-- "=" 按钮用于计算结果 -->
-                <button onclick="calculate()">=</button>
-
-                <button onclick="appendToDisplay('0')">0</button>
-                <button onclick="appendToDisplay('.')">.</button>
-            </div>
-        </div>
-
-        <!-- 货币换算器部分 -->
-        <div class="currency-converter">
-            <h2>Currency Converter</h2>
-            <!-- 输入待转换的金额 -->
-            <div class="input-section">
-                <label for="amount">Amount:</label>
-                <input type="number" id="amount" placeholder="Enter amount">
-            </div>
-            <!-- 选择要转换的源货币 -->
-            <div class="select-section">
-                <label for="from-currency">From:</label>
-                <select id="from-currency">
-                    <option value="USD">USD - US Dollar</option>
-                    <option value="EUR">EUR - Euro</option>
-                    <option value="CNY">CNY - Chinese Yuan</option>
-                </select>
-            </div>
-            <!-- 选择目标货币 -->
-            <div class="select-section">
-                <label for="to-currency">To:</label>
-                <select id="to-currency">
-                    <option value="USD">USD - US Dollar</option>
-                    <option value="EUR">EUR - Euro</option>
-                    <option value="CNY">CNY - Chinese Yuan</option>
-                </select>
-            </div>
-            <!-- 按钮触发货币换算 -->
-            <button id="convert-btn">Convert</button>
-            <!-- 显示转换结果 -->
-            <div id="result"></div>
+    <!-- 基础加减乘除计算器 -->
+    <div class="calculator">
+        <input type="text" id="basic-display" placeholder="0" readonly>
+        <div class="buttons">
+            <button onclick="clearDisplay()">C</button>
+            <button onclick="deleteLast()">←</button>
+            <button onclick="inputValue('/')">/</button>
+            <button onclick="inputValue('*')">*</button>
+            <button onclick="inputValue('7')">7</button>
+            <button onclick="inputValue('8')">8</button>
+            <button onclick="inputValue('9')">9</button>
+            <button onclick="inputValue('-')">-</button>
+            <button onclick="inputValue('4')">4</button>
+            <button onclick="inputValue('5')">5</button>
+            <button onclick="inputValue('6')">6</button>
+            <button onclick="inputValue('+')">+</button>
+            <button onclick="inputValue('1')">1</button>
+            <button onclick="inputValue('2')">2</button>
+            <button onclick="inputValue('3')">3</button>
+            <button onclick="calculateResult()">=</button>
+            <button onclick="inputValue('0')">0</button>
+            <button onclick="inputValue('.')">.</button>
         </div>
     </div>
 
-    <!-- 引用外部JavaScript文件 -->
-    <script src="app.js"></script>
+    <!-- 货币换算器 -->
+    <h2>货币换算器</h2>
+    <form id="currency-converter">
+        <label for="amount">金额:</label>
+        <input type="number" id="amount" placeholder="输入金额" required><br>
+
+        <label for="fromCurrency">从:</label>
+        <select id="fromCurrency">
+            <option value="USD">USD</option>
+            <option value="EUR">EUR</option>
+            <option value="GBP">GBP</option>
+            <!-- 可以根据需求添加更多货币 -->
+        </select><br>
+
+        <label for="toCurrency">到:</label>
+        <select id="toCurrency">
+            <option value="USD">USD</option>
+            <option value="EUR">EUR</option>
+            <option value="GBP">GBP</option>
+        </select><br>
+
+        <button type="button" onclick="convertCurrency()">转换</button>
+    </form>
+    <p id="conversion-result"></p>
+
+    <script src="script.js"></script>
 </body>
 </html>

@@ -1,65 +1,39 @@
-/* 页面整体设置 */
 body {
-    font-family: Arial, sans-serif; /* 字体 */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh; /* 设置页面全高 */
-    margin: 0; /* 取消默认的外边距 */
-    background-color: #f4f4f4; /* 设置背景颜色 */
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 20px;
+    background-color: #f0f0f0;
 }
 
-/* 计算器容器样式 */
-.calculator-container {
-    background-color: white;
-    padding: 20px; /* 内边距 */
-    border-radius: 10px; /* 边角圆滑 */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 设置阴影 */
-    width: 320px;
+h1, h2 {
+    color: #333;
 }
 
-h1 {
-    text-align: center; /* 居中标题 */
+.calculator {
+    display: inline-block;
+    margin-bottom: 20px;
 }
 
-.basic-calculator, .currency-converter {
-    margin-bottom: 30px; /* 底部外边距 */
-}
-
-/* 输入框样式 */
-input[type="text"], input[type="number"] {
-    width: 100%; /* 全宽 */
+#basic-display {
+    width: 100%;
+    font-size: 2em;
+    margin-bottom: 10px;
+    text-align: right;
     padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ddd; /* 边框颜色 */
-    border-radius: 5px; /* 边框圆滑 */
 }
 
-/* 按钮区域布局 */
-.buttons {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 创建4列按钮布局 */
-    gap: 10px; /* 按钮之间的间距 */
+.buttons button {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5em;
+    margin: 5px;
 }
 
-/* 按钮样式 */
-button {
-    padding: 15px;
-    background-color: #28a745; /* 按钮背景颜色 */
-    color: white; /* 字体颜色 */
-    border: none; /* 无边框 */
-    border-radius: 5px; /* 圆角 */
-    cursor: pointer; /* 鼠标悬停时显示手形图标 */
-    font-size: 18px;
+form {
+    margin: 20px 0;
 }
 
-button:hover {
-    background-color: #218838; /* 悬停时改变背景色 */
-}
-
-/* 结果显示区域样式 */
-#result {
-    margin-top: 20px;
-    font-size: 18px;
-    font-weight: bold; /* 加粗字体 */
+input[type="number"], select {
+    padding: 10px;
+    font-size: 1.2em;
 }

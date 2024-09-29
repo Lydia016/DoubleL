@@ -1,56 +1,55 @@
-// 基本计算器功能
-let display = document.getElementById('display'); // 获取显示器元素
+// Open Exchange Rates API 密钥
+const appId = '431402e48d944926be7d0b1c49836008';
 
-// 向显示屏中添加内容
-function appendToDisplay(value) {
-    display.value += value;
+// 1. 基础加减乘除计算器功能
+let basicDisplay = document.getElementById('basic-display');
+
+function inputValue(value) {
+    basicDisplay.value += value;
 }
 
-// 清空显示屏
 function clearDisplay() {
-    display.value = '';
+    basicDisplay.value = '';
 }
 
-// 删除最后一个输入的字符
 function deleteLast() {
-    display.value = display.value.slice(0, -1);
+    basicDisplay.value = basicDisplay.value.slice(0, -1);
 }
 
-// 计算输入的表达式并显示结果
-function calculate() {
+function calculateResult() {
     try {
-        display.value = eval(display.value); // 使用 eval 函数执行表达式
+        basicDisplay.value = eval(basicDisplay.value);
     } catch (error) {
-        display.value = 'Error'; // 捕捉错误并显示错误信息
+        basicDisplay.value = 'Error';
     }
 }
 
-// 货币换算功能
-document.getElementById('convert-btn').addEventListener('click', convertCurrency); // 绑定转换按钮点击事件
+// 2. 货币换算器功能
+async function convertCurrency() {
+    const amount = document.getElementById('amount').value;
+    const fromCurrency = document.getElementById('fromCurrency').value;
+    const toCurrency = document.getElementById('toCurrency').value;
+    const resultElement = document.getElementById('conversion-result');
 
-function convertCurrency() {
-    const amount = document.getElementById('amount').value; // 获取输入的金额
-    const fromCurrency = document.getElementById('from-currency').value; // 获取源货币
-    const toCurrency = document.getElementById('to-currency').value; // 获取目标货币
-
-    // 检查输入金额是否有效
-    if (amount === '' || amount <= 0) {
-        alert('Please enter a valid amount');
+    if (amount === '' || isNaN(amount)) {
+        resultElement.textContent = '请输入有效金额。';
         return;
     }
 
-    const apiKey = 'b54ed56f2c5c49631ca98068';  // 替换为你的API密钥
-    const apiUrl = ` https://v6.exchangerate-api.com/v6/b54ed56f2c5c49631ca98068/latest/${fromCurrency}`; // 汇率API地址
+    try {
+        // 发送 API 请求获取最新汇率
+        const response = await fetch(`https://openexchangerates.org/api/latest.json?app_id=${appId}`);
+        const data = await response.json();
+        const rates = data.rates;
 
-    // 发送请求获取汇率
-    fetch(apiUrl)
-        .then(response => response.json()) // 解析JSON数据
-        .then(data => {
-            const rate = data.rates[toCurrency]; // 获取目标货币的汇率
-            const result = (amount * rate).toFixed(2); // 计算结果并保留两位小数
-            document.getElementById('result').innerText = `${amount} ${fromCurrency} = ${result} ${toCurrency}`; // 显示转换结果
-        })
-        .catch(error => {
-            console.error('Error fetching exchange rates:', error);
-            document.getElementById('result').innerText = 'Error fetching exchange rates. Please try again later.'; // 错误处理
-        })}
+        const fromRate = rates[fromCurrency];
+        const toRate = rates[toCurrency];
+        const convertedAmount = (amount / fromRate) * toRate;
+
+        // 显示换算结果
+        resultElement.textContent = `${amount} ${fromCurrency} = ${convertedAmount.toFixed(2)} ${toCurrency}`;
+    } catch (error) {
+        console.error('汇率获取失败:', error);
+        resultElement.textContent = '获取汇率失败，请稍后重试。';
+    }
+}
