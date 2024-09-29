@@ -3,25 +3,31 @@ const appId = '431402e48d944926be7d0b1c49836008'; // 将 YOUR_APP_ID 替换为�
 
 // 基础加减乘除计算器
 // 用于存储输入的当前值、之前的值和操作符
-let currentValue = '';  // 当前输入的数字
+let currentValue = '';  // 当前输入的数字或计算结果
 let previousValue = '';  // 之前的值
 let operator = '';  // 当前操作符
 let resultCalculated = false;  // 用于标记是否刚刚计算过结果
 
 // 输入数字时调用
 function inputNumber(num) {
-    // 如果已经计算出结果并继续输入数字，则重置
+    // 如果已经计算出结果并继续输入数字，则清空 currentValue，继续输入
     if (resultCalculated) {
         currentValue = '';  // 清空当前值
         resultCalculated = false;  // 重置结果标记
     }
-    // 将输入的数字追加到当前值中
+    
+    // 将输入的数字追加到 currentValue 中
     currentValue += num;
     document.getElementById('display').value = currentValue;  // 更新显示器
 }
 
 // 输入操作符时调用
 function inputOperator(op) {
+    // 如果按下等号后直接输入操作符，将之前的结果作为第一个值
+    if (resultCalculated) {
+        resultCalculated = false;  // 重置计算标记
+    }
+
     // 如果有当前值，则将其保存为 previousValue 并继续
     if (currentValue !== '') {
         if (previousValue !== '') {
@@ -31,8 +37,8 @@ function inputOperator(op) {
             previousValue = currentValue;  // 保存当前数字为 previousValue
         }
         operator = op;  // 保存操作符
-        currentValue = '';  // 重置 currentValue，准备输入下一个数字
         document.getElementById('display').value = previousValue + ` ${operator} `;  // 显示操作符
+        currentValue = '';  // 重置 currentValue，准备输入下一个数字
     }
 }
 
@@ -50,6 +56,7 @@ function clearDisplay() {
     currentValue = '';
     previousValue = '';
     operator = '';
+    resultCalculated = false;  // 重置结果标记
     document.getElementById('display').value = '';  // 清空显示器
 }
 
@@ -94,6 +101,7 @@ function calculateResult() {
         document.getElementById('display').value = currentValue;  // 显示结果
     }
 }
+
 
 
 // 货币换算器
