@@ -18,7 +18,7 @@ function inputNumber(num) {
     
     // 将输入的数字追加到 currentValue 中
     currentValue += num;
-    document.getElementById('display').value = currentValue;  // 更新显示器
+    document.getElementById('display').value += currentValue;  // 更新显示器
 }
 
 // 输入操作符时调用

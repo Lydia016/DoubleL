@@ -6,11 +6,12 @@
     <title>多功能计算器</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <h1>多功能计算器</h1>
 
+<body>
+    <div class ="container">
     <!-- 基础加减乘除计算器 -->
     <div class="calculator">
+        <h1>Basic Calculater</h1>
         <input type="text" id="display" class="display" readonly>
         <div class="buttons">
             <button onclick="clearDisplay()">C</button>
@@ -35,25 +36,26 @@
     </div>
 
     <!-- 货币换算器 -->
-    <h2>货币换算器</h2>
     <div class="currency-converter">
-        <input type="number" id="amount" placeholder="输入金额">
-        <select id="fromCurrency">
+        <h2>Currency conversion</h2>
+        <input type="number" id="amount" placeholder="Enter amount" class="inputBox">
+        <select id="fromCurrency" class="selectBox">
             <option value="USD">USD</option>
             <option value="CNY">CNY</option>
             <option value="EUR">EUR</option>
             <option value="GBP">GBP</option>
             <option value="KRW">KRW</option>
         </select>
-        <select id="toCurrency">
+        <select id="toCurrency" class="selectBox">
             <option value="USD">USD</option>
             <option value="CNY">CNY</option>
             <option value="EUR">EUR</option>
             <option value="GBP">GBP</option>
             <option value="KRW">KRW</option>
         </select>
-        <button onclick="convertCurrency()">转换</button>
+        <button onclick="convertCurrency()">convert</button>
         <p id="conversionResult"></p>
+    </div>
     </div>
 
     <script src="app.js"></script>

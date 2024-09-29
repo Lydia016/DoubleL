@@ -4,24 +4,25 @@ body {
     background-color: #f0f0f0;
 }
 
-h1 {
-    text-align:left;
+.container {
+    display: flex;
+    flex-direction: row;  /* 设置为水平排列 */
+    /*justify-content: space-between;*/
+    align-items: flex-start;
+    gap:10px;
 }
 
-h2 {
-    text-align: right;
-}
 .calculator, .currency-converter {
     margin: 20px auto;
     max-width: 300px;
     padding: 20px;
-    background-color: white;
+    background-color: rgb(39, 37, 37);
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .display {
-    width: 100%;
+    width: 250px;
     height: 40px;
     text-align: right;
     padding: 10px;
@@ -29,6 +30,15 @@ h2 {
     font-size: 18px;
     border-radius: 5px;
     border: 1px solid #ccc;
+}
+
+h1{
+    text-align: center;
+    color: darkseagreen;
+}
+h2{
+    text-align: center;
+    color: darkseagreen;
 }
 
 .buttons {
@@ -40,7 +50,7 @@ h2 {
 .buttons button {
     padding: 20px;
     font-size: 18px;
-    background-color: #f1f1f1;
+    background-color: #8dcd8f; /*普通计算器按钮颜色*/
     border: 1px solid #ccc;
     border-radius: 5px;
     cursor: pointer;
@@ -48,23 +58,30 @@ h2 {
 }
 
 .buttons button:hover {
-    background-color: #ddd;
+    background-color: #265228;/*鼠标放上去时的颜色*/
 }
 
-.currency-converter input, select {
-    width: 100%;
+.inputBox {
+    width: 230px;
     padding: 10px;
     margin: 5px 0;
     font-size: 16px;
     border-radius: 5px;
     border: 1px solid #ccc;
 }
-
-.currency-converter button {
-    width: 100%;
+.selectBox{
+    width: 80px;
     padding: 10px;
-    background-color: #4CAF50;
-    color: white;
+    margin: 5px 0;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+.currency-converter button {
+    width: 80px;
+    padding: 10px;
+    background-color: #8dcd8f;
+    color:black;
     border: none;
     font-size: 16px;
     cursor: pointer;
@@ -74,4 +91,5 @@ h2 {
 #conversionResult {
     margin-top: 10px;
     font-size: 18px;
+    color:#8dcd8f;
 }
