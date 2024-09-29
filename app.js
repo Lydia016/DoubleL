@@ -18,7 +18,7 @@ function inputNumber(num) {
     
     // 将输入的数字追加到 currentValue 中
     currentValue += num;
-    document.getElementById('display').value += currentValue;  // 更新显示器
+    document.getElementById('display').value += num;  // 更新显示器
 }
 
 // 输入操作符时调用
@@ -62,10 +62,23 @@ function clearDisplay() {
 
 // 删除最后一个字符
 function deleteLast() {
-    // 删除当前值中的最后一个字符
-    currentValue = currentValue.slice(0, -1);
-    document.getElementById('display').value = currentValue;  // 更新显示器
+    // 如果 currentValue 不为空，删除 currentValue 的最后一个字符
+    if (currentValue !== '') {
+        currentValue = currentValue.slice(0, -1);
+        document.getElementById('display').value = currentValue || previousValue + ` ${operator} `;  // 更新显示器
+    } 
+    // 如果 currentValue 为空且有操作符，删除操作符
+    else if (operator !== '') {
+        operator = '';  // 清空操作符
+        document.getElementById('display').value = previousValue;  // 只显示 previousValue
+    } 
+    // 如果 currentValue 和 operator 都为空，删除 previousValue 的最后一个字符
+    else if (previousValue !== '') {
+        previousValue = previousValue.slice(0, -1);
+        document.getElementById('display').value = previousValue;
+    }
 }
+
 
 // 当按下等号时计算结果
 function calculateResult() {
