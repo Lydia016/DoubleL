@@ -2,31 +2,37 @@
 const appId = '431402e48d944926be7d0b1c49836008'; // 将 YOUR_APP_ID 替换为你自己的 App ID
 
 // 基础加减乘除计算器
-// 声明变量用于存储当前值、之前的值和操作符
-let currentValue = '';  // 当前输入的值
+// 用于存储输入的当前值、之前的值和操作符
+let currentValue = '';  // 当前输入的数字
 let previousValue = '';  // 之前的值
-let operator = '';  // 当前的操作符
+let operator = '';  // 当前操作符
+let resultCalculated = false;  // 用于标记是否刚刚计算过结果
 
 // 输入数字时调用
 function inputNumber(num) {
-    // 将输入的数字添加到当前值中
+    // 如果已经计算出结果并继续输入数字，则重置
+    if (resultCalculated) {
+        currentValue = '';  // 清空当前值
+        resultCalculated = false;  // 重置结果标记
+    }
+    // 将输入的数字追加到当前值中
     currentValue += num;
-    document.getElementById('basic-display').value = currentValue;  // 更新显示器
+    document.getElementById('display').value = currentValue;  // 更新显示器
 }
 
 // 输入操作符时调用
 function inputOperator(op) {
-    // 如果当前已经输入了数字，才处理运算符
+    // 如果有当前值，则将其保存为 previousValue 并继续
     if (currentValue !== '') {
-        // 如果已经有一个 previousValue，先执行之前的计算
         if (previousValue !== '') {
-            calculateResult();  // 立即计算前两个值的结果
+            // 如果已经有 previousValue，则先进行计算
+            calculateResult();
+        } else {
+            previousValue = currentValue;  // 保存当前数字为 previousValue
         }
-        previousValue = currentValue;  // 保存第一个数字
         operator = op;  // 保存操作符
-        currentValue += ` ${operator} `;  // 在当前值后面添加操作符，显示在屏幕上
-        document.getElementById('basic-display').value = currentValue;  // 更新显示器
-        currentValue = '';  // 清空 currentValue，准备下一个数字的输入
+        currentValue = '';  // 重置 currentValue，准备输入下一个数字
+        document.getElementById('display').value = previousValue + ` ${operator} `;  // 显示操作符
     }
 }
 
@@ -34,8 +40,8 @@ function inputOperator(op) {
 function inputDecimal() {
     // 确保当前值中只包含一个小数点
     if (!currentValue.includes('.')) {
-        currentValue += '.';
-        document.getElementById('basic-display').value = currentValue;
+        currentValue += '.';  // 添加小数点
+        document.getElementById('display').value = currentValue;  // 更新显示器
     }
 }
 
@@ -44,48 +50,49 @@ function clearDisplay() {
     currentValue = '';
     previousValue = '';
     operator = '';
-    document.getElementById('basic-display').value = '';  // 清空显示器
+    document.getElementById('display').value = '';  // 清空显示器
 }
 
 // 删除最后一个字符
 function deleteLast() {
-    // 删除当前输入的最后一个字符
+    // 删除当前值中的最后一个字符
     currentValue = currentValue.slice(0, -1);
-    document.getElementById('basic-display').value = currentValue;
+    document.getElementById('display').value = currentValue;  // 更新显示器
 }
 
 // 当按下等号时计算结果
 function calculateResult() {
-    let result = 0;
-    const prev = parseFloat(previousValue);  // 将 previousValue 转换为数字
-    const curr = parseFloat(currentValue);  // 将 currentValue 转换为数字
+    // 只有在有 previousValue 和 currentValue 的情况下才能计算
+    if (previousValue !== '' && currentValue !== '' && operator !== '') {
+        let result = 0;
+        const prev = parseFloat(previousValue);  // 将 previousValue 转换为数字
+        const curr = parseFloat(currentValue);  // 将 currentValue 转换为数字
 
-    // 检查输入是否合法
-    if (isNaN(prev) || isNaN(curr)) return;  // 确保两个值都是数字
+        // 根据操作符执行相应的运算
+        switch (operator) {
+            case '+':
+                result = prev + curr;
+                break;
+            case '-':
+                result = prev - curr;
+                break;
+            case '*':
+                result = prev * curr;
+                break;
+            case '/':
+                result = curr === 0 ? 'Error' : prev / curr;  // 防止除以 0
+                break;
+            default:
+                return;
+        }
 
-    // 根据操作符执行相应的运算
-    switch (operator) {
-        case '+':
-            result = prev + curr;
-            break;
-        case '-':
-            result = prev - curr;
-            break;
-        case '*':
-            result = prev * curr;
-            break;
-        case '/':
-            result = curr === 0 ? 'Error' : prev / curr;  // 防止除以 0
-            break;
-        default:
-            return;  // 如果没有操作符，则不进行任何计算
+        // 显示结果并标记计算完成
+        currentValue = result.toString();  // 将结果保存到 currentValue
+        operator = '';  // 清空操作符
+        resultCalculated = true;  // 标记结果已经计算，允许继续操作
+        previousValue = '';  // 重置 previousValue
+        document.getElementById('display').value = currentValue;  // 显示结果
     }
-
-    // 将计算结果显示出来，并重置 currentValue 和 previousValue
-    currentValue = result.toString();  // 保存结果为当前值
-    operator = '';  // 清空操作符
-    previousValue = '';  // 重置 previousValue
-    document.getElementById('basic-display').value = currentValue;  // 显示结果
 }
 
 
