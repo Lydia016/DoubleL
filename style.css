@@ -1,39 +1,74 @@
 body {
     font-family: Arial, sans-serif;
-    text-align: center;
     padding: 20px;
     background-color: #f0f0f0;
 }
 
 h1, h2 {
-    color: #333;
+    text-align: center;
 }
 
-.calculator {
-    display: inline-block;
-    margin-bottom: 20px;
+.calculator, .currency-converter {
+    margin: 20px auto;
+    max-width: 300px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-#basic-display {
+.display {
     width: 100%;
-    font-size: 2em;
-    margin-bottom: 10px;
+    height: 40px;
     text-align: right;
     padding: 10px;
+    margin-bottom: 10px;
+    font-size: 18px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
 }
 
 .buttons button {
-    width: 60px;
-    height: 60px;
-    font-size: 1.5em;
-    margin: 5px;
+    padding: 20px;
+    font-size: 18px;
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
-form {
-    margin: 20px 0;
+.buttons button:hover {
+    background-color: #ddd;
 }
 
-input[type="number"], select {
+.currency-converter input, select {
+    width: 100%;
     padding: 10px;
-    font-size: 1.2em;
+    margin: 5px 0;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.currency-converter button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#conversionResult {
+    margin-top: 10px;
+    font-size: 18px;
 }

@@ -3,62 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Multi-Function Calculator</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>多功能计算器</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h1>多功能计算器</h1>
 
     <!-- 基础加减乘除计算器 -->
     <div class="calculator">
-        <input type="text" id="basic-display" placeholder="0" readonly>
+        <input type="text" id="basic-display" class="display" readonly>
         <div class="buttons">
             <button onclick="clearDisplay()">C</button>
             <button onclick="deleteLast()">←</button>
-            <button onclick="inputValue('/')">/</button>
-            <button onclick="inputValue('*')">*</button>
-            <button onclick="inputValue('7')">7</button>
-            <button onclick="inputValue('8')">8</button>
-            <button onclick="inputValue('9')">9</button>
-            <button onclick="inputValue('-')">-</button>
-            <button onclick="inputValue('4')">4</button>
-            <button onclick="inputValue('5')">5</button>
-            <button onclick="inputValue('6')">6</button>
-            <button onclick="inputValue('+')">+</button>
-            <button onclick="inputValue('1')">1</button>
-            <button onclick="inputValue('2')">2</button>
-            <button onclick="inputValue('3')">3</button>
+            <button onclick="inputOperator('/')">/</button>
+            <button onclick="inputOperator('*')">*</button>
+            <button onclick="inputNumber('7')">7</button>
+            <button onclick="inputNumber('8')">8</button>
+            <button onclick="inputNumber('9')">9</button>
+            <button onclick="inputOperator('-')">-</button>
+            <button onclick="inputNumber('4')">4</button>
+            <button onclick="inputNumber('5')">5</button>
+            <button onclick="inputNumber('6')">6</button>
+            <button onclick="inputOperator('+')">+</button>
+            <button onclick="inputNumber('1')">1</button>
+            <button onclick="inputNumber('2')">2</button>
+            <button onclick="inputNumber('3')">3</button>
             <button onclick="calculateResult()">=</button>
-            <button onclick="inputValue('0')">0</button>
-            <button onclick="inputValue('.')">.</button>
+            <button onclick="inputNumber('0')">0</button>
+            <button onclick="inputDecimal()">.</button>
         </div>
     </div>
 
     <!-- 货币换算器 -->
     <h2>货币换算器</h2>
-    <form id="currency-converter">
-        <label for="amount">金额:</label>
-        <input type="number" id="amount" placeholder="输入金额" required><br>
-
-        <label for="fromCurrency">从:</label>
+    <div class="currency-converter">
+        <input type="number" id="amount" placeholder="输入金额">
         <select id="fromCurrency">
             <option value="USD">USD</option>
             <option value="EUR">EUR</option>
             <option value="GBP">GBP</option>
-            <!-- 可以根据需求添加更多货币 -->
-        </select><br>
-
-        <label for="toCurrency">到:</label>
+        </select>
         <select id="toCurrency">
             <option value="USD">USD</option>
             <option value="EUR">EUR</option>
             <option value="GBP">GBP</option>
-        </select><br>
+        </select>
+        <button onclick="convertCurrency()">转换</button>
+        <p id="conversionResult"></p>
+    </div>
 
-        <button type="button" onclick="convertCurrency()">转换</button>
-    </form>
-    <p id="conversion-result"></p>
-
-    <script src="script.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
