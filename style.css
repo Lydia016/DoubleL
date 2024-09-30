@@ -155,7 +155,7 @@ header h2 {
 .card:nth-of-type(3) {
     width: 90px;
     height: 90px;
-    transform: rotate(72deg) translate(240px) rotate(-72deg);
+    transform: rotate(72deg) translate(235px) rotate(-72deg);
 }
 
 .card:nth-of-type(4) {
@@ -179,7 +179,7 @@ header h2 {
 .card:nth-of-type(7) {
     width: 90px;
     height: 90px;
-    transform: rotate(216deg) translate(215px) rotate(-216deg);
+    transform: rotate(216deg) translate(240px) rotate(-216deg);
 }
 
 .card:nth-of-type(8){
