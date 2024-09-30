@@ -8,10 +8,12 @@
 </head>
 
 <body>
-    <div class ="container">
+    <main class="main-container">
+    <!--左侧基础计算器-->
+    <div class ="container left-container">
     <!-- 基础加减乘除计算器 -->
     <div class="calculator">
-        <h1>Basic Calculater</h1>
+        <h3>基础计算器</h3>
         <input type="text" id="display" class="display" readonly>
         <div class="buttons">
             <button onclick="clearDisplay()">C</button>
@@ -34,10 +36,37 @@
             <button onclick="inputDecimal()">.</button>
         </div>
     </div>
+</div>
+         <!--右侧功能计算器-->
+    <div class="container right-container">     
+         <!-- 圆形布局的容器 -->
+    <div class="circle-container">
+        <!-- 中间的图片 -->
+        <img src="https://marketplace.canva.cn/d5B34/MACKkEd5B34/2/tl/canva-MACKkEd5B34.png" alt="Center Image">
+        <div class="card" onclick="openCalculator('tip-calculator')">Tip Calculator</div>
+        <div class="card" onclick="openCalculator('loan-calculator')">Loan Calculator</div>
+        <div class="card" onclick="openCalculator('bmi-calculator')">BMI Calculator</div>
+        <div class="card" onclick="openCalculator('currency-converter')">Currency Converter</div>
+        <div class="card" onclick="openCalculator('date-calculator')">Date Calculator</div>
+        <div class="card" onclick="openCalculator('percentage-calculator')">Percentage Calculator</div>
+        <div class="card" onclick="openCalculator('discount-calculator')">Discount Calculator</div>
+        <div class="card" onclick="openCalculator('货币换算器')">货币换算器</div>
+        <div class="card" onclick="openCalculator('investment-calculator')">Investment Calculator</div>
+        <div class="card" onclick="openCalculator('age-calculator')">Age Calculator</div>
+     </div>
+    </div>
+</main>
 
-    <!-- 货币换算器 -->
-    <div class="currency-converter">
-        <h2>Currency conversion</h2>
+<!-- 模态窗口，当点击某个额外功能时显示相应的计算器 -->
+<div class="modal" id="calculator-modal" style="display:none;">
+    <div class="modal-content">
+        <!-- 关闭模态窗口的按钮 -->
+        <span class="close" onclick="closeModal()">&times;</span>
+        <!-- 具体计算器的内容将动态加载到这里 -->
+        <div id="calculator-body">
+                <!-- 货币换算器 -->
+    <div id="currency-converter-content" style="display: none;">
+        <h3>货币换算器</h3>
         <input type="number" id="amount" placeholder="Enter amount" class="inputBox">
         <select id="fromCurrency" class="selectBox">
             <option value="USD">USD</option>
@@ -53,11 +82,14 @@
             <option value="GBP">GBP</option>
             <option value="KRW">KRW</option>
         </select>
-        <button onclick="convertCurrency()">convert</button>
+        <button class="convert-button" onclick="convertCurrency()">convert</button>
         <p id="conversionResult"></p>
+            </div>
+        </div>
     </div>
-    </div>
+</div>
 
     <script src="app.js"></script>
+</main>
 </body>
 </html>

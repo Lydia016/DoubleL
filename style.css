@@ -1,95 +1,288 @@
+/* 页面整体样式 */
 body {
-    font-family: Arial, sans-serif;
-    padding: 20px;
-    background-color: #f0f0f0;
+    font-family: "SimSun", sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #141313;
 }
 
-.container {
+header h2 {
+    font-size: 28px;
+    margin: 0;
+}
+
+/* 页面主容器布局：左侧基础计算器 + 右侧圆形布局 */
+.main-container {
     display: flex;
-    flex-direction: row;  /* 设置为水平排列 */
-    /*justify-content: space-between;*/
-    align-items: flex-start;
-    gap:10px;
+    justify-content: center;
+    padding: 20px;
+    height: 100vh; /* 占满整个视口高度 */
+    gap:1px;
+    margin-top:20px;
 }
 
-.calculator, .currency-converter {
-    margin: 20px auto;
-    max-width: 300px;
-    padding: 20px;
-    background-color: rgb(39, 37, 37);
-    border-radius: 10px;
+/* 左侧基础计算器样式，30% */
+.left-container {
+    flex: 0 0 30%; /* 左侧容器占 30% */
+    display: flex;
+    justify-content:flex-end;
+    
+    align-items: center;
+    padding-right: 20px;
+}
+
+.calculator {
+    background-color: #363333;
+    padding: 10px;
+    border-radius: 30px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 290px;
+    height:550px;
+    left:50px;
+    font-weight: bold;
+}
+
+.calculator h3 {
+    text-align: center;
+    color: #4fe0b5;
+    font-size: 25px;
 }
 
 .display {
-    width: 250px;
-    height: 40px;
+    width: 240px;
+    height: 50px;
+    font-size: 24px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    margin-left: 12px;
     text-align: right;
     padding: 10px;
-    margin-bottom: 10px;
-    font-size: 18px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-}
-
-h1{
-    text-align: center;
-    color: darkseagreen;
-}
-h2{
-    text-align: center;
-    color: darkseagreen;
+    border: 3px solid #3bcfb6;
+    border-radius: 18px;
+    background-color: #ffffff;
 }
 
 .buttons {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
+    gap: 6px;
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-bottom: 25px;;
 }
 
 .buttons button {
     padding: 20px;
     font-size: 18px;
-    background-color: #8dcd8f; /*普通计算器按钮颜色*/
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    border: none;
+    background-color: #4fe0b5;
+    color: rgb(0, 0, 0);
+    border-radius: 15px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s ease;
+    border: 2px solid #18584e;
 }
 
 .buttons button:hover {
-    background-color: #265228;/*鼠标放上去时的颜色*/
+    background-color: #38889a;
 }
 
-.inputBox {
-    width: 230px;
-    padding: 10px;
-    margin: 5px 0;
-    font-size: 16px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+/* 右侧功能计算器圆形布局，70% */
+.right-container {
+    flex: 0 0 70%; /* 右侧容器占 70% */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-.selectBox{
-    width: 80px;
-    padding: 10px;
-    margin: 5px 0;
-    font-size: 16px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+
+.circle-container {
+    width: 800px; /* 圆的大小 */
+    height: 800px;
+    position: relative;
+    border-radius: 50%; /* 圆形 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-.currency-converter button {
-    width: 80px;
-    padding: 10px;
-    background-color: #8dcd8f;
-    color:black;
-    border: none;
-    font-size: 16px;
+
+/* 中间的图片区域 */
+.circle-container img {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: absolute;
+    z-index: 2; /* 确保图片位于上层 */
+}
+
+/* 每个卡片的基础样式 */
+.card {
+    position: absolute;
+    background-color: #15cecb;
+    border: 2px solid rgb(25, 56, 54); /* 添加边框调试 */
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
     cursor: pointer;
-    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    z-index: 1;
+    font-weight:bolder;
+    font-family: "SimSun",serif;
+}
+/* 卡片悬停效果 */
+.card:hover {
+    background-color: #195452;
+    color: white;
+    transform: scale(1.1);
 }
 
-#conversionResult {
-    margin-top: 10px;
-    font-size: 18px;
-    color:#8dcd8f;
+/* 卡片位置，围成圆圈，使用 rotate 和 translate 技术 */
+.card:nth-of-type(1) {
+    width: 100px;
+    height: 100px;
+    transform: rotate(0deg) translate(250px) rotate(-0deg);
+}
+
+.card:nth-of-type(2) {
+    width: 120px;
+    height: 120px;
+    transform: rotate(36deg) translate(235px) rotate(-36deg);
+}
+
+.card:nth-of-type(3) {
+    width: 90px;
+    height: 90px;
+    transform: rotate(72deg) translate(240px) rotate(-72deg);
+}
+
+.card:nth-of-type(4) {
+    width: 100px;
+    height: 100px;
+    transform: rotate(108deg) translate(220px) rotate(-108deg);
+}
+
+.card:nth-of-type(5) {
+    width: 145px;
+    height: 145px;
+    transform: rotate(144deg) translate(240px) rotate(-144deg);
+}
+
+.card:nth-of-type(6) {
+    width: 115px;
+    height: 115px;
+    transform: rotate(180deg) translate(250px) rotate(-180deg);
+}
+
+.card:nth-of-type(7) {
+    width: 90px;
+    height: 90px;
+    transform: rotate(216deg) translate(215px) rotate(-216deg);
+}
+
+.card:nth-of-type(8){
+    width: 130px;
+    height: 130px;
+    transform: rotate(252deg) translate(250px) rotate(-252deg);
+}
+
+.card:nth-of-type(9){
+    width: 115px;
+    height: 115px;
+    transform: rotate(288deg) translate(250px) rotate(-288deg);
+}
+
+.card:nth-of-type(10) {
+    width: 140px;
+    height: 140px;
+    transform: rotate(324deg) translate(230px) rotate(-324deg);
+}
+
+/* 模态窗口默认隐藏 */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* 半透明背景 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 模态窗口内容 */
+.modal-content {
+    background-color: #363333;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    height:300px;
+    position: relative;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* 关闭按钮样式 */
+.close {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    cursor: pointer;
+    font-size: 24px;
+    color: #ffffff;
+}
+
+/* 货币换算器容器样式 */
+#currency-converter-content {
+    display:flex;
+    flex-direction: column;
+    justify-content: center; /* 水平居中 */
+    align-items: center; /* 垂直居中 */
+    gap: 50px; /* 设置选择框、输入框、按钮之间的间距 */
+    margin-bottom: 10px; /* 给货币转换部分增加下边距 */
+    font-size: 20px;;
+    color:white;
+}
+
+/* 输入框样式 */
+.inputBox {
+    display:flex;
+    width: 250px; /* 输入框的宽度 */
+    padding: 10px; /* 输入框内部的填充 */
+    font-size: 16px; /* 设置字体大小 */
+    border-radius: 5px; /* 设置圆角边框 */
+    border: 1px solid #ccc; /* 边框样式 */
+    margin-bottom: 18px;
+}
+
+/* 选择框样式 */
+.selectBox {
+    display:inline-block;
+    width: 133px; /* 选择框的宽度 */
+    padding: 10px; /* 选择框内部的填充 */
+    font-size: 16px; /* 设置字体大小 */
+    border-radius: 5px; /* 设置圆角边框 */
+    border: 1px solid #ccc; /* 边框样式 */
+    margin-bottom: 15px;
+}
+
+/* 按钮样式 */
+.convert-button {
+    padding: 10px 20px; /* 设置按钮的内边距 */
+    background-color: #4fe0b5; /* 按钮背景颜色 */
+    color: rgb(0, 0, 0); /* 按钮文字颜色 */
+    border: none; /* 移除默认边框 */
+    border-radius: 5px; /* 按钮圆角 */
+    cursor: pointer; /* 鼠标悬停时显示手形 */
+    font-size: 16px; /* 设置字体大小 */
+    width:273px;
+}
+
+/* 按钮悬停效果 */
+.convert-button:hover {
+    background-color: #336f62; /* 悬停时按钮背景颜色变化 */
 }

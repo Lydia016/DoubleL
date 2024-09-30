@@ -145,3 +145,37 @@ async function convertCurrency() {
     }
 }
 
+
+// 打开模态窗口并显示相应的计算器
+function openCalculator(calculator) {
+    // 显示模态窗口
+    document.getElementById('calculator-modal').style.display = 'flex';
+
+    // 虚化主内容，避免模态窗口也被虚化
+    document.querySelector('.main-container').style.filter = 'blur(5px)';
+
+    // 重置模态窗口的内容（隐藏所有其他计算器）
+    document.getElementById('currency-converter-content').style.display = 'none';
+    // 可以添加其他计算器的内容隐藏逻辑，例如 document.getElementById('other-calculator-content').style.display = 'none';
+
+    // 显示货币换算器
+    if (calculator === '货币换算器') {
+        document.getElementById('currency-converter-content').style.display = 'block';
+        //document.getElementById('calculator-title').innerText = '货币换算器';
+    }
+    // 根据需要添加其他计算器的内容显示逻辑
+}
+
+// 关闭模态窗口并恢复背景
+function closeModal() {
+    // 关闭模态窗口
+    document.getElementById('calculator-modal').style.display = 'none';
+
+    // 取消背景虚化
+    document.querySelector('.main-container').style.filter = 'none';
+
+    // 隐藏货币换算器（或者其他打开的内容）
+    document.getElementById('currency-converter-content').style.display = 'none';
+    // 可以添加其他计算器内容的隐藏逻辑，例如 document.getElementById('other-calculator-content').style.display = 'none';
+}
+
