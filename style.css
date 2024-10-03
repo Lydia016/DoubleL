@@ -68,7 +68,7 @@ header h2 {
     gap: 6px;
     padding-left: 12px;
     padding-right: 12px;
-    padding-bottom: 25px;;
+    padding-bottom: 25px;
 }
 
 .buttons button {
@@ -83,13 +83,13 @@ header h2 {
     border: 2px solid #18584e;
 }
 
-.buttons button:hover {
+.buttons :hover {
     background-color: #38889a;
 }
 
 /* 右侧功能计算器圆形布局，70% */
 .right-container {
-    flex: 0 0 70%; /* 右侧容器占 70% */
+    flex: 0 0 70%; 
     display: flex;
     justify-content: center;
     align-items: center;
