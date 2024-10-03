@@ -2,7 +2,6 @@
 const appId = '431402e48d944926be7d0b1c49836008'; // 将 YOUR_APP_ID 替换为你自己的 App ID
 
 // 基础加减乘除计算器
-// 用于存储输入的当前值、之前的值和操作符
 let currentValue = '';  // 当前输入的数字或计算结果
 let previousValue = '';  // 之前的值
 let operator = '';  // 当前操作符
@@ -15,7 +14,6 @@ function inputNumber(num) {
         currentValue = '';  // 清空当前值
         resultCalculated = false;  // 重置结果标记
     }
-    
     // 将输入的数字追加到 currentValue 中
     currentValue += num;
     document.getElementById('display').value += num;  // 更新显示器
@@ -108,7 +106,7 @@ function calculateResult() {
 
         // 显示结果并标记计算完成
         currentValue = result.toString();  // 将结果保存到 currentValue
-        operator = '';  // 清空操作符
+        operator = '';  // 清空操作符j
         resultCalculated = true;  // 标记结果已经计算，允许继续操作
         previousValue = '';  // 重置 previousValue
         document.getElementById('display').value = currentValue;  // 显示结果
@@ -122,10 +120,10 @@ async function convertCurrency() {
     const amount = document.getElementById('amount').value;
     const fromCurrency = document.getElementById('fromCurrency').value;
     const toCurrency = document.getElementById('toCurrency').value;
-    const resultElement = document.getElementById('conversionResult');
+    const conversionResult = document.getElementById('conversionResult');
 
     if (amount === '' || isNaN(amount)) {
-        resultElement.textContent = '请输入有效金额。';
+        conversionResult.textContent = '请输入有效金额。';
         return;
     }
 
@@ -138,16 +136,47 @@ async function convertCurrency() {
         const toRate = rates[toCurrency];
         const convertedAmount = (amount / fromRate) * toRate;
 
-        resultElement.textContent = `${amount} ${fromCurrency} = ${convertedAmount.toFixed(2)} ${toCurrency}`;
+        conversionResult.textContent = `${amount} ${fromCurrency} = ${convertedAmount.toFixed(2)} ${toCurrency}`;
     } catch (error) {
         console.error('Error fetching exchange rates:', error);
-        resultElement.textContent = '无法获取汇率，请稍后重试。';
+        conversionResult.textContent = '无法获取汇率，请稍后重试。';
     }
+    document.getElementById('amount').value = '';
 }
 
+//工资计算器
+let mid_d = 0;
+let mid_c = 0;
+function saveExtraSalary_d(){
+    let delta = 0;
+    const extraSalary_d = Number(document.getElementById('extraSalary_d').value);
+    if(extraSalary_d>0 && extraSalary_d<=50){delta = 200;}
+    else if(extraSalary_d>50 && extraSalary_d<=100){delta = 100;}
+    else if(extraSalary_d>100 && extraSalary_d<=300){delta = 50;}
+    else delta = 0;
+    mid_d += delta;
+    document.getElementById('extraSalary_d').value = '';
+}
+function saveExtraSalary_c1(){
+    const extraSalary_c1 = Number(document.getElementById('extraSalary_c1').value);
+    mid_c += 10*extraSalary_c1;
+    document.getElementById('extraSalary_c1').value = '';
+}
+function saveExtraSalary_c2(){
+    const extraSalary_c2 = Number(document.getElementById('extraSalary_c2').value);
+    mid_c += 20*extraSalary_c2;
+    document.getElementById('extraSalary_c2').value = '';
+}
+function calculateSalary(){
+    const basicSalary = Number(document.getElementById('basicSalary').value);
+    const salaryResult = document.getElementById('salaryResult');
+    const totalSalary = basicSalary + mid_d + mid_c;
+    salaryResult.textContent = `总工资为${totalSalary}元`;
+    document.getElementById('basicSalary').value = '';
+}
 
 // 打开模态窗口并显示相应的计算器
-function openCalculator(calculator) {
+function openCalculator(calculater) {
     // 显示模态窗口
     document.getElementById('calculator-modal').style.display = 'flex';
 
@@ -159,9 +188,12 @@ function openCalculator(calculator) {
     // 可以添加其他计算器的内容隐藏逻辑，例如 document.getElementById('other-calculator-content').style.display = 'none';
 
     // 显示货币换算器
-    if (calculator === '货币换算器') {
+    if (calculater === '货币换算器') {
         document.getElementById('currency-converter-content').style.display = 'block';
         //document.getElementById('calculator-title').innerText = '货币换算器';
+    }
+    else if(calculater === '工资计算器'){
+        document.getElementById('salary-calculater-content').style.display = 'block';
     }
     // 根据需要添加其他计算器的内容显示逻辑
 }
@@ -176,6 +208,8 @@ function closeModal() {
 
     // 隐藏货币换算器（或者其他打开的内容）
     document.getElementById('currency-converter-content').style.display = 'none';
+    document.getElementById('conversionResult').value = '';
+    document.getElementById('salary-calculater-content').style.display = 'none';
+    document.getElementById('salaryResult').value = '';
     // 可以添加其他计算器内容的隐藏逻辑，例如 document.getElementById('other-calculator-content').style.display = 'none';
 }
-

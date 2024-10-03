@@ -221,7 +221,7 @@ header h2 {
     padding: 20px;
     border-radius: 10px;
     width: 300px;
-    height:300px;
+    height:420px;
     position: relative;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
@@ -285,4 +285,59 @@ header h2 {
 /* 按钮悬停效果 */
 .convert-button:hover {
     background-color: #336f62; /* 悬停时按钮背景颜色变化 */
+}
+
+/*工资计算器样式*/
+#salary-calculater-content {
+    display:flex;
+    flex-direction: column;
+    justify-content: center; /* 水平居中 */
+    align-items: center; /* 垂直居中 */
+    gap: 50px; /* 设置选择框、输入框、按钮之间的间距 */
+    margin-bottom: 10px; /* 给货币转换部分增加下边距 */
+    font-size: 20px;
+    color:white;
+
+}
+.input-group{
+    display: flex;
+    align-items: center; /* 垂直居中对齐按钮和输入框 */
+}
+.inputSalary{
+    display:flex;
+    width: 170px; /* 输入框的宽度 */
+    padding: 10px; /* 输入框内部的填充 */
+    font-size: 16px; /* 设置字体大小 */
+    border-radius: 5px; /* 设置圆角边框 */
+    border: 1px solid #ccc; /* 边框样式 */
+    margin: 10px;
+}
+
+.save {
+    padding: 10px; /* 设置按钮的内边距 */
+    background-color: #4fe0b5; /* 按钮背景颜色 */
+    color: rgb(0, 0, 0); /* 按钮文字颜色 */
+    border: 1px; /* 移除默认边框 */
+    border-radius: 5px; /* 按钮圆角 */
+    cursor: pointer; /* 鼠标悬停时显示手形 */
+    font-size: 16px; /* 设置字体大小 */
+    width:80px;
+}
+.calculate-button {
+    padding: 10px; /* 设置按钮的内边距 */
+    background-color: #4fe0b5; /* 按钮背景颜色 */
+    color: rgb(0, 0, 0); /* 按钮文字颜色 */
+    border: 1px; /* 移除默认边框 */
+    border-radius: 5px; /* 按钮圆角 */
+    cursor: pointer; /* 鼠标悬停时显示手形 */
+    font-size: 16px; /* 设置字体大小 */
+    width:170px;
+    margin:10px;
+}
+.save:hover,.calculate-button:hover{
+    background-color: #336f62;
+}
+#salaryResult{
+    margin-left: 10px;
+    font-weight: bolder;
 }
