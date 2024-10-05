@@ -229,25 +229,6 @@ function calculateBMI() {
 }
 
 
-//BMI计算器
-function calculateBMI() {
-    const perHeight = document.getElementById('perHeight').value;
-    const perWeight = document.getElementById('perWeight').value;
-    const BMIResult = document.getElementById('BMIResult');
-    // 检查输入值是否为空
-    if (perHeight === '' || perWeight === '') {
-        BMIResult.textContent = "请确定每项均已输入。";
-        return;
-    }
-    //计算BMI
-    else {
-        BMI = perWeight / (perHeight * perHeight)
-        BMIResult.textContent = `您的BMI为${BMI.toFixed(2)}`;
-        document.getElementById('perHeight').value = '';
-        document.getElementById('perWeight').value = '';
-    }
-}
-
 
 // 打开模态窗口并显示相应的计算器
 function openCalculator(calculater) {
@@ -269,12 +250,9 @@ function openCalculator(calculater) {
     else if (calculater === '工资计算器') {
         document.getElementById('salary-calculater-content').style.display = 'block';
     }
-<<<<<<< Updated upstream
     else if (calculater === '退休年龄计算器') {
         document.getElementById('retirement-age-calculater-content').style.display = 'block';
     }
-=======
->>>>>>> Stashed changes
     else if (calculater === 'BMI计算器') {
         document.getElementById('BMI-calculater-content').style.display = 'block';
     }
@@ -294,14 +272,8 @@ function closeModal() {
     document.getElementById('conversionResult').value = '';
     document.getElementById('salary-calculater-content').style.display = 'none';
     document.getElementById('salaryResult').value = '';
-<<<<<<< Updated upstream
     document.getElementById('retirement-age-calculater-content').style.display = 'none';
     document.getElementById('BMI-calculater-content').style.display = 'none';
     document.getElementById('BMIResult').value = '';
-
-=======
-    document.getElementById('BMI-calculater-content').style.display = 'none';
-    document.getElementById('BMIResult').value = '';
->>>>>>> Stashed changes
     // 可以添加其他计算器内容的隐藏逻辑，例如 document.getElementById('other-calculator-content').style.display = 'none';
 }

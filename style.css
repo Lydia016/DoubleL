@@ -320,7 +320,6 @@ header h2 {
 
 /*工资计算器样式*/
 #salary-calculater-content {
-<<<<<<< Updated upstream
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -336,12 +335,6 @@ header h2 {
 }
 
 .input-group {
-    display: flex;
-    align-items: center;
-    /* 垂直居中对齐按钮和输入框 */
-}
-
-=======
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -363,7 +356,6 @@ header h2 {
     /* 垂直居中对齐按钮和输入框 */
 }
 
->>>>>>> Stashed changes
 .inputSalary {
     display: flex;
     width: 170px;
@@ -426,7 +418,7 @@ header h2 {
     font-weight: bolder;
 }
 
-<<<<<<< Updated upstream
+
 /*退休年龄计算器样式*/
 #retirement-age-calculater-content {
     display: flex;
@@ -512,8 +504,6 @@ header h2 {
 }
 
 /*BMI计算器*/
-=======
->>>>>>> Stashed changes
 #BMI-calculater-content {
     display: flex;
     flex-direction: column;
@@ -530,7 +520,6 @@ header h2 {
 
 }
 
-<<<<<<< Updated upstream
 .inputHeight {
     display: flex;
     width: 170px;
@@ -581,8 +570,6 @@ header h2 {
 }
 
 
-=======
->>>>>>> Stashed changes
 #BMIResult {
     margin-left: 10px;
     font-weight: bolder;

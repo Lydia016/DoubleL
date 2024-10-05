@@ -49,11 +49,7 @@
                 <div class="card" onclick="openCalculator('BMI计算器')">BMI计算器</div>
                 <div class="card" onclick="openCalculator('currency-converter')">Currency Converter</div>
                 <div class="card" onclick="openCalculator('date-calculator')">Date Calculator</div>
-<<<<<<< Updated upstream
                 <div class="card" onclick="openCalculator('退休年龄计算器')">退休年龄计算器</div>
-=======
-                <div class="card" onclick="openCalculator('percentage-calculator')">Percentage Calculator</div>
->>>>>>> Stashed changes
                 <div class="card" onclick="openCalculator('工资计算器')">工资计算器</div>
                 <div class="card" onclick="openCalculator('货币换算器')">货币换算器</div>
                 <div class="card" onclick="openCalculator('investment-calculator')">Investment Calculator</div>
@@ -73,31 +69,19 @@
                 <!-- 货币换算器 -->
                 <div id="currency-converter-content" style="display: none;">
                     <h3>货币换算器</h3>
-<<<<<<< Updated upstream
                     <input type="number" id="amount" placeholder="输入金额" class="inputBox">
                     <select id="fromCurrency" class="selectBox">
                         <option value="CNY">CNY</option>
                         <option value="HKD">HKD</option>
                         <option value="USD">USD</option>
-=======
-                    <input type="number" id="amount" placeholder="Enter amount" class="inputBox">
-                    <select id="fromCurrency" class="selectBox">
-                        <option value="USD">USD</option>
-                        <option value="CNY">CNY</option>
->>>>>>> Stashed changes
                         <option value="EUR">EUR</option>
                         <option value="GBP">GBP</option>
                         <option value="KRW">KRW</option>
                     </select>
                     <select id="toCurrency" class="selectBox">
-<<<<<<< Updated upstream
                         <option value="CNY">CNY</option>
                         <option value="HKD">HKD</option>
                         <option value="USD">USD</option>
-=======
-                        <option value="USD">USD</option>
-                        <option value="CNY">CNY</option>
->>>>>>> Stashed changes
                         <option value="EUR">EUR</option>
                         <option value="GBP">GBP</option>
                         <option value="KRW">KRW</option>
@@ -105,18 +89,10 @@
                     <button class="convert-button" onclick="convertCurrency()">convert</button>
                     <p id="conversionResult"></p>
                 </div>
-<<<<<<< Updated upstream
                 <!--工资计算器-->
                 <div id="salary-calculater-content" style="display:none;">
                     <h3>工资计算器</h3>
                     <input type="number" id="basicSalary" class="inputSalary" placeholder="固定工资（元）">
-=======
-
-                <!--工资计算器-->
-                <div id="salary-calculater-content" style="display:none;">
-                    <h3>工资计算器</h3>
-                    <input type="text" id="basicSalary" class="inputSalary" placeholder="固定工资（元）">
->>>>>>> Stashed changes
                     <div class="input-group">
                         <input type="number" id="extraSalary_d" class="inputSalary" placeholder="每笔放贷额（万）">
                         <button class="save" onclick="saveExtraSalary_d()">保存</button>
@@ -132,7 +108,6 @@
                     <button class="calculate-button" onclick="calculateSalary()">计算总工资</button>
                     <p id="salaryResult"></p>
                 </div>
-<<<<<<< Updated upstream
                 <!--退休年龄计算器-->
                 <div id="retirement-age-calculater-content" style="display:none">
                     <h3>退休年龄计算器</h3>
@@ -148,15 +123,11 @@
                     <button class="reset-button" onclick="resetAge()">重置</button>
                     <p id="ageResult"></p>
                 </div>
-=======
-
->>>>>>> Stashed changes
                 <!--BMI计算器-->
                 <div id="BMI-calculater-content" style="display:none;">
                     <h3>BMI计算器</h3>
                     <input type="number" id="perHeight" class="inputHeight" placeholder="身高(m)">
                     <input type="number" id="perWeight" class="inputWeight" placeholder="体重(kg)">
-<<<<<<< Updated upstream
                     <button class="calculateBMI-button" onclick="calculateBMI()">计算BMI</button>
                     <p id="BMIResult"></p>
 
@@ -165,17 +136,6 @@
             </div>
         </div>
     </div>
-=======
-                    <button class="calculate-button" onclick="calculateBMI()">计算BMI</button>
-                    <p id="BMIResult"></p>
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-
->>>>>>> Stashed changes
 
     <script src="app.js"></script>
     </main>
