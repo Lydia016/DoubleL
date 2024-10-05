@@ -332,21 +332,6 @@ header h2 {
     /* 给货币转换部分增加下边距 */
     font-size: 20px;
     color: white;
-}
-
-.input-group {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    /* 水平居中 */
-    align-items: center;
-    /* 垂直居中 */
-    gap: 50px;
-    /* 设置选择框、输入框、按钮之间的间距 */
-    margin-bottom: 10px;
-    /* 给货币转换部分增加下边距 */
-    font-size: 20px;
-    color: white;
 
 }
 
@@ -417,7 +402,6 @@ header h2 {
     margin-left: 10px;
     font-weight: bolder;
 }
-
 
 /*退休年龄计算器样式*/
 #retirement-age-calculater-content {

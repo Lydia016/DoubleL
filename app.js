@@ -229,7 +229,6 @@ function calculateBMI() {
 }
 
 
-
 // 打开模态窗口并显示相应的计算器
 function openCalculator(calculater) {
     // 显示模态窗口
