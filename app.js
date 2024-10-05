@@ -174,6 +174,40 @@ function calculateSalary(){
     salaryResult.textContent = `总工资为${totalSalary}元`;
     document.getElementById('basicSalary').value = '';
 }
+//退休年龄计算器
+function calculateAge(){
+    let month=0;
+    let age = 0;
+    let retireYear = 0;
+    let retireMonth = 0;
+    const birthYear = Number(document.getElementById('birthYear').value);
+    const birthMonth = Number(document.getElementById('birthMonth').value);
+    const ageResult = document.getElementById('ageResult');
+    if(document.getElementById('type').value === 'a'){
+        month = Math.floor(((birthYear+60-2025)*12+(birthMonth-1))/4)+1;
+        retireYear = birthYear+60+Math.floor((birthMonth+month-1)/12);
+        age = 60+Math.floor(month/12);
+        retireMonth = (birthMonth+month)%12;
+    }
+    else if(document.getElementById('type').value === 'b'){
+        month = Math.floor(((birthYear+55-2025)*12+(birthMonth-1))/4)+1;
+        retireYear = birthYear+55+Math.floor((birthMonth+month-1)/12);
+        age = 55+Math.floor(month/12);
+        retireMonth = (birthMonth+month)%12;
+    }
+    else{
+        month = Math.floor(((birthYear+50-2025)*12+(birthMonth-1))/2)+1;
+        retireYear = birthYear+50+Math.floor((birthMonth+month-1)/12);
+        age = 50+Math.floor(month/12);
+        retireMonth = (birthMonth+month)%12;
+    }
+    ageResult.textContent = `您的改革后法定退休年龄为${age}岁${month%12}月，您的改革后退休时间为${retireYear}年${retireMonth}月`;
+}
+function resetAge(){
+    document.getElementById('birthYear').value = '';
+    document.getElementById('birthMonth').value = '';
+    document.getElementById('ageResult').value = '';
+}
 
 // 打开模态窗口并显示相应的计算器
 function openCalculator(calculater) {
@@ -195,6 +229,9 @@ function openCalculator(calculater) {
     else if(calculater === '工资计算器'){
         document.getElementById('salary-calculater-content').style.display = 'block';
     }
+    else if(calculater === '退休年龄计算器'){
+        document.getElementById('retirement-age-calculater-content').style.display = 'block';
+    }
     // 根据需要添加其他计算器的内容显示逻辑
 }
 
@@ -211,5 +248,6 @@ function closeModal() {
     document.getElementById('conversionResult').value = '';
     document.getElementById('salary-calculater-content').style.display = 'none';
     document.getElementById('salaryResult').value = '';
+    document.getElementById('retirement-age-calculater-content').style.display = 'none';
     // 可以添加其他计算器内容的隐藏逻辑，例如 document.getElementById('other-calculator-content').style.display = 'none';
 }

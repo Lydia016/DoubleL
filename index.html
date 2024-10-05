@@ -48,7 +48,7 @@
         <div class="card" onclick="openCalculator('bmi-calculator')">BMI Calculator</div>
         <div class="card" onclick="openCalculator('currency-converter')">Currency Converter</div>
         <div class="card" onclick="openCalculator('date-calculator')">Date Calculator</div>
-        <div class="card" onclick="openCalculator('percentage-calculator')">Percentage Calculator</div>
+        <div class="card" onclick="openCalculator('退休年龄计算器')">退休年龄计算器</div>
         <div class="card" onclick="openCalculator('工资计算器')">工资计算器</div>
         <div class="card" onclick="openCalculator('货币换算器')">货币换算器</div>
         <div class="card" onclick="openCalculator('investment-calculator')">Investment Calculator</div>
@@ -68,17 +68,19 @@
                 <!-- 货币换算器 -->
     <div id="currency-converter-content" style="display: none;">
         <h3>货币换算器</h3>
-        <input type="number" id="amount" placeholder="Enter amount" class="inputBox">
+        <input type="number" id="amount" placeholder="输入金额" class="inputBox">
         <select id="fromCurrency" class="selectBox">
-            <option value="USD">USD</option>
             <option value="CNY">CNY</option>
+            <option value="HKD">HKD</option>
+            <option value="USD">USD</option>
             <option value="EUR">EUR</option>
             <option value="GBP">GBP</option>
             <option value="KRW">KRW</option>
         </select>
         <select id="toCurrency" class="selectBox">
-            <option value="USD">USD</option>
             <option value="CNY">CNY</option>
+            <option value="HKD">HKD</option>
+            <option value="USD">USD</option>
             <option value="EUR">EUR</option>
             <option value="GBP">GBP</option>
             <option value="KRW">KRW</option>
@@ -87,9 +89,9 @@
         <p id="conversionResult"></p>
             </div>
                 <!--工资计算器-->
-    <div id="salary-calculater-content" style="display:block;">
+    <div id="salary-calculater-content" style="display:none;">
         <h3>工资计算器</h3>
-        <input type="text" id="basicSalary"  class="inputSalary" placeholder="固定工资（元）">
+        <input type="number" id="basicSalary"  class="inputSalary" placeholder="固定工资（元）">
         <div class="input-group">
             <input type="number" id="extraSalary_d" class="inputSalary" placeholder="每笔放贷额（万）">
             <button class="save" onclick="saveExtraSalary_d()">保存</button>
@@ -104,6 +106,21 @@
         </div>
         <button class="calculate-button" onclick="calculateSalary()">计算总工资</button>
         <p id="salaryResult"></p>
+    </div>
+            <!--退休年龄计算器-->
+    <div id="retirement-age-calculater-content" style="display:none">
+        <h3>退休年龄计算器</h3>
+        <input type="text" id="birthYear" class="inputAge" placeholder="出生年份">
+        <input type="text" id="birthMonth" class="inputAge" placeholder="出生月份">
+        <select id="type" class="typeBox" aria-placeholder="性别及人员类型">
+            <option value=" " disabled selected>性别及员工类型</option>
+            <option value="a">男职工</option>
+            <option value="b">原定法定退休年龄55周岁女职工</option>
+            <option value="c">原定法定退休年龄50周岁女职工</option>
+        </select>
+        <button class="calculateAge-button" onclick="calculateAge()">计算退休年龄</button>
+        <button class="reset-button" onclick="resetAge()">重置</button>
+        <p id="ageResult"></p>
     </div>
             
         </div>
