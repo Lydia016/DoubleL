@@ -64,12 +64,12 @@ function deleteLast() {
     if (currentValue !== '') {
         currentValue = currentValue.slice(0, -1);
         document.getElementById('display').value = currentValue || previousValue + ` ${operator} `;  // 更新显示器
-    } 
+    }
     // 如果 currentValue 为空且有操作符，删除操作符
     else if (operator !== '') {
         operator = '';  // 清空操作符
         document.getElementById('display').value = previousValue;  // 只显示 previousValue
-    } 
+    }
     // 如果 currentValue 和 operator 都为空，删除 previousValue 的最后一个字符
     else if (previousValue !== '') {
         previousValue = previousValue.slice(0, -1);
@@ -147,27 +147,27 @@ async function convertCurrency() {
 //工资计算器
 let mid_d = 0;
 let mid_c = 0;
-function saveExtraSalary_d(){
+function saveExtraSalary_d() {
     let delta = 0;
     const extraSalary_d = Number(document.getElementById('extraSalary_d').value);
-    if(extraSalary_d>0 && extraSalary_d<=50){delta = 200;}
-    else if(extraSalary_d>50 && extraSalary_d<=100){delta = 100;}
-    else if(extraSalary_d>100 && extraSalary_d<=300){delta = 50;}
+    if (extraSalary_d > 0 && extraSalary_d <= 50) { delta = 200; }
+    else if (extraSalary_d > 50 && extraSalary_d <= 100) { delta = 100; }
+    else if (extraSalary_d > 100 && extraSalary_d <= 300) { delta = 50; }
     else delta = 0;
     mid_d += delta;
     document.getElementById('extraSalary_d').value = '';
 }
-function saveExtraSalary_c1(){
+function saveExtraSalary_c1() {
     const extraSalary_c1 = Number(document.getElementById('extraSalary_c1').value);
-    mid_c += 10*extraSalary_c1;
+    mid_c += 10 * extraSalary_c1;
     document.getElementById('extraSalary_c1').value = '';
 }
-function saveExtraSalary_c2(){
+function saveExtraSalary_c2() {
     const extraSalary_c2 = Number(document.getElementById('extraSalary_c2').value);
-    mid_c += 20*extraSalary_c2;
+    mid_c += 20 * extraSalary_c2;
     document.getElementById('extraSalary_c2').value = '';
 }
-function calculateSalary(){
+function calculateSalary() {
     const basicSalary = Number(document.getElementById('basicSalary').value);
     const salaryResult = document.getElementById('salaryResult');
     const totalSalary = basicSalary + mid_d + mid_c;
@@ -175,39 +175,79 @@ function calculateSalary(){
     document.getElementById('basicSalary').value = '';
 }
 //退休年龄计算器
-function calculateAge(){
-    let month=0;
+function calculateAge() {
+    let month = 0;
     let age = 0;
     let retireYear = 0;
     let retireMonth = 0;
     const birthYear = Number(document.getElementById('birthYear').value);
     const birthMonth = Number(document.getElementById('birthMonth').value);
     const ageResult = document.getElementById('ageResult');
-    if(document.getElementById('type').value === 'a'){
-        month = Math.floor(((birthYear+60-2025)*12+(birthMonth-1))/4)+1;
-        retireYear = birthYear+60+Math.floor((birthMonth+month-1)/12);
-        age = 60+Math.floor(month/12);
-        retireMonth = (birthMonth+month)%12;
+    if (document.getElementById('type').value === 'a') {
+        month = Math.floor(((birthYear + 60 - 2025) * 12 + (birthMonth - 1)) / 4) + 1;
+        retireYear = birthYear + 60 + Math.floor((birthMonth + month - 1) / 12);
+        age = 60 + Math.floor(month / 12);
+        retireMonth = (birthMonth + month) % 12;
     }
-    else if(document.getElementById('type').value === 'b'){
-        month = Math.floor(((birthYear+55-2025)*12+(birthMonth-1))/4)+1;
-        retireYear = birthYear+55+Math.floor((birthMonth+month-1)/12);
-        age = 55+Math.floor(month/12);
-        retireMonth = (birthMonth+month)%12;
+    else if (document.getElementById('type').value === 'b') {
+        month = Math.floor(((birthYear + 55 - 2025) * 12 + (birthMonth - 1)) / 4) + 1;
+        retireYear = birthYear + 55 + Math.floor((birthMonth + month - 1) / 12);
+        age = 55 + Math.floor(month / 12);
+        retireMonth = (birthMonth + month) % 12;
     }
-    else{
-        month = Math.floor(((birthYear+50-2025)*12+(birthMonth-1))/2)+1;
-        retireYear = birthYear+50+Math.floor((birthMonth+month-1)/12);
-        age = 50+Math.floor(month/12);
-        retireMonth = (birthMonth+month)%12;
+    else {
+        month = Math.floor(((birthYear + 50 - 2025) * 12 + (birthMonth - 1)) / 2) + 1;
+        retireYear = birthYear + 50 + Math.floor((birthMonth + month - 1) / 12);
+        age = 50 + Math.floor(month / 12);
+        retireMonth = (birthMonth + month) % 12;
     }
-    ageResult.textContent = `您的改革后法定退休年龄为${age}岁${month%12}月，您的改革后退休时间为${retireYear}年${retireMonth}月`;
+    ageResult.textContent = `您的改革后法定退休年龄为${age}岁${month % 12}月，您的改革后退休时间为${retireYear}年${retireMonth}月`;
 }
-function resetAge(){
+function resetAge() {
     document.getElementById('birthYear').value = '';
     document.getElementById('birthMonth').value = '';
     document.getElementById('ageResult').value = '';
 }
+
+//BMI计算器
+function calculateBMI() {
+    const perHeight = document.getElementById('perHeight').value;
+    const perWeight = document.getElementById('perWeight').value;
+    const BMIResult = document.getElementById('BMIResult');
+    // 检查输入值是否为空
+    if (perHeight === '' || perWeight === '') {
+        BMIResult.textContent = "请确定每项均已输入。";
+        return;
+    }
+    //计算BMI
+    else {
+        BMI = perWeight / (perHeight * perHeight)
+        BMIResult.textContent = `您的BMI为${BMI.toFixed(2)}`;
+        document.getElementById('perHeight').value = '';
+        document.getElementById('perWeight').value = '';
+    }
+}
+
+
+//BMI计算器
+function calculateBMI() {
+    const perHeight = document.getElementById('perHeight').value;
+    const perWeight = document.getElementById('perWeight').value;
+    const BMIResult = document.getElementById('BMIResult');
+    // 检查输入值是否为空
+    if (perHeight === '' || perWeight === '') {
+        BMIResult.textContent = "请确定每项均已输入。";
+        return;
+    }
+    //计算BMI
+    else {
+        BMI = perWeight / (perHeight * perHeight)
+        BMIResult.textContent = `您的BMI为${BMI.toFixed(2)}`;
+        document.getElementById('perHeight').value = '';
+        document.getElementById('perWeight').value = '';
+    }
+}
+
 
 // 打开模态窗口并显示相应的计算器
 function openCalculator(calculater) {
@@ -226,11 +266,17 @@ function openCalculator(calculater) {
         document.getElementById('currency-converter-content').style.display = 'block';
         //document.getElementById('calculator-title').innerText = '货币换算器';
     }
-    else if(calculater === '工资计算器'){
+    else if (calculater === '工资计算器') {
         document.getElementById('salary-calculater-content').style.display = 'block';
     }
-    else if(calculater === '退休年龄计算器'){
+<<<<<<< Updated upstream
+    else if (calculater === '退休年龄计算器') {
         document.getElementById('retirement-age-calculater-content').style.display = 'block';
+    }
+=======
+>>>>>>> Stashed changes
+    else if (calculater === 'BMI计算器') {
+        document.getElementById('BMI-calculater-content').style.display = 'block';
     }
     // 根据需要添加其他计算器的内容显示逻辑
 }
@@ -248,6 +294,14 @@ function closeModal() {
     document.getElementById('conversionResult').value = '';
     document.getElementById('salary-calculater-content').style.display = 'none';
     document.getElementById('salaryResult').value = '';
+<<<<<<< Updated upstream
     document.getElementById('retirement-age-calculater-content').style.display = 'none';
+    document.getElementById('BMI-calculater-content').style.display = 'none';
+    document.getElementById('BMIResult').value = '';
+
+=======
+    document.getElementById('BMI-calculater-content').style.display = 'none';
+    document.getElementById('BMIResult').value = '';
+>>>>>>> Stashed changes
     // 可以添加其他计算器内容的隐藏逻辑，例如 document.getElementById('other-calculator-content').style.display = 'none';
 }

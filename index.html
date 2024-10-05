@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,125 +10,175 @@
 
 <body>
     <main class="main-container">
-    <!--左侧基础计算器-->
-    <div class ="container left-container">
-    <!-- 基础加减乘除计算器 -->
-    <div class="calculator">
-        <h3>基础计算器</h3>
-        <input type="text" id="display" class="display" readonly>
-        <div class="buttons">
-            <button onclick="clearDisplay()">C</button>
-            <button onclick="deleteLast()">←</button>
-            <button onclick="inputOperator('/')">/</button>
-            <button onclick="inputOperator('*')">*</button>
-            <button onclick="inputNumber('7')">7</button>
-            <button onclick="inputNumber('8')">8</button>
-            <button onclick="inputNumber('9')">9</button>
-            <button onclick="inputOperator('-')">-</button>
-            <button onclick="inputNumber('4')">4</button>
-            <button onclick="inputNumber('5')">5</button>
-            <button onclick="inputNumber('6')">6</button>
-            <button onclick="inputOperator('+')">+</button>
-            <button onclick="inputNumber('1')">1</button>
-            <button onclick="inputNumber('2')">2</button>
-            <button onclick="inputNumber('3')">3</button>
-            <button onclick="calculateResult()">=</button>
-            <button onclick="inputNumber('0')">0</button>
-            <button onclick="inputDecimal()">.</button>
+        <!--左侧基础计算器-->
+        <div class="container left-container">
+            <!-- 基础加减乘除计算器 -->
+            <div class="calculator">
+                <h3>基础计算器</h3>
+                <input type="text" id="display" class="display" readonly>
+                <div class="buttons">
+                    <button onclick="clearDisplay()">C</button>
+                    <button onclick="deleteLast()">←</button>
+                    <button onclick="inputOperator('/')">/</button>
+                    <button onclick="inputOperator('*')">*</button>
+                    <button onclick="inputNumber('7')">7</button>
+                    <button onclick="inputNumber('8')">8</button>
+                    <button onclick="inputNumber('9')">9</button>
+                    <button onclick="inputOperator('-')">-</button>
+                    <button onclick="inputNumber('4')">4</button>
+                    <button onclick="inputNumber('5')">5</button>
+                    <button onclick="inputNumber('6')">6</button>
+                    <button onclick="inputOperator('+')">+</button>
+                    <button onclick="inputNumber('1')">1</button>
+                    <button onclick="inputNumber('2')">2</button>
+                    <button onclick="inputNumber('3')">3</button>
+                    <button onclick="calculateResult()">=</button>
+                    <button onclick="inputNumber('0')">0</button>
+                    <button onclick="inputDecimal()">.</button>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
-         <!--右侧功能计算器-->
-    <div class="container right-container">     
-         <!-- 圆形布局的容器 -->
-    <div class="circle-container">
-        <!-- 中间的图片 -->
-        <img src="https://marketplace.canva.cn/d5B34/MACKkEd5B34/2/tl/canva-MACKkEd5B34.png" alt="Center Image">
-        <div class="card" onclick="openCalculator('tip-calculator')">Tip Calculator</div>
-        <div class="card" onclick="openCalculator('loan-calculator')">Loan Calculator</div>
-        <div class="card" onclick="openCalculator('bmi-calculator')">BMI Calculator</div>
-        <div class="card" onclick="openCalculator('currency-converter')">Currency Converter</div>
-        <div class="card" onclick="openCalculator('date-calculator')">Date Calculator</div>
-        <div class="card" onclick="openCalculator('退休年龄计算器')">退休年龄计算器</div>
-        <div class="card" onclick="openCalculator('工资计算器')">工资计算器</div>
-        <div class="card" onclick="openCalculator('货币换算器')">货币换算器</div>
-        <div class="card" onclick="openCalculator('investment-calculator')">Investment Calculator</div>
-        <div class="card" onclick="openCalculator('age-calculator')">Age Calculator</div>
-     </div>
-    </div>
-</main>
+        <!--右侧功能计算器-->
+        <div class="container right-container">
+            <!-- 圆形布局的容器 -->
+            <div class="circle-container">
+                <!-- 中间的图片 -->
+                <img src="https://marketplace.canva.cn/d5B34/MACKkEd5B34/2/tl/canva-MACKkEd5B34.png" alt="Center Image">
+                <div class="card" onclick="openCalculator('tip-calculator')">Tip Calculator</div>
+                <div class="card" onclick="openCalculator('loan-calculator')">Loan Calculator</div>
+                <div class="card" onclick="openCalculator('BMI计算器')">BMI计算器</div>
+                <div class="card" onclick="openCalculator('currency-converter')">Currency Converter</div>
+                <div class="card" onclick="openCalculator('date-calculator')">Date Calculator</div>
+<<<<<<< Updated upstream
+                <div class="card" onclick="openCalculator('退休年龄计算器')">退休年龄计算器</div>
+=======
+                <div class="card" onclick="openCalculator('percentage-calculator')">Percentage Calculator</div>
+>>>>>>> Stashed changes
+                <div class="card" onclick="openCalculator('工资计算器')">工资计算器</div>
+                <div class="card" onclick="openCalculator('货币换算器')">货币换算器</div>
+                <div class="card" onclick="openCalculator('investment-calculator')">Investment Calculator</div>
+                <div class="card" onclick="openCalculator('age-calculator')">Age Calculator</div>
+            </div>
+        </div>
+    </main>
 
-<!-- 模态窗口，当点击某个额外功能时显示相应的计算器 -->
-<div class="modal" id="calculator-modal" style="display:none;">
-    <div class="modal-content">
-        <!-- 关闭模态窗口的按钮 -->
-        <span class="close" onclick="closeModal()">&times;</span>
-        <!-- 具体计算器的内容将动态加载到这里 -->
-        <div id="calculator-body">
+    <!-- 模态窗口，当点击某个额外功能时显示相应的计算器 -->
+    <div class="modal" id="calculator-modal" style="display:none;">
+        <div class="modal-content">
+            <!-- 关闭模态窗口的按钮 -->
+            <span class="close" onclick="closeModal()">&times;</span>
+            <!-- 具体计算器的内容将动态加载到这里 -->
+            <div id="calculator-body">
 
                 <!-- 货币换算器 -->
-    <div id="currency-converter-content" style="display: none;">
-        <h3>货币换算器</h3>
-        <input type="number" id="amount" placeholder="输入金额" class="inputBox">
-        <select id="fromCurrency" class="selectBox">
-            <option value="CNY">CNY</option>
-            <option value="HKD">HKD</option>
-            <option value="USD">USD</option>
-            <option value="EUR">EUR</option>
-            <option value="GBP">GBP</option>
-            <option value="KRW">KRW</option>
-        </select>
-        <select id="toCurrency" class="selectBox">
-            <option value="CNY">CNY</option>
-            <option value="HKD">HKD</option>
-            <option value="USD">USD</option>
-            <option value="EUR">EUR</option>
-            <option value="GBP">GBP</option>
-            <option value="KRW">KRW</option>
-        </select>
-        <button class="convert-button" onclick="convertCurrency()">convert</button>
-        <p id="conversionResult"></p>
-            </div>
+                <div id="currency-converter-content" style="display: none;">
+                    <h3>货币换算器</h3>
+<<<<<<< Updated upstream
+                    <input type="number" id="amount" placeholder="输入金额" class="inputBox">
+                    <select id="fromCurrency" class="selectBox">
+                        <option value="CNY">CNY</option>
+                        <option value="HKD">HKD</option>
+                        <option value="USD">USD</option>
+=======
+                    <input type="number" id="amount" placeholder="Enter amount" class="inputBox">
+                    <select id="fromCurrency" class="selectBox">
+                        <option value="USD">USD</option>
+                        <option value="CNY">CNY</option>
+>>>>>>> Stashed changes
+                        <option value="EUR">EUR</option>
+                        <option value="GBP">GBP</option>
+                        <option value="KRW">KRW</option>
+                    </select>
+                    <select id="toCurrency" class="selectBox">
+<<<<<<< Updated upstream
+                        <option value="CNY">CNY</option>
+                        <option value="HKD">HKD</option>
+                        <option value="USD">USD</option>
+=======
+                        <option value="USD">USD</option>
+                        <option value="CNY">CNY</option>
+>>>>>>> Stashed changes
+                        <option value="EUR">EUR</option>
+                        <option value="GBP">GBP</option>
+                        <option value="KRW">KRW</option>
+                    </select>
+                    <button class="convert-button" onclick="convertCurrency()">convert</button>
+                    <p id="conversionResult"></p>
+                </div>
+<<<<<<< Updated upstream
                 <!--工资计算器-->
-    <div id="salary-calculater-content" style="display:none;">
-        <h3>工资计算器</h3>
-        <input type="number" id="basicSalary"  class="inputSalary" placeholder="固定工资（元）">
-        <div class="input-group">
-            <input type="number" id="extraSalary_d" class="inputSalary" placeholder="每笔放贷额（万）">
-            <button class="save" onclick="saveExtraSalary_d()">保存</button>
+                <div id="salary-calculater-content" style="display:none;">
+                    <h3>工资计算器</h3>
+                    <input type="number" id="basicSalary" class="inputSalary" placeholder="固定工资（元）">
+=======
+
+                <!--工资计算器-->
+                <div id="salary-calculater-content" style="display:none;">
+                    <h3>工资计算器</h3>
+                    <input type="text" id="basicSalary" class="inputSalary" placeholder="固定工资（元）">
+>>>>>>> Stashed changes
+                    <div class="input-group">
+                        <input type="number" id="extraSalary_d" class="inputSalary" placeholder="每笔放贷额（万）">
+                        <button class="save" onclick="saveExtraSalary_d()">保存</button>
+                    </div>
+                    <div class="input-group">
+                        <input type="number" id="extraSalary_c1" class="inputSalary" placeholder="每次定期揽储额（万）">
+                        <button class="save" onclick="saveExtraSalary_c1()">保存</button><!--定期-->
+                    </div>
+                    <div class="input-group">
+                        <input type="number" id="extraSalary_c2" class="inputSalary" placeholder="每次活期揽储额（万）">
+                        <button class="save" onclick="saveExtraSalary_c2()">保存</button><!--活期-->
+                    </div>
+                    <button class="calculate-button" onclick="calculateSalary()">计算总工资</button>
+                    <p id="salaryResult"></p>
+                </div>
+<<<<<<< Updated upstream
+                <!--退休年龄计算器-->
+                <div id="retirement-age-calculater-content" style="display:none">
+                    <h3>退休年龄计算器</h3>
+                    <input type="text" id="birthYear" class="inputAge" placeholder="出生年份">
+                    <input type="text" id="birthMonth" class="inputAge" placeholder="出生月份">
+                    <select id="type" class="typeBox" aria-placeholder="性别及人员类型">
+                        <option value=" " disabled selected>性别及员工类型</option>
+                        <option value="a">男职工</option>
+                        <option value="b">原定法定退休年龄55周岁女职工</option>
+                        <option value="c">原定法定退休年龄50周岁女职工</option>
+                    </select>
+                    <button class="calculateAge-button" onclick="calculateAge()">计算退休年龄</button>
+                    <button class="reset-button" onclick="resetAge()">重置</button>
+                    <p id="ageResult"></p>
+                </div>
+=======
+
+>>>>>>> Stashed changes
+                <!--BMI计算器-->
+                <div id="BMI-calculater-content" style="display:none;">
+                    <h3>BMI计算器</h3>
+                    <input type="number" id="perHeight" class="inputHeight" placeholder="身高(m)">
+                    <input type="number" id="perWeight" class="inputWeight" placeholder="体重(kg)">
+<<<<<<< Updated upstream
+                    <button class="calculateBMI-button" onclick="calculateBMI()">计算BMI</button>
+                    <p id="BMIResult"></p>
+
+                </div>
+
+            </div>
         </div>
-        <div class="input-group">
-            <input type="number" id="extraSalary_c1" class="inputSalary" placeholder="每次定期揽储额（万）">
-            <button class="save" onclick="saveExtraSalary_c1()">保存</button><!--定期-->
-        </div>
-        <div class="input-group">
-            <input type="number" id="extraSalary_c2" class="inputSalary" placeholder="每次活期揽储额（万）">
-            <button class="save" onclick="saveExtraSalary_c2()">保存</button><!--活期-->
-        </div>
-        <button class="calculate-button" onclick="calculateSalary()">计算总工资</button>
-        <p id="salaryResult"></p>
     </div>
-            <!--退休年龄计算器-->
-    <div id="retirement-age-calculater-content" style="display:none">
-        <h3>退休年龄计算器</h3>
-        <input type="text" id="birthYear" class="inputAge" placeholder="出生年份">
-        <input type="text" id="birthMonth" class="inputAge" placeholder="出生月份">
-        <select id="type" class="typeBox" aria-placeholder="性别及人员类型">
-            <option value=" " disabled selected>性别及员工类型</option>
-            <option value="a">男职工</option>
-            <option value="b">原定法定退休年龄55周岁女职工</option>
-            <option value="c">原定法定退休年龄50周岁女职工</option>
-        </select>
-        <button class="calculateAge-button" onclick="calculateAge()">计算退休年龄</button>
-        <button class="reset-button" onclick="resetAge()">重置</button>
-        <p id="ageResult"></p>
-    </div>
-            
+=======
+                    <button class="calculate-button" onclick="calculateBMI()">计算BMI</button>
+                    <p id="BMIResult"></p>
+
+                </div>
+            </div>
         </div>
     </div>
-</div>
+
+
+>>>>>>> Stashed changes
 
     <script src="app.js"></script>
-</main>
+    </main>
 </body>
+
 </html>
