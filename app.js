@@ -206,7 +206,6 @@ function calculateAge() {
 function resetAge() {
     document.getElementById('birthYear').value = '';
     document.getElementById('birthMonth').value = '';
-    document.getElementById('ageResult').value = '';
 }
 
 //BMI计算器
@@ -226,6 +225,50 @@ function calculateBMI() {
         document.getElementById('perHeight').value = '';
         document.getElementById('perWeight').value = '';
     }
+}
+
+//投资计算器
+let currentPeriod = 1; 
+let cashFlows = [];      // 存储每期的现金流
+const NPVResult = document.getElementById('NPVResult');
+const saveButton = document.getElementById('saveButton'); 
+const cashFlowInput = document.getElementById('cashFlowInput');
+
+
+function saveCashFlow() {
+    console.log('saveCashFlow 被调用'); // 确认是否触发了函数
+    const  cashFlowValue = Number(cashFlowInput.value); // 获取当前输入框的值
+    const nper = Number(document.getElementById('nper').value);
+    
+    console.log('当前现金流:', cashFlowValue); // 输出现金流的值
+    console.log('当前期数:', currentPeriod); // 输出当前期数
+    
+    // 检查输入的现金流是否有效
+    if (currentPeriod <= nper && !isNaN(cashFlowValue)) {
+        cashFlows.push(cashFlowValue); // 将当前期的现金流保存到数组中
+        currentPeriod++; // 更新当前期数
+        cashFlowInput.value = '';
+        console.log('清空后的输入框:', cashFlowInput.value);
+        if (currentPeriod <= nper) {
+            cashFlowInput.placeholder = `请输入第${currentPeriod}期现金流`;
+        }
+        else {
+            saveButton.innerText = '计算净现值';
+            saveButton.onclick = calculateNPV;  // 修改按钮的功能，点击后计算NPV
+            cashFlowInput.style.display = 'none'; // 隐藏输入框
+        }
+    } else {
+        alert('请输入有效的现金流');
+    }
+}
+
+function calculateNPV() {
+    let initialCashFlow = Number(document.getElementById('initialCashFlow').value);
+    const  rate = Number(document.getElementById('rate').value);    
+    for (let i = 0; i < cashFlows.length; i++) {
+        initialCashFlow += cashFlows[i] / Math.pow((1 + rate), i + 1); 
+    }
+   NPVResult.textContent = `净现值为: ${Math.round(initialCashFlow)}`;
 }
 
 
@@ -255,6 +298,9 @@ function openCalculator(calculater) {
     else if (calculater === 'BMI计算器') {
         document.getElementById('BMI-calculater-content').style.display = 'block';
     }
+    else if (calculater === '投资计算器') {
+        document.getElementById('investment-calculater-content').style.display = 'block';
+    }
     // 根据需要添加其他计算器的内容显示逻辑
 }
 
@@ -268,11 +314,15 @@ function closeModal() {
 
     // 隐藏货币换算器（或者其他打开的内容）
     document.getElementById('currency-converter-content').style.display = 'none';
-    document.getElementById('conversionResult').value = '';
+    document.getElementById('conversionResult').textContent = '';
     document.getElementById('salary-calculater-content').style.display = 'none';
-    document.getElementById('salaryResult').value = '';
+    document.getElementById('salaryResult').textContent = '';
     document.getElementById('retirement-age-calculater-content').style.display = 'none';
+    document.getElementById('ageResult').textContent = '';
     document.getElementById('BMI-calculater-content').style.display = 'none';
-    document.getElementById('BMIResult').value = '';
+    document.getElementById('BMIResult').textContent = '';
+    document.getElementById('investment-calculater-content').style.display = 'none';
+    document.getElementById('NPVResult').textContent = '';
+    cashFlowInput.style.display = 'block'; 
     // 可以添加其他计算器内容的隐藏逻辑，例如 document.getElementById('other-calculator-content').style.display = 'none';
 }
