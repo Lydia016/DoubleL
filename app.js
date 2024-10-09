@@ -495,3 +495,4 @@ function closeModal() {
     chartInstance.destroy(); 
     // 可以添加其他计算器内容的隐藏逻辑，例如 document.getElementById('other-calculator-content').style.display = 'none';
 }
+1
