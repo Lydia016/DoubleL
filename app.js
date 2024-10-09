@@ -331,7 +331,6 @@ function calculateOptionValues() {
     // 计算看涨和看跌期权的价值
     const optionValues = blackScholes(S0, X, r, T, sigma);
 
-    // 显示结果
     document.getElementById("callResult").innerText = "欧式看涨期权的价值: " + optionValues.call.toFixed(2) + " 元";
     document.getElementById("putResult").innerText = "欧式看跌期权的价值: " + optionValues.put.toFixed(2) + " 元";
 }
@@ -396,3 +395,4 @@ function closeModal() {
     document.getElementById('DateResult').textContent = '';
     // 可以添加其他计算器内容的隐藏逻辑，例如 document.getElementById('other-calculator-content').style.display = 'none';
 }
+1
