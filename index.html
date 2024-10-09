@@ -51,7 +51,7 @@
                 <div class="card" onclick="openCalculator('工资计算器')">工资计算器</div>
                 <div class="card" onclick="openCalculator('货币换算器')">货币换算器</div>
                 <div class="card" onclick="openCalculator('投资计算器')">投资计算器</div>
-                <div class="card" onclick="openCalculator('age-calculator')">Age Calculator</div>
+                <div class="card" onclick="openCalculator('数据统计器')">数据统计器</div>
             </div>
         </div>
     </main>
@@ -151,7 +151,21 @@
                     <button class="calculateDate-button" onclick="calculateDate()">计算日期间隔</button>
                     <p id="DateResult"></p>
                 </div>
+                <!--数据统计器-->
+                <div id="Statistic-content" style="display : none;">
+                    <h3>数据统计器</h3>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+                    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                     <!-- 文件上传按钮 -->
+                    <input type="file" id="fileInput" accrpt=".xlsx">
+                    <!-- 处理文件的按钮 -->
+                    <button onclick="processFile()">Process File</button>
+                    <!-- 用于显示直方图的画布 -->
+                    <div>
+                        <canvas id="histogram" width="400" height="200"></canvas>
+                    </div>
 
+                </div>
 
             </div>
         </div>
