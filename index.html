@@ -48,7 +48,7 @@
                 <div class="card" onclick="openCalculator('loan-calculator')">Loan Calculator</div>
                 <div class="card" onclick="openCalculator('BMI计算器')">BMI计算器</div>
                 <div class="card" onclick="openCalculator('currency-converter')">Currency Converter</div>
-                <div class="card" onclick="openCalculator('date-calculator')">Date Calculator</div>
+                <div class="card" onclick="openCalculator('日期间隔计算器')">日期间隔计算器</div>
                 <div class="card" onclick="openCalculator('退休年龄计算器')">退休年龄计算器</div>
                 <div class="card" onclick="openCalculator('工资计算器')">工资计算器</div>
                 <div class="card" onclick="openCalculator('货币换算器')">货币换算器</div>
@@ -136,12 +136,21 @@
                     <h3>投资计算器</h3>
                     <input type="number" id="rate" class="inputRate" placeholder="折现率">
                     <input type="number" id="nper" placeholder="请输入期数">
-                    <input type="number" id="initialCashFlow" placeholder="请输入初始现金流" >
+                    <input type="number" id="initialCashFlow" placeholder="请输入初始现金流">
                     <div id="cash-flow-container">
-                        <input type="number" id="cashFlowInput" placeholder="请输入第1期现金流" >
+                        <input type="number" id="cashFlowInput" placeholder="请输入第1期现金流">
                         <button id="saveButton" onclick="saveCashFlow()">保存</button>
                     </div>
                     <div id="NPVResult"></div>
+                </div>
+                <!--日期间隔计算器-->
+                <div id="Date-calculater-content" style="display:none;">
+                    <h3>日期间隔计算器</h3>
+                    <input type="date" id="startDate" class="startDate" placeholder="起始日期">
+                    <input type="date" id="endDate" class="endDate" placeholder="终止日期">
+                    <button class="calculateDate-button" onclick="calculateDate()">计算日期间隔</button>
+                    <p id="DateResult"></p>
+
                 </div>
 
             </div>

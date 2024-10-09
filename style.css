@@ -558,3 +558,69 @@ header h2 {
     margin-left: 10px;
     font-weight: bolder;
 }
+
+/*日期间隔计算器*/
+#Date-calculater-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* 水平居中 */
+    align-items: center;
+    /* 垂直居中 */
+    gap: 50px;
+    /* 设置选择框、输入框、按钮之间的间距 */
+    margin-bottom: 10px;
+    /* 给货币转换部分增加下边距 */
+    font-size: 20px;
+    color: white;
+
+}
+
+.startDate {
+    display: flex;
+    width: 170px;
+    /* 输入框的宽度 */
+    padding: 10px;
+    /* 输入框内部的填充 */
+    font-size: 16px;
+    /* 设置字体大小 */
+    border-radius: 5px;
+    /* 设置圆角边框 */
+    border: 1px solid #ccc;
+    /* 边框样式 */
+    margin: 10px;
+}
+
+.endDate {
+    display: flex;
+    width: 170px;
+    /* 输入框的宽度 */
+    padding: 10px;
+    /* 输入框内部的填充 */
+    font-size: 16px;
+    /* 设置字体大小 */
+    border-radius: 5px;
+    /* 设置圆角边框 */
+    border: 1px solid #ccc;
+    /* 边框样式 */
+    margin: 10px;
+}
+
+.calculateDate-button {
+    padding: 10px;
+    /* 设置按钮的内边距 */
+    background-color: #4fe0b5;
+    /* 按钮背景颜色 */
+    color: rgb(0, 0, 0);
+    /* 按钮文字颜色 */
+    border: 1px;
+    /* 移除默认边框 */
+    border-radius: 5px;
+    /* 按钮圆角 */
+    cursor: pointer;
+    /* 鼠标悬停时显示手形 */
+    font-size: 16px;
+    /* 设置字体大小 */
+    width: 170px;
+    margin: 10px;
+}
