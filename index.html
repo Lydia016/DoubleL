@@ -40,9 +40,7 @@
         </div>
         <!--右侧功能计算器-->
         <div class="container right-container">
-            <!-- 圆形布局的容器 -->
             <div class="circle-container">
-                <!-- 中间的图片 -->
                 <img src="https://marketplace.canva.cn/d5B34/MACKkEd5B34/2/tl/canva-MACKkEd5B34.png" alt="Center Image">
                 <div class="card" onclick="openCalculator('tip-calculator')">Tip Calculator</div>
                 <div class="card" onclick="openCalculator('loan-calculator')">Loan Calculator</div>
@@ -71,6 +69,7 @@
                     <h3>货币换算器</h3>
                     <input type="number" id="amount" placeholder="输入金额" class="inputBox">
                     <select id="fromCurrency" class="selectBox">
+                        <option value=" " disabled selected>From</option>
                         <option value="CNY">CNY</option>
                         <option value="HKD">HKD</option>
                         <option value="USD">USD</option>
@@ -79,6 +78,7 @@
                         <option value="KRW">KRW</option>
                     </select>
                     <select id="toCurrency" class="selectBox">
+                        <option value=" " disabled selected>To</option>
                         <option value="CNY">CNY</option>
                         <option value="HKD">HKD</option>
                         <option value="USD">USD</option>
@@ -135,11 +135,11 @@
                 <div id="investment-calculater-content" style="display : none;">
                     <h3>投资计算器</h3>
                     <input type="number" id="rate" class="inputRate" placeholder="折现率">
-                    <input type="number" id="nper" placeholder="请输入期数">
-                    <input type="number" id="initialCashFlow" placeholder="请输入初始现金流">
-                    <div id="cash-flow-container">
-                        <input type="number" id="cashFlowInput" placeholder="请输入第1期现金流">
-                        <button id="saveButton" onclick="saveCashFlow()">保存</button>
+                    <input type="number" id="nper" class="inputRate" placeholder="请输入期数">
+                    <input type="number" id="initialCashFlow" class="inputRate" placeholder="请输入初始现金流">
+                    <div class="cashFlow-group">
+                        <input type="number" id="cashFlowInput" class="inputRate" placeholder="请输入第1期现金流">
+                        <button id="saveButton" class="saveButton" onclick="saveCashFlow()">保存</button>
                     </div>
                     <div id="NPVResult"></div>
                 </div>
@@ -150,8 +150,8 @@
                     <input type="date" id="endDate" class="endDate" placeholder="终止日期">
                     <button class="calculateDate-button" onclick="calculateDate()">计算日期间隔</button>
                     <p id="DateResult"></p>
-
                 </div>
+
 
             </div>
         </div>

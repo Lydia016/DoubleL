@@ -332,7 +332,6 @@ header h2 {
     /* 给货币转换部分增加下边距 */
     font-size: 20px;
     color: white;
-
 }
 
 .input-group {
@@ -394,6 +393,7 @@ header h2 {
 }
 
 .save:hover,
+.saveButton:hover,
 .calculate-button:hover {
     background-color: #336f62;
 }
@@ -450,7 +450,8 @@ header h2 {
     font-size: 16px;
     /* 设置字体大小 */
     width: 170px;
-    margin: 10px;
+    margin-top: 10px;
+    margin-left: 10px;
 }
 
 .reset-button {
@@ -474,7 +475,7 @@ header h2 {
 
 .typeBox {
     display: inline-block;
-    width: 200px;
+    width: 194px;
     /* 选择框的宽度 */
     padding: 10px;
     /* 选择框内部的填充 */
@@ -486,9 +487,8 @@ header h2 {
     /* 边框样式 */
     margin-left: 10px;
 }
-
-/*BMI计算器*/
-#BMI-calculater-content {
+/*投资计算器*/
+#investment-calculater-content {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -499,6 +499,48 @@ header h2 {
     /* 设置选择框、输入框、按钮之间的间距 */
     margin-bottom: 10px;
     /* 给货币转换部分增加下边距 */
+    font-size: 20px;
+    color: white;
+}
+.inputRate {
+    display: flex;
+    width: 170px;
+    /* 输入框的宽度 */
+    padding: 10px;
+    /* 输入框内部的填充 */
+    font-size: 16px;
+    /* 设置字体大小 */
+    border-radius: 5px;
+    /* 设置圆角边框 */
+    border: 1px solid #ccc;
+    /* 边框样式 */
+    margin: 10px;
+}
+.cashFlow-group{
+    display: flex;
+}
+.saveButton{
+    padding: 10px;
+    background-color: #4fe0b5;
+    color: rgb(0, 0, 0);
+    border: 1px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 170px;
+    margin: 10px;
+    margin-bottom: 12px;;
+}
+
+
+/*BMI计算器*/
+#BMI-calculater-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    margin-bottom: 10px;
     font-size: 20px;
     color: white;
 
