@@ -279,18 +279,13 @@ header h2 {
 
 /* 选择框样式 */
 .selectBox {
-    display: inline-block;
-    width: 133px;
-    /* 选择框的宽度 */
+    display: flex;
+    width: 170px;
     padding: 10px;
-    /* 选择框内部的填充 */
     font-size: 16px;
-    /* 设置字体大小 */
     border-radius: 5px;
-    /* 设置圆角边框 */
     border: 1px solid #ccc;
-    /* 边框样式 */
-    margin-bottom: 15px;
+    margin: 10px;
 }
 
 /* 按钮样式 */
@@ -323,13 +318,9 @@ header h2 {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /* 水平居中 */
     align-items: center;
-    /* 垂直居中 */
     gap: 50px;
-    /* 设置选择框、输入框、按钮之间的间距 */
     margin-bottom: 10px;
-    /* 给货币转换部分增加下边距 */
     font-size: 20px;
     color: white;
 }
@@ -343,33 +334,21 @@ header h2 {
 .inputSalary {
     display: flex;
     width: 170px;
-    /* 输入框的宽度 */
     padding: 10px;
-    /* 输入框内部的填充 */
     font-size: 16px;
-    /* 设置字体大小 */
     border-radius: 5px;
-    /* 设置圆角边框 */
     border: 1px solid #ccc;
-    /* 边框样式 */
     margin: 10px;
 }
 
 .save {
     padding: 10px;
-    /* 设置按钮的内边距 */
     background-color: #4fe0b5;
-    /* 按钮背景颜色 */
     color: rgb(0, 0, 0);
-    /* 按钮文字颜色 */
     border: 1px;
-    /* 移除默认边框 */
     border-radius: 5px;
-    /* 按钮圆角 */
     cursor: pointer;
-    /* 鼠标悬停时显示手形 */
     font-size: 16px;
-    /* 设置字体大小 */
     width: 80px;
 }
 
@@ -408,47 +387,32 @@ header h2 {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /* 水平居中 */
     align-items: center;
-    /* 垂直居中 */
     gap: 50px;
-    /* 设置选择框、输入框、按钮之间的间距 */
     margin-bottom: 10px;
-    /* 给货币转换部分增加下边距 */
     font-size: 20px;
     color: white;
+
 }
 
 .inputAge {
     display: flex;
     width: 170px;
-    /* 输入框的宽度 */
     padding: 10px;
-    /* 输入框内部的填充 */
     font-size: 16px;
-    /* 设置字体大小 */
     border-radius: 5px;
-    /* 设置圆角边框 */
     border: 1px solid #ccc;
-    /* 边框样式 */
     margin: 10px;
 }
 
 .calculateAge-button {
     padding: 10px;
-    /* 设置按钮的内边距 */
     background-color: #4fe0b5;
-    /* 按钮背景颜色 */
     color: rgb(0, 0, 0);
-    /* 按钮文字颜色 */
     border: 1px;
-    /* 移除默认边框 */
     border-radius: 5px;
-    /* 按钮圆角 */
     cursor: pointer;
-    /* 鼠标悬停时显示手形 */
     font-size: 16px;
-    /* 设置字体大小 */
     width: 170px;
     margin-top: 10px;
     margin-left: 10px;
@@ -456,19 +420,13 @@ header h2 {
 
 .reset-button {
     padding: 10px;
-    /* 设置按钮的内边距 */
+    padding: 10px;
     background-color: #4fe0b5;
-    /* 按钮背景颜色 */
     color: rgb(0, 0, 0);
-    /* 按钮文字颜色 */
     border: 1px;
-    /* 移除默认边框 */
     border-radius: 5px;
-    /* 按钮圆角 */
     cursor: pointer;
-    /* 鼠标悬停时显示手形 */
     font-size: 16px;
-    /* 设置字体大小 */
     width: 170px;
     margin: 10px;
 }
@@ -492,13 +450,9 @@ header h2 {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /* 水平居中 */
     align-items: center;
-    /* 垂直居中 */
     gap: 50px;
-    /* 设置选择框、输入框、按钮之间的间距 */
     margin-bottom: 10px;
-    /* 给货币转换部分增加下边距 */
     font-size: 20px;
     color: white;
 }
@@ -549,48 +503,31 @@ header h2 {
 .inputHeight {
     display: flex;
     width: 170px;
-    /* 输入框的宽度 */
     padding: 10px;
-    /* 输入框内部的填充 */
     font-size: 16px;
-    /* 设置字体大小 */
     border-radius: 5px;
-    /* 设置圆角边框 */
     border: 1px solid #ccc;
-    /* 边框样式 */
     margin: 10px;
 }
 
 .inputWeight {
     display: flex;
     width: 170px;
-    /* 输入框的宽度 */
     padding: 10px;
-    /* 输入框内部的填充 */
     font-size: 16px;
-    /* 设置字体大小 */
     border-radius: 5px;
-    /* 设置圆角边框 */
     border: 1px solid #ccc;
-    /* 边框样式 */
     margin: 10px;
 }
 
 .calculateBMI-button {
     padding: 10px;
-    /* 设置按钮的内边距 */
     background-color: #4fe0b5;
-    /* 按钮背景颜色 */
     color: rgb(0, 0, 0);
-    /* 按钮文字颜色 */
     border: 1px;
-    /* 移除默认边框 */
     border-radius: 5px;
-    /* 按钮圆角 */
     cursor: pointer;
-    /* 鼠标悬停时显示手形 */
     font-size: 16px;
-    /* 设置字体大小 */
     width: 170px;
     margin: 10px;
 }
@@ -606,13 +543,8 @@ header h2 {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /* 水平居中 */
     align-items: center;
-    /* 垂直居中 */
     gap: 50px;
-    /* 设置选择框、输入框、按钮之间的间距 */
-    margin-bottom: 10px;
-    /* 给货币转换部分增加下边距 */
     font-size: 20px;
     color: white;
 
@@ -621,48 +553,36 @@ header h2 {
 .startDate {
     display: flex;
     width: 170px;
-    /* 输入框的宽度 */
     padding: 10px;
-    /* 输入框内部的填充 */
     font-size: 16px;
-    /* 设置字体大小 */
     border-radius: 5px;
-    /* 设置圆角边框 */
     border: 1px solid #ccc;
-    /* 边框样式 */
     margin: 10px;
 }
 
 .endDate {
     display: flex;
     width: 170px;
-    /* 输入框的宽度 */
     padding: 10px;
-    /* 输入框内部的填充 */
     font-size: 16px;
-    /* 设置字体大小 */
     border-radius: 5px;
-    /* 设置圆角边框 */
     border: 1px solid #ccc;
-    /* 边框样式 */
     margin: 10px;
 }
 
 .calculateDate-button {
     padding: 10px;
-    /* 设置按钮的内边距 */
     background-color: #4fe0b5;
-    /* 按钮背景颜色 */
     color: rgb(0, 0, 0);
-    /* 按钮文字颜色 */
     border: 1px;
-    /* 移除默认边框 */
     border-radius: 5px;
-    /* 按钮圆角 */
     cursor: pointer;
-    /* 鼠标悬停时显示手形 */
     font-size: 16px;
-    /* 设置字体大小 */
     width: 170px;
     margin: 10px;
+}
+
+#DateResult {
+    margin-left: 10px;
+    font-weight: bolder;
 }
