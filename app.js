@@ -1,5 +1,5 @@
 // Open Exchange Rates API 密钥
-const appId = '431402e48d944926be7d0b1c49836008'; // 将 YOUR_APP_ID 替换为你自己的 App ID
+const appId = '431402e48d944926be7d0b1c49836008';
 
 // 基础加减乘除计算器
 let currentValue = '';  // 当前输入的数字或计算结果
@@ -292,6 +292,48 @@ function calculateDate() {
 
     // 显示结果
     DateResult.textContent = "日期间隔是: " + daysDifference + " 天";
+}
+
+
+// 标准正态分布的累积分布函数近似
+function normalCDF(x) {
+    const t = 1 / (1 + 0.5 * Math.abs(x) * (1 + 0.196854 * x * x));
+    const erf = 1 - t * Math.exp(-x * x - 1.26551223 + t * (1.00002368 + t * (0.37409196 + t * (0.09678418 + t * (-0.18628806 + t * (0.27886807 + t * (-1.13520398 + t * (1.48851587 + t * (-0.82215223 + t * 0.17087277)))))))));
+    return (1 + Math.sign(x) * erf) / 2;
+}
+
+// 布莱克-斯科尔斯模型计算看涨和看跌期权的价值
+function blackScholes(S, X, r, T, sigma) {
+    const d1 = (Math.log(S / X) + (r + 0.5 * sigma * sigma) * T) / (sigma * Math.sqrt(T));
+    const d2 = d1 - sigma * Math.sqrt(T);
+
+    const N_d1 = normalCDF(d1);
+    const N_d2 = normalCDF(d2);
+
+    // 看涨期权价值
+    const callValue = S * N_d1 - X * Math.exp(-r * T) * N_d2;
+
+    // 看跌期权价值
+    const putValue = X * Math.exp(-r * T) * (1 - N_d2) - S * (1 - N_d1);
+
+    return { call: callValue, put: putValue };
+}
+
+// 期权价值计算器
+function calculateOptionValues() {
+    // 获取用户输入的参数
+    const S0 = parseFloat(document.getElementById("S0").value);
+    const X = parseFloat(document.getElementById("X").value);
+    const r = parseFloat(document.getElementById("r").value) / 100; // 将百分比转换为小数
+    const T = parseFloat(document.getElementById("T").value) / 365; // 假设一年有365天
+    const sigma = parseFloat(document.getElementById("sigma").value) / 100; // 将百分比转换为小数
+
+    // 计算看涨和看跌期权的价值
+    const optionValues = blackScholes(S0, X, r, T, sigma);
+
+    // 显示结果
+    document.getElementById("callResult").innerText = "欧式看涨期权的价值: " + optionValues.call.toFixed(2) + " 元";
+    document.getElementById("putResult").innerText = "欧式看跌期权的价值: " + optionValues.put.toFixed(2) + " 元";
 }
 
 
