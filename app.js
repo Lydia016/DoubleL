@@ -335,6 +335,99 @@ function calculateOptionValues() {
     document.getElementById("putResult").innerText = "欧式看跌期权的价值: " + optionValues.put.toFixed(2) + " 元";
 }
 
+//数据统计器
+let chartInstance = null; 
+document.getElementById('fileInput').addEventListener('change', handleFileUpload);
+
+// 当用户选择文件时触发此函数
+function handleFileUpload(event) {
+  const file = event.target.files[0]; // 获取文件
+  const fileExtension = file.name.split('.').pop().toLowerCase(); // 获取文件扩展名
+
+  // 检查文件是否为 .xlsx 格式
+  if (fileExtension === 'xlsx') {
+    parseExcel(file); // 解析 Excel 文件
+  } else {
+    alert('仅支持 Excel 文件！'); // 提示用户仅支持 Excel 文件
+  }
+}
+
+// 解析 Excel 文件
+function parseExcel(file) {
+  const reader = new FileReader(); // 创建文件读取器
+  reader.onload = function(event) {
+    const data = new Uint8Array(event.target.result); // 读取文件的二进制内容
+    const workbook = XLSX.read(data, {type: 'array'}); // 使用 xlsx 解析 Excel 文件
+    const sheetName = workbook.SheetNames[0]; // 获取第一个工作表的名称
+    const worksheet = workbook.Sheets[sheetName]; // 获取工作表内容
+    const json = XLSX.utils.sheet_to_json(worksheet, {header: 1}); // 将工作表转换为 JSON 格式
+
+    console.log(json);  // 调试：查看解析的 Excel 文件内容
+
+    // 假设第一列包含我们要统计的类别数据
+    const categoryArray = json.map(row => row[0]).filter(value => typeof value === 'string'); // 过滤掉非字符串的值
+    processData(categoryArray); // 处理数据
+  };
+  reader.readAsArrayBuffer(file); // 以二进制数组形式读取文件
+}
+
+// 处理类别数据，生成频率分布
+function processData(data) {
+  if (data.length === 0) {
+    alert('文件中没有有效数据！'); // 如果文件中没有有效数据，提示用户
+    return;
+  }
+
+  // 创建一个对象来存储每个类别的频率
+  const frequency = {};
+  data.forEach(item => {
+    if (frequency[item]) {
+      frequency[item]++; // 如果类别已经存在，计数加1
+    } else {
+      frequency[item] = 1; // 如果类别不存在，初始化计数为1
+    }
+  });
+
+  // 调用函数生成直方图
+  generateHistogram(frequency);
+}
+
+// 生成频率分布直方图
+function generateHistogram(frequency) {
+  const ctx = document.getElementById('histogram').getContext('2d'); // 获取 canvas 上下文
+
+  const labels = Object.keys(frequency);  // 获取所有类别名称（作为横坐标标签）
+  const data = Object.values(frequency);  // 获取每个类别的频率（作为数据集）
+
+  const histogramData = {
+    labels: labels,
+    datasets: [{
+      label: '类别频率', // 图表的标签
+      data: data, // 类别对应的频率数据
+      backgroundColor: 'rgba(75, 192, 192, 0.6)', // 柱状图的背景颜色
+      borderColor: 'rgba(75, 192, 192, 1)', // 柱状图的边框颜色
+      borderWidth: 1 // 柱状图的边框宽度
+    }]
+  };
+
+  // 使用 Chart.js 生成直方图
+chartInstance = new Chart(ctx, {
+    type: 'bar', // 生成柱状图
+    data: histogramData, // 图表的数据
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true // 确保 Y 轴从零开始
+        }
+      }
+    }
+  });
+}
+
+
+
+
+
 
 // 打开模态窗口并显示相应的计算器
 function openCalculator(calculater) {
@@ -368,6 +461,9 @@ function openCalculator(calculater) {
     else if (calculater === '日期间隔计算器') {
         document.getElementById('Date-calculater-content').style.display = 'block';
     }
+    else if (calculater === '数据统计器') {
+        document.getElementById('Statistic-content').style.display = 'block';
+    }
     // 根据需要添加其他计算器的内容显示逻辑
 }
 
@@ -393,6 +489,9 @@ function closeModal() {
     cashFlowInput.style.display = 'block';
     document.getElementById('Date-calculater-content').style.display = 'none';
     document.getElementById('DateResult').textContent = '';
+    document.getElementById('Statistic-content').style.display = 'none';
+    document.getElementById('fileInput').value = '';
+    chartInstance.destroy(); 
     // 可以添加其他计算器内容的隐藏逻辑，例如 document.getElementById('other-calculator-content').style.display = 'none';
 }
 1555555555555555
