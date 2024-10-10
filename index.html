@@ -44,14 +44,14 @@
                 <img src="https://marketplace.canva.cn/d5B34/MACKkEd5B34/2/tl/canva-MACKkEd5B34.png" alt="Center Image">
                 <div class="card" onclick="openCalculator('tip-calculator')">Tip Calculator</div>
                 <div class="card" onclick="openCalculator('loan-calculator')">Loan Calculator</div>
-                <div class="card" onclick="openCalculator('BMI计算器')">BMI计算器</div>
+                <div class="card" onclick="openCalculator('BMI计算器')">BMI计算器(改)</div>
                 <div class="card" onclick="openCalculator('currency-converter')">Currency Converter</div>
-                <div class="card" onclick="openCalculator('日期间隔计算器')">日期间隔计算器</div>
+                <div class="card" onclick="openCalculator('日期间隔计算器')">日期间隔计算器（改）</div>
                 <div class="card" onclick="openCalculator('退休年龄计算器')">退休年龄计算器</div>
                 <div class="card" onclick="openCalculator('工资计算器')">工资计算器</div>
                 <div class="card" onclick="openCalculator('货币换算器')">货币换算器</div>
                 <div class="card" onclick="openCalculator('投资计算器')">投资计算器</div>
-                <div class="card" onclick="openCalculator('数据统计器')">数据统计器</div>
+                <div class="card" onclick="openCalculator('数据统计器')">数据统计器（改）</div>
             </div>
         </div>
     </main>
@@ -123,14 +123,7 @@
                     <button class="reset-button" onclick="resetAge()">重置</button>
                     <p id="ageResult"></p>
                 </div>
-                <!--BMI计算器-->
-                <div id="BMI-calculater-content" style="display:none;">
-                    <h3>BMI计算器</h3>
-                    <input type="number" id="perHeight" class="inputHeight" placeholder="身高(m)">
-                    <input type="number" id="perWeight" class="inputWeight" placeholder="体重(kg)">
-                    <button class="calculateBMI-button" onclick="calculateBMI()">计算BMI</button>
-                    <p id="BMIResult"></p>
-                </div>
+
                 <!--投资计算器-->
                 <div id="investment-calculater-content" style="display : none;">
                     <h3>投资计算器</h3>
@@ -143,29 +136,7 @@
                     </div>
                     <div id="NPVResult"></div>
                 </div>
-                <!--日期间隔计算器-->
-                <div id="Date-calculater-content" style="display:none;">
-                    <h3>日期间隔计算器</h3>
-                    <input type="date" id="startDate" class="startDate" placeholder="起始日期">
-                    <input type="date" id="endDate" class="endDate" placeholder="终止日期">
-                    <button class="calculateDate-button" onclick="calculateDate()">计算日期间隔</button>
-                    <p id="DateResult"></p>
-                </div>
-                <!--数据统计器-->
-                <div id="Statistic-content" style="display : none;">
-                    <h3>数据统计器</h3>
-                    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-                    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-                     <!-- 文件上传按钮 -->
-                    <input type="file" id="fileInput" accrpt=".xlsx">
-                    <!-- 处理文件的按钮 -->
-                    <button onclick="processFile()">Process File</button>
-                    <!-- 用于显示直方图的画布 -->
-                    <div>
-                        <canvas id="histogram" width="400" height="200"></canvas>
-                    </div>
 
-                </div>
 
             </div>
         </div>

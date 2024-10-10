@@ -208,24 +208,6 @@ function resetAge() {
     document.getElementById('birthMonth').value = '';
 }
 
-//BMI计算器
-function calculateBMI() {
-    const perHeight = document.getElementById('perHeight').value;
-    const perWeight = document.getElementById('perWeight').value;
-    const BMIResult = document.getElementById('BMIResult');
-    // 检查输入值是否为空
-    if (perHeight === '' || perWeight === '') {
-        BMIResult.textContent = "请确定每项均已输入。";
-        return;
-    }
-    //计算BMI
-    else {
-        BMI = perWeight / (perHeight * perHeight)
-        BMIResult.textContent = `您的BMI为${BMI.toFixed(2)}`;
-        document.getElementById('perHeight').value = '';
-        document.getElementById('perWeight').value = '';
-    }
-}
 
 //投资计算器
 let currentPeriod = 1;
@@ -272,160 +254,6 @@ function calculateNPV() {
 }
 
 
-//日期间隔计算器
-function calculateDate() {
-    // 获取用户输入的日期
-    const startDate = new Date(document.getElementById("startDate").value);
-    const endDate = new Date(document.getElementById("endDate").value);
-
-    // 检查是否正确输入了日期
-    if (isNaN(startDate) || isNaN(endDate)) {
-        document.getElementById("result").innerText = "请输入有效的日期";
-        return;
-    }
-
-    // 计算两个日期之间的毫秒数差异
-    const timeDifference = endDate - startDate;
-
-    // 将毫秒转换为天数
-    const daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-
-    // 显示结果
-    DateResult.textContent = "日期间隔是: " + daysDifference + " 天";
-}
-
-
-// 标准正态分布的累积分布函数近似
-function normalCDF(x) {
-    const t = 1 / (1 + 0.5 * Math.abs(x) * (1 + 0.196854 * x * x));
-    const erf = 1 - t * Math.exp(-x * x - 1.26551223 + t * (1.00002368 + t * (0.37409196 + t * (0.09678418 + t * (-0.18628806 + t * (0.27886807 + t * (-1.13520398 + t * (1.48851587 + t * (-0.82215223 + t * 0.17087277)))))))));
-    return (1 + Math.sign(x) * erf) / 2;
-}
-
-// 布莱克-斯科尔斯模型计算看涨和看跌期权的价值
-function blackScholes(S, X, r, T, sigma) {
-    const d1 = (Math.log(S / X) + (r + 0.5 * sigma * sigma) * T) / (sigma * Math.sqrt(T));
-    const d2 = d1 - sigma * Math.sqrt(T);
-
-    const N_d1 = normalCDF(d1);
-    const N_d2 = normalCDF(d2);
-
-    // 看涨期权价值
-    const callValue = S * N_d1 - X * Math.exp(-r * T) * N_d2;
-
-    // 看跌期权价值
-    const putValue = X * Math.exp(-r * T) * (1 - N_d2) - S * (1 - N_d1);
-
-    return { call: callValue, put: putValue };
-}
-
-// 期权价值计算器
-function calculateOptionValues() {
-    // 获取用户输入的参数
-    const S0 = parseFloat(document.getElementById("S0").value);
-    const X = parseFloat(document.getElementById("X").value);
-    const r = parseFloat(document.getElementById("r").value) / 100; // 将百分比转换为小数
-    const T = parseFloat(document.getElementById("T").value) / 365; // 假设一年有365天
-    const sigma = parseFloat(document.getElementById("sigma").value) / 100; // 将百分比转换为小数
-
-    // 计算看涨和看跌期权的价值
-    const optionValues = blackScholes(S0, X, r, T, sigma);
-
-    document.getElementById("callResult").innerText = "欧式看涨期权的价值: " + optionValues.call.toFixed(2) + " 元";
-    document.getElementById("putResult").innerText = "欧式看跌期权的价值: " + optionValues.put.toFixed(2) + " 元";
-}
-
-//数据统计器
-let chartInstance = null; 
-document.getElementById('fileInput').addEventListener('change', handleFileUpload);
-
-// 当用户选择文件时触发此函数
-function handleFileUpload(event) {
-  const file = event.target.files[0]; // 获取文件
-  const fileExtension = file.name.split('.').pop().toLowerCase(); // 获取文件扩展名
-
-  // 检查文件是否为 .xlsx 格式
-  if (fileExtension === 'xlsx') {
-    parseExcel(file); // 解析 Excel 文件
-  } else {
-    alert('仅支持 Excel 文件！'); // 提示用户仅支持 Excel 文件
-  }
-}
-
-// 解析 Excel 文件
-function parseExcel(file) {
-  const reader = new FileReader(); // 创建文件读取器
-  reader.onload = function(event) {
-    const data = new Uint8Array(event.target.result); // 读取文件的二进制内容
-    const workbook = XLSX.read(data, {type: 'array'}); // 使用 xlsx 解析 Excel 文件
-    const sheetName = workbook.SheetNames[0]; // 获取第一个工作表的名称
-    const worksheet = workbook.Sheets[sheetName]; // 获取工作表内容
-    const json = XLSX.utils.sheet_to_json(worksheet, {header: 1}); // 将工作表转换为 JSON 格式
-
-    console.log(json);  // 调试：查看解析的 Excel 文件内容
-
-    // 假设第一列包含我们要统计的类别数据
-    const categoryArray = json.map(row => row[0]).filter(value => typeof value === 'string'); // 过滤掉非字符串的值
-    processData(categoryArray); // 处理数据
-  };
-  reader.readAsArrayBuffer(file); // 以二进制数组形式读取文件
-}
-
-// 处理类别数据，生成频率分布
-function processData(data) {
-  if (data.length === 0) {
-    alert('文件中没有有效数据！'); // 如果文件中没有有效数据，提示用户
-    return;
-  }
-
-  // 创建一个对象来存储每个类别的频率
-  const frequency = {};
-  data.forEach(item => {
-    if (frequency[item]) {
-      frequency[item]++; // 如果类别已经存在，计数加1
-    } else {
-      frequency[item] = 1; // 如果类别不存在，初始化计数为1
-    }
-  });
-
-  // 调用函数生成直方图
-  generateHistogram(frequency);
-}
-
-// 生成频率分布直方图
-function generateHistogram(frequency) {
-  const ctx = document.getElementById('histogram').getContext('2d'); // 获取 canvas 上下文
-
-  const labels = Object.keys(frequency);  // 获取所有类别名称（作为横坐标标签）
-  const data = Object.values(frequency);  // 获取每个类别的频率（作为数据集）
-
-  const histogramData = {
-    labels: labels,
-    datasets: [{
-      label: '类别频率', // 图表的标签
-      data: data, // 类别对应的频率数据
-      backgroundColor: 'rgba(75, 192, 192, 0.6)', // 柱状图的背景颜色
-      borderColor: 'rgba(75, 192, 192, 1)', // 柱状图的边框颜色
-      borderWidth: 1 // 柱状图的边框宽度
-    }]
-  };
-
-  // 使用 Chart.js 生成直方图
-chartInstance = new Chart(ctx, {
-    type: 'bar', // 生成柱状图
-    data: histogramData, // 图表的数据
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true // 确保 Y 轴从零开始
-        }
-      }
-    }
-  });
-}
-
-
-
 
 
 
@@ -452,18 +280,11 @@ function openCalculator(calculater) {
     else if (calculater === '退休年龄计算器') {
         document.getElementById('retirement-age-calculater-content').style.display = 'block';
     }
-    else if (calculater === 'BMI计算器') {
-        document.getElementById('BMI-calculater-content').style.display = 'block';
-    }
+
     else if (calculater === '投资计算器') {
         document.getElementById('investment-calculater-content').style.display = 'block';
     }
-    else if (calculater === '日期间隔计算器') {
-        document.getElementById('Date-calculater-content').style.display = 'block';
-    }
-    else if (calculater === '数据统计器') {
-        document.getElementById('Statistic-content').style.display = 'block';
-    }
+
     // 根据需要添加其他计算器的内容显示逻辑
 }
 
@@ -482,16 +303,8 @@ function closeModal() {
     document.getElementById('salaryResult').textContent = '';
     document.getElementById('retirement-age-calculater-content').style.display = 'none';
     document.getElementById('ageResult').textContent = '';
-    document.getElementById('BMI-calculater-content').style.display = 'none';
-    document.getElementById('BMIResult').textContent = '';
     document.getElementById('investment-calculater-content').style.display = 'none';
     document.getElementById('NPVResult').textContent = '';
     cashFlowInput.style.display = 'block';
-    document.getElementById('Date-calculater-content').style.display = 'none';
-    document.getElementById('DateResult').textContent = '';
-    document.getElementById('Statistic-content').style.display = 'none';
-    document.getElementById('fileInput').value = '';
-    chartInstance.destroy(); 
     // 可以添加其他计算器内容的隐藏逻辑，例如 document.getElementById('other-calculator-content').style.display = 'none';
 }
-1555555555555555
