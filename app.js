@@ -284,6 +284,27 @@ function calculateTax() {
 
 }
 
+//DAC计算器
+function calculateDAC() {
+    const monthlyInvestment = Number(document.getElementById('monthly-investment').value);
+    const investmentPeriod = Number(document.getElementById('investment-period').value);
+    const annualReturnRate = Number(document.getElementById('annual-return-rate').value) / 100;
+
+    if (isNaN(monthlyInvestment) || isNaN(investmentPeriod) || isNaN(annualReturnRate)) {
+        alert("请输入有效的数值！");
+        return;
+    }
+
+    let totalAmount = 0;
+    let monthlyReturnRate = Math.pow(1 + annualReturnRate, 1 / 12) - 1;
+
+    for (let i = 0; i < investmentPeriod; i++) {
+        // 每个月的投资金额加上之前投资的复利增长
+        totalAmount = (totalAmount + monthlyInvestment) * (1 + monthlyReturnRate);
+    }
+
+    DACresult.textContent = `定投 ${investmentPeriod} 个月后的累计金额为: ${totalAmount.toFixed(2)} 元`;
+}
 
 
 
@@ -316,6 +337,9 @@ function openCalculator(calculater) {
     else if (calculater === '税收计算器') {
         document.getElementById('tax-calculater-content').style.display = 'block';
     }
+    else if (calculater === 'DAC计算器') {
+        document.getElementById('DAC-calculater-content').style.display = 'block';
+    }
 
     // 根据需要添加其他计算器的内容显示逻辑
 }
@@ -340,6 +364,8 @@ function closeModal() {
     cashFlowInput.style.display = 'block';
     document.getElementById('tax-calculater-content').style.display = 'none';
     document.getElementById('taxResult').textContent = '';
+    document.getElementById('DAC-calculater-content').style.display = 'none';
+    document.getElementById('DACResult').textContent = '';
 
     // 可以添加其他计算器内容的隐藏逻辑，例如 document.getElementById('other-calculator-content').style.display = 'none';
 }

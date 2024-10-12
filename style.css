@@ -512,3 +512,13 @@ header h2 {
     margin-top: 10px;
     margin-left: 10px;
 }
+
+#taxResult {
+    margin-left: 10px;
+    font-weight: bolder;
+}
+
+#DACresult {
+    margin-left: 10px;
+    font-weight: bolder;
+}

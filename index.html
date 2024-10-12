@@ -42,7 +42,7 @@
         <div class="container right-container">
             <div class="circle-container">
                 <img src="https://marketplace.canva.cn/d5B34/MACKkEd5B34/2/tl/canva-MACKkEd5B34.png" alt="Center Image">
-                <div class="card" onclick="openCalculator('tip-calculator')">Tip Calculator</div>
+                <div class="card" onclick="openCalculator('DAC计算器')">DAC计算器</div>
                 <div class="card" onclick="openCalculator('loan-calculator')">Loan Calculator</div>
                 <div class="card" onclick="openCalculator('税收计算器')">税收计算器</div>
                 <div class="card" onclick="openCalculator('currency-converter')">Currency Converter</div>
@@ -141,7 +141,15 @@
                     <h3>税收计算器</h3>
                     <input type="number" id="income" class="input" placeholder="请输入月工资应交税金额">
                     <button id="tax-button" class="Basic-button" onclick="calculateTax()">计算应缴税收</button>
-                    <div id="taxResult"></div>
+                    <div id="taxResult" class="Result"></div>
+                </div>
+                <!--DAC计算器-->
+                <div id="DAC-calculater-content" style="display : none;">
+                    <input type="number" id="monthly-investment" class="input" placeholder="每月投资金额 (元)">
+                    <input type="number" id="investment-period" class="input" placeholder="投资期限 (月)">
+                    <input type="number" id="annual-return-rate" class="input" placeholder="预期年化收益率 (%)">
+                    <button id="DAC-button" class="Basic-button" onclick="calculateDAC()">计算累计金额</button>
+                    <div id="DACresult" class="Result"></div>
                 </div>
 
 
