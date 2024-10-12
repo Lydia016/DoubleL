@@ -44,7 +44,7 @@
                 <img src="https://marketplace.canva.cn/d5B34/MACKkEd5B34/2/tl/canva-MACKkEd5B34.png" alt="Center Image">
                 <div class="card" onclick="openCalculator('tip-calculator')">Tip Calculator</div>
                 <div class="card" onclick="openCalculator('loan-calculator')">Loan Calculator</div>
-                <div class="card" onclick="openCalculator('BMI计算器')">BMI计算器(改)</div>
+                <div class="card" onclick="openCalculator('税收计算器')">税收计算器</div>
                 <div class="card" onclick="openCalculator('currency-converter')">Currency Converter</div>
                 <div class="card" onclick="openCalculator('日期间隔计算器')">日期间隔计算器（改）</div>
                 <div class="card" onclick="openCalculator('退休年龄计算器')">退休年龄计算器</div>
@@ -135,6 +135,13 @@
                         <button id="saveButton" class="saveButton" onclick="saveCashFlow()">保存</button>
                     </div>
                     <div id="NPVResult"></div>
+                </div>
+                <!--税收计算器-->
+                <div id="tax-calculater-content" style="display : none;">
+                    <h3>税收计算器</h3>
+                    <input type="number" id="income" class="input" placeholder="请输入月工资应交税金额">
+                    <button id="tax-button" class="Basic-button" onclick="calculateTax()">计算应缴税收</button>
+                    <div id="taxResult"></div>
                 </div>
 
 

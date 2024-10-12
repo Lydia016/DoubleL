@@ -253,6 +253,36 @@ function calculateNPV() {
     NPVResult.textContent = `净现值为: ${Math.round(initialCashFlow)}`;
 }
 
+//税收计算器
+function calculateTax() {
+    const income = Number(document.getElementById('income').value);
+
+    if (isNaN(income)) {
+        alert("请输入有效的收入金额！");
+        return;
+    }
+    // 个税起征点为5000元
+    const taxableIncome = Math.max(0, income);
+
+    // 税率及速算扣除数
+    const taxBrackets = [
+        { max: 3000, rate: 0.03, deduction: 0 },
+        { max: 12000, rate: 0.1, deduction: 210 },
+        { max: 25000, rate: 0.2, deduction: 1410 },
+        { max: 35000, rate: 0.25, deduction: 2660 },
+        { max: 55000, rate: 0.3, deduction: 4410 },
+        { max: 80000, rate: 0.35, deduction: 7160 },
+        { rate: 0.45, deduction: 15160 }
+    ];
+    for (let i = 0; i < taxBrackets.length; i++) {
+        if (taxableIncome <= taxBrackets[i].max || !taxBrackets[i].max) {
+            const tax = (taxableIncome * taxBrackets[i].rate) - taxBrackets[i].deduction;
+            taxResult.textContent = "应缴个人所得税: " + (Math.max(tax, 0)).toFixed(2) + " 元";
+            return;
+        }
+    }
+
+}
 
 
 
@@ -280,9 +310,11 @@ function openCalculator(calculater) {
     else if (calculater === '退休年龄计算器') {
         document.getElementById('retirement-age-calculater-content').style.display = 'block';
     }
-
     else if (calculater === '投资计算器') {
         document.getElementById('investment-calculater-content').style.display = 'block';
+    }
+    else if (calculater === '税收计算器') {
+        document.getElementById('tax-calculater-content').style.display = 'block';
     }
 
     // 根据需要添加其他计算器的内容显示逻辑
@@ -306,5 +338,8 @@ function closeModal() {
     document.getElementById('investment-calculater-content').style.display = 'none';
     document.getElementById('NPVResult').textContent = '';
     cashFlowInput.style.display = 'block';
+    document.getElementById('tax-calculater-content').style.display = 'none';
+    document.getElementById('taxResult').textContent = '';
+
     // 可以添加其他计算器内容的隐藏逻辑，例如 document.getElementById('other-calculator-content').style.display = 'none';
 }
