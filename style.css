@@ -34,17 +34,18 @@ header h2 {
 }
 
 
-/*
+
 
 .buttons {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 6px;
-    padding-left: 12px;
-    padding-right: 12px;
-    padding-bottom: 25px;
+    grid-gap: 6px;
+    padding-right :20px;
+    padding-left :20px;
+    padding-bottom: 20px;
+    padding-top :10px;
 }
-
+/*
 .buttons button {
     padding: 20px;
     font-size: 18px;
@@ -63,8 +64,8 @@ header h2 {
     padding: 10px;
     border-radius: 30px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 290px;
-    height: 550px;
+    width: 315px;
+    height: 580px;
     left: 50px;
     font-weight: bold;
 }
@@ -76,12 +77,12 @@ header h2 {
 }
 
 .calculator input[type="text"] {
-    width: 240px;
+    width: 250px;
     height: 50px;
     font-size: 24px;
     margin-top: 5px;
-    margin-bottom: 20px;
-    margin-left: 12px;
+    margin-bottom: 10px;
+    margin-left: 20px;
     text-align: right;
     padding: 10px;
     border: 3px solid #3bcfb6;
@@ -90,14 +91,12 @@ header h2 {
 }
 
 .calculator button {
-    width: 21.9%;
+    width: 100%; /* 占满每一列 */
     font-size: 24px;
-    margin: 0.5%;
-    padding: 16px;
-
+    padding: 20px;
     cursor: pointer;
     border: none;
-    border-radius: 15px;
+    border-radius: 20px;
     background-color: #4fe0b5;
     color: rgb(0, 0, 0);
     transition: background-color 0.3s;
@@ -268,20 +267,7 @@ header h2 {
 }
 
 /* 货币换算器容器样式 */
-#currency-converter-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    /* 水平居中 */
-    align-items: center;
-    /* 垂直居中 */
-    gap: 50px;
-    /* 设置选择框、输入框、按钮之间的间距 */
-    margin-bottom: 10px;
-    /* 给货币转换部分增加下边距 */
-    font-size: 20px;
-    color: white;
-}
+
 
 /* 输入框样式 */
 .inputBox {
@@ -336,16 +322,6 @@ header h2 {
 }
 
 /*工资计算器样式*/
-#salary-calculater-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 50px;
-    margin-bottom: 10px;
-    font-size: 20px;
-    color: white;
-}
 
 .input-group {
     display: flex;
@@ -405,17 +381,7 @@ header h2 {
 }
 
 /*退休年龄计算器样式*/
-#retirement-age-calculater-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 50px;
-    margin-bottom: 10px;
-    font-size: 20px;
-    color: white;
 
-}
 
 .inputAge {
     display: flex;
@@ -469,16 +435,6 @@ header h2 {
 }
 
 /*投资计算器*/
-#investment-calculater-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 50px;
-    margin-bottom: 10px;
-    font-size: 20px;
-    color: white;
-}
 
 .inputRate {
     display: flex;
@@ -535,6 +491,25 @@ header h2 {
     margin-top: 10px;
     margin-left: 10px;
 }
+#currency-converter-content,
+#salary-calculater-content,
+#retirement-age-calculater-content,
+#investment-calculater-content,
+#tax-calculater-content,
+#DAC-calculater-content,
+#loan-calculater-content,
+#Budget-calculater-content,
+#Insurance-calculater-content
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    margin-bottom: 10px;
+    font-size: 20px;
+    color: white;
+}
 
 
 .Result {
@@ -542,3 +517,41 @@ header h2 {
     color: rgb(254, 252, 252);
     font-weight: bolder;
 }
+
+.Insurance-utton {
+    padding: 10px;
+    background-color: #4fe0b5;
+    color: rgb(0, 0, 0);
+    border: 1px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 170px;
+    margin: 10px;
+    margin-bottom: 12px;
+    ;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#result {
+    margin-top: 20px;
+    font-size: 18px;
+    color: rgb(255, 255, 255);
+}
+
+.popup {
+    display: none;
+    position: absolute;
+    padding: 10px;
+    z-index: 1000;
+    background-color: #ffffff;
+}
+
+.popup button {
+    margin: 5px;
+    color:#141313;
+}
+

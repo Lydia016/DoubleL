@@ -16,33 +16,33 @@
             <div class="calculator">
                 <h3>基础计算器</h3>
                 <input type="text" id="calculator-screen" disabled>
-                <br>
+                <div class="buttons">
                 <button onclick="clearScreen()">C</button>
-                <button onclick="appendToScreen('(')">(</button>
-                <button onclick="appendToScreen(')')">)</button>
                 <button onclick="deleteFromScreen()">←</button>
-                <br>
+                <button onclick="appendToScreen('%')">%</button>
+                <button onclick="appendToScreen('+')">+</button>
                 <button onclick="appendToScreen('7')">7</button>
                 <button onclick="appendToScreen('8')">8</button>
                 <button onclick="appendToScreen('9')">9</button>
-                <button onclick="appendToScreen('/')">/</button>
-                <br>
+                <button onclick="appendToScreen('-')">-</button>
                 <button onclick="appendToScreen('4')">4</button>
                 <button onclick="appendToScreen('5')">5</button>
                 <button onclick="appendToScreen('6')">6</button>
                 <button onclick="appendToScreen('*')">*</button>
-                <br>
                 <button onclick="appendToScreen('1')">1</button>
                 <button onclick="appendToScreen('2')">2</button>
                 <button onclick="appendToScreen('3')">3</button>
-                <button onclick="appendToScreen('-')">-</button>
-                <br>
-                <button onclick="appendToScreen('0')">0</button>
+                <button onclick="appendToScreen('/')">/</button>
                 <button onclick="appendToScreen('.')">.</button>
-                <button onclick="appendToScreen('+')">+</button>
+                <button onclick="appendToScreen('0')">0</button>
+                <button id="bracket-button">(/)</button>
+                <div id="bracket-popup" class="popup">
+                    <button onclick="appendToScreen('(')">(</button>
+                    <button onclick="appendToScreen(')')"> )</button>
+                </div>
                 <button onclick="calculateResult()">=</button>
                 <br>
-
+                </div>
             </div>
         </div>
         <!--右侧功能计算器-->
@@ -58,7 +58,7 @@
                 <div class="card" onclick="openCalculator('工资计算器')">工资计算器</div>
                 <div class="card" onclick="openCalculator('货币换算器')">货币换算器</div>
                 <div class="card" onclick="openCalculator('投资计算器')">投资计算器</div>
-                <div class="card" onclick="openCalculator('数据统计器')">数据统计器（改）</div>
+                <div class="card" onclick="openCalculator('五险一金计算器')">五险一金计算器</div>
             </div>
         </div>
     </main>
@@ -182,6 +182,21 @@
                     <button id="Budget-button" class="Basic-button" onclick="calculateBudget()">预算管理计算</button>
                     <p id="BudgetResult" class="Result"></p>
                 </div>
+                <!--五险一金计算器-->
+                <div id="Insurance-calculater-content"  style="display : none;">
+                    <h3>五险一金计算器</h3>
+                    <select id="province">
+                        <option value=" " disabled selected>选择省份</option>
+                        <option value="beijing">北京</option>
+                        <option value="shanghai">上海</option>
+                        <option value="guangdong">广东</option>
+                        <option value="sichuan">四川</option>
+                    </select>
+                    <input type="number" id="salary" placeholder="请输入月薪">
+                    <button id="Insurance-button" class="Insurance-button" onclick="calculateInsurance()">计算五险一金</button>
+                    <p id="InsuranceResult"></p>
+                </div>
+
 
             </div>
         </div>

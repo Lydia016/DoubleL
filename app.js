@@ -2,8 +2,32 @@
 const appId = '431402e48d944926be7d0b1c49836008';
 
 // 基础加减乘除计算器
+// 点击括号按钮时弹出选择框
+document.getElementById('bracket-button').addEventListener('click', function(e) {
+    let popup = document.getElementById('bracket-popup');
+    popup.style.display = 'block';
+
+    // 根据按钮位置动态定位弹窗
+    let rect = e.target.getBoundingClientRect();
+    popup.style.left = `${rect.left}px`;
+    popup.style.top = `${rect.bottom + window.scrollY}px`;
+});
+
+// 点击页面其他地方时关闭弹窗
+document.addEventListener('click', function(e) {
+    let popup = document.getElementById('bracket-popup');
+    let bracketButton = document.getElementById('bracket-button');
+
+    if (!popup.contains(e.target) && e.target !== bracketButton) {
+        popup.style.display = 'none';
+    }
+});
+
+// 添加内容到屏幕
 function appendToScreen(value) {
     document.getElementById('calculator-screen').value += value;
+    // 输入完成后关闭弹窗
+    document.getElementById('bracket-popup').style.display = 'none';
 }
 
 function clearScreen() {
@@ -26,6 +50,7 @@ function calculateResult() {
         document.getElementById('calculator-screen').value = 'Error';
     }
 }
+
 
 
 
@@ -290,6 +315,83 @@ function calculateBudget() {
     `;
 }
 
+// 定义每个省份的五险一金缴费比例（假设比例为企业缴纳部分的百分比）
+const rates = {
+    "beijing": {
+        "pension": 0.16,  // 养老保险
+        "medical": 0.1,   // 医疗保险
+        "unemployment": 0.005, // 失业保险
+        "injury": 0.002,  // 工伤保险
+        "maternity": 0.008, // 生育保险
+        "housing": 0.12   // 住房公积金
+    },
+    "shanghai": {
+        "pension": 0.16,
+        "medical": 0.095,
+        "unemployment": 0.005,
+        "injury": 0.002,
+        "maternity": 0.008,
+        "housing": 0.07
+    },
+    "guangdong": {
+        "pension": 0.14,
+        "medical": 0.08,
+        "unemployment": 0.005,
+        "injury": 0.002,
+        "maternity": 0.008,
+        "housing": 0.05
+    },
+    "sichuan": {
+        "pension": 0.18,
+        "medical": 0.09,
+        "unemployment": 0.005,
+        "injury": 0.002,
+        "maternity": 0.01,
+        "housing": 0.06
+    }
+};
+
+// 获取HTML元素
+const provinceSelect = document.getElementById("province");
+const salaryInput = document.getElementById("salary");
+const resultDiv = document.getElementById("InsuranceResult");
+const InsuranceResult = document.getElementById('InsuranceResult');
+
+// 添加点击事件处理器
+function calculateInsurance(){
+    const province = provinceSelect.value; // 获取选择的省份
+    const salary = parseFloat(salaryInput.value); // 获取输入的月薪并转换为数字
+
+    if (isNaN(salary) || salary <= 0) {
+        resultDiv.textContent = "请输入有效的月薪！";
+        return;
+    }
+
+    // 获取对应省份的五险一金比例
+    const provinceRates = rates[province];
+    
+    // 计算各项费用
+    const pension = salary * provinceRates.pension;
+    const medical = salary * provinceRates.medical;
+    const unemployment = salary * provinceRates.unemployment;
+    const injury = salary * provinceRates.injury;
+    const maternity = salary * provinceRates.maternity;
+    const housing = salary * provinceRates.housing;
+
+    // 计算总额
+    const total = pension + medical + unemployment + injury + maternity + housing;
+    resultDiv.innerHTML = `
+        <p>养老保险: ${pension.toFixed(2)} 元</p>
+        <p>医疗保险: ${medical.toFixed(2)} 元</p>
+        <p>失业保险: ${unemployment.toFixed(2)} 元</p>
+        <p>工伤保险: ${injury.toFixed(2)} 元</p>
+        <p>生育保险: ${maternity.toFixed(2)} 元</p>
+        <p>住房公积金: ${housing.toFixed(2)} 元</p>
+        <p><strong>总计: ${total.toFixed(2)} 元</strong></p>
+    `;
+};
+
+
 
 
 // 打开模态窗口并显示相应的计算器
@@ -330,6 +432,9 @@ function openCalculator(calculater) {
     else if (calculater === '预算管理计算器') {
         document.getElementById('Budget-calculater-content').style.display = 'block';
     }
+    else if (calculater === '五险一金计算器') {
+        document.getElementById('Insurance-calculater-content').style.display = 'block';
+    }
 
     // 根据需要添加其他计算器的内容显示逻辑
 }
@@ -360,7 +465,7 @@ function closeModal() {
     document.getElementById('loanResult').textContent = '';
     document.getElementById('Budget-calculater-content').style.display = 'none';
     document.getElementById('BudgetResult').textContent = '';
-
+    document.getElementById('Insurance-calculater-content').style.display = 'none';
     // 可以添加其他计算器内容的隐藏逻辑，例如 document.getElementById('other-calculator-content').style.display = 'none';
 }
 1
