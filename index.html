@@ -15,37 +15,44 @@
             <!-- 基础加减乘除计算器 -->
             <div class="calculator">
                 <h3>基础计算器</h3>
-                <input type="text" id="display" class="display" readonly>
-                <div class="buttons">
-                    <button onclick="clearDisplay()">C</button>
-                    <button onclick="deleteLast()">←</button>
-                    <button onclick="inputOperator('/')">/</button>
-                    <button onclick="inputOperator('*')">*</button>
-                    <button onclick="inputNumber('7')">7</button>
-                    <button onclick="inputNumber('8')">8</button>
-                    <button onclick="inputNumber('9')">9</button>
-                    <button onclick="inputOperator('-')">-</button>
-                    <button onclick="inputNumber('4')">4</button>
-                    <button onclick="inputNumber('5')">5</button>
-                    <button onclick="inputNumber('6')">6</button>
-                    <button onclick="inputOperator('+')">+</button>
-                    <button onclick="inputNumber('1')">1</button>
-                    <button onclick="inputNumber('2')">2</button>
-                    <button onclick="inputNumber('3')">3</button>
-                    <button onclick="calculateResult()">=</button>
-                    <button onclick="inputNumber('0')">0</button>
-                    <button onclick="inputDecimal()">.</button>
-                </div>
+                <input type="text" id="calculator-screen" disabled>
+                <br>
+                <button onclick="clearScreen()">C</button>
+                <button onclick="appendToScreen('(')">(</button>
+                <button onclick="appendToScreen(')')">)</button>
+                <button onclick="deleteFromScreen()">←</button>
+                <br>
+                <button onclick="appendToScreen('7')">7</button>
+                <button onclick="appendToScreen('8')">8</button>
+                <button onclick="appendToScreen('9')">9</button>
+                <button onclick="appendToScreen('/')">/</button>
+                <br>
+                <button onclick="appendToScreen('4')">4</button>
+                <button onclick="appendToScreen('5')">5</button>
+                <button onclick="appendToScreen('6')">6</button>
+                <button onclick="appendToScreen('*')">*</button>
+                <br>
+                <button onclick="appendToScreen('1')">1</button>
+                <button onclick="appendToScreen('2')">2</button>
+                <button onclick="appendToScreen('3')">3</button>
+                <button onclick="appendToScreen('-')">-</button>
+                <br>
+                <button onclick="appendToScreen('0')">0</button>
+                <button onclick="appendToScreen('.')">.</button>
+                <button onclick="appendToScreen('+')">+</button>
+                <button onclick="calculateResult()">=</button>
+                <br>
+
             </div>
         </div>
         <!--右侧功能计算器-->
         <div class="container right-container">
             <div class="circle-container">
                 <img src="https://marketplace.canva.cn/d5B34/MACKkEd5B34/2/tl/canva-MACKkEd5B34.png" alt="Center Image">
-                <div class="card" onclick="openCalculator('tip-calculator')">Tip Calculator</div>
-                <div class="card" onclick="openCalculator('loan-calculator')">Loan Calculator</div>
-                <div class="card" onclick="openCalculator('BMI计算器')">BMI计算器(改)</div>
-                <div class="card" onclick="openCalculator('currency-converter')">Currency Converter</div>
+                <div class="card" onclick="openCalculator('DAC计算器')">DAC计算器</div>
+                <div class="card" onclick="openCalculator('贷款还款计算器')">贷款还款计算器</div>
+                <div class="card" onclick="openCalculator('税收计算器')">税收计算器</div>
+                <div class="card" onclick="openCalculator('预算管理计算器')">预算管理计算器</div>
                 <div class="card" onclick="openCalculator('日期间隔计算器')">日期间隔计算器（改）</div>
                 <div class="card" onclick="openCalculator('退休年龄计算器')">退休年龄计算器</div>
                 <div class="card" onclick="openCalculator('工资计算器')">工资计算器</div>
@@ -136,7 +143,45 @@
                     </div>
                     <div id="NPVResult"></div>
                 </div>
-
+                <!--税收计算器-->
+                <div id="tax-calculater-content" style="display : none;">
+                    <h3>税收计算器</h3>
+                    <input type="number" id="income" class="input" placeholder="请输入月工资应交税金额">
+                    <button id="tax-button" class="Basic-button" onclick="calculateTax()">计算应缴税收</button>
+                    <div id="taxResult" class="Result"></div>
+                </div>
+                <!--DAC计算器-->
+                <div id="DAC-calculater-content" style="display : none;">
+                    <h3>DAC计算器</h3>
+                    <input type="number" id="monthly-investment" class="input" placeholder="每月投资金额 (元)">
+                    <input type="number" id="investment-period" class="input" placeholder="投资期限 (月)">
+                    <input type="number" id="annual-return-rate" class="input" placeholder="预期年化收益率 (%)">
+                    <button id="DAC-button" class="Basic-button" onclick="calculateDAC()">计算累计金额</button>
+                    <div id="DACResult" class="Result"></div>
+                </div>
+                <!--贷款还款计算器-->
+                <div id="loan-calculater-content" style="display : none;">
+                    <h3>贷款还款计算器</h3>
+                    <input type="number" id="loanAmount" class="input" placeholder="贷款本金 (元)">
+                    <input type="number" id="annualInterestRate" class="input" placeholder="年利率 (%)">
+                    <input type="number" id="loanTermInYears" class="input" placeholder="贷款期限 (年)">
+                    <input type="number" id="monthlyPayment" class="input" placeholder="每月还款额">
+                    <input type="number" id="prepaymentAmount" class="input" placeholder="提前还款金额 (元)">
+                    <input type="number" id="monthsPaid" class="input" placeholder="已还款月数">
+                    <button id="loan-button" class="Basic-button" onclick="calculateloan()">计算剩余贷款金额</button>
+                    <p id="loanResult" class="Result"></p>
+                </div>
+                <!--预算管理计算器-->
+                <div id="Budget-calculater-content" style="display : none;">
+                    <h3>预算管理计算器</h3>
+                    <input type="number" id="salaryIncome" class="input" placeholder="工资 (元)">
+                    <input type="number" id="otherIncome" class="input" placeholder="其他收入 (元)">
+                    <input type="number" id="fixedExpenses" class="input" placeholder="固定支出（元）">
+                    <input type="number" id="variableExpenses" class="input" placeholder="可变支出（元）">
+                    <input type="number" id="savingsTarget" class="input" placeholder="储蓄目标（元）">
+                    <button id="Budget-button" class="Basic-button" onclick="calculateBudget()">预算管理计算</button>
+                    <p id="BudgetResult" class="Result"></p>
+                </div>
 
             </div>
         </div>

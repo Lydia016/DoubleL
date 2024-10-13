@@ -2,116 +2,32 @@
 const appId = '431402e48d944926be7d0b1c49836008';
 
 // 基础加减乘除计算器
-let currentValue = '';  // 当前输入的数字或计算结果
-let previousValue = '';  // 之前的值
-let operator = '';  // 当前操作符
-let resultCalculated = false;  // 用于标记是否刚刚计算过结果
-
-// 输入数字时调用
-function inputNumber(num) {
-    // 如果已经计算出结果并继续输入数字，则清空 currentValue，继续输入
-    if (resultCalculated) {
-        currentValue = '';  // 清空当前值
-        resultCalculated = false;  // 重置结果标记
-    }
-    // 将输入的数字追加到 currentValue 中
-    currentValue += num;
-    document.getElementById('display').value += num;  // 更新显示器
+function appendToScreen(value) {
+    document.getElementById('calculator-screen').value += value;
 }
 
-// 输入操作符时调用
-function inputOperator(op) {
-    // 如果按下等号后直接输入操作符，将之前的结果作为第一个值
-    if (resultCalculated) {
-        resultCalculated = false;  // 重置计算标记
-    }
+function clearScreen() {
+    document.getElementById('calculator-screen').value = '';
+}
 
-    // 如果有当前值，则将其保存为 previousValue 并继续
-    if (currentValue !== '') {
-        if (previousValue !== '') {
-            // 如果已经有 previousValue，则先进行计算
-            calculateResult();
-        } else {
-            previousValue = currentValue;  // 保存当前数字为 previousValue
-        }
-        operator = op;  // 保存操作符
-        document.getElementById('display').value = previousValue + ` ${operator} `;  // 显示操作符
-        currentValue = '';  // 重置 currentValue，准备输入下一个数字
+function deleteFromScreen() {
+    let screen = document.getElementById('calculator-screen');
+    let currentValue = screen.value;
+    if (currentValue.length > 0) {
+        screen.value = currentValue.slice(0, -1); // 删除最后一个字符  
     }
 }
 
-// 输入小数点时调用
-function inputDecimal() {
-    // 确保当前值中只包含一个小数点
-    if (!currentValue.includes('.')) {
-        currentValue += '.';  // 添加小数点
-        document.getElementById('display').value = currentValue;  // 更新显示器
-    }
-}
-
-// 清空显示器和所有变量
-function clearDisplay() {
-    currentValue = '';
-    previousValue = '';
-    operator = '';
-    resultCalculated = false;  // 重置结果标记
-    document.getElementById('display').value = '';  // 清空显示器
-}
-
-// 删除最后一个字符
-function deleteLast() {
-    // 如果 currentValue 不为空，删除 currentValue 的最后一个字符
-    if (currentValue !== '') {
-        currentValue = currentValue.slice(0, -1);
-        document.getElementById('display').value = currentValue || previousValue + ` ${operator} `;  // 更新显示器
-    }
-    // 如果 currentValue 为空且有操作符，删除操作符
-    else if (operator !== '') {
-        operator = '';  // 清空操作符
-        document.getElementById('display').value = previousValue;  // 只显示 previousValue
-    }
-    // 如果 currentValue 和 operator 都为空，删除 previousValue 的最后一个字符
-    else if (previousValue !== '') {
-        previousValue = previousValue.slice(0, -1);
-        document.getElementById('display').value = previousValue;
-    }
-}
-
-
-// 当按下等号时计算结果
 function calculateResult() {
-    // 只有在有 previousValue 和 currentValue 的情况下才能计算
-    if (previousValue !== '' && currentValue !== '' && operator !== '') {
-        let result = 0;
-        const prev = parseFloat(previousValue);  // 将 previousValue 转换为数字
-        const curr = parseFloat(currentValue);  // 将 currentValue 转换为数字
-
-        // 根据操作符执行相应的运算
-        switch (operator) {
-            case '+':
-                result = prev + curr;
-                break;
-            case '-':
-                result = prev - curr;
-                break;
-            case '*':
-                result = prev * curr;
-                break;
-            case '/':
-                result = curr === 0 ? 'Error' : prev / curr;  // 防止除以 0
-                break;
-            default:
-                return;
-        }
-
-        // 显示结果并标记计算完成
-        currentValue = result.toString();  // 将结果保存到 currentValue
-        operator = '';  // 清空操作符j
-        resultCalculated = true;  // 标记结果已经计算，允许继续操作
-        previousValue = '';  // 重置 previousValue
-        document.getElementById('display').value = currentValue;  // 显示结果
+    try {
+        let result = eval(document.getElementById('calculator-screen').value);
+        document.getElementById('calculator-screen').value = result;
+    } catch (error) {
+        document.getElementById('calculator-screen').value = 'Error';
     }
 }
+
+
 
 
 
@@ -253,7 +169,126 @@ function calculateNPV() {
     NPVResult.textContent = `净现值为: ${Math.round(initialCashFlow)}`;
 }
 
+//税收计算器
+function calculateTax() {
+    const income = Number(document.getElementById('income').value);
 
+    if (isNaN(income)) {
+        alert("请输入有效的收入金额！");
+        return;
+    }
+    // 个税起征点为5000元
+    const taxableIncome = Math.max(0, income);
+
+    // 税率及速算扣除数
+    const taxBrackets = [
+        { max: 3000, rate: 0.03, deduction: 0 },
+        { max: 12000, rate: 0.1, deduction: 210 },
+        { max: 25000, rate: 0.2, deduction: 1410 },
+        { max: 35000, rate: 0.25, deduction: 2660 },
+        { max: 55000, rate: 0.3, deduction: 4410 },
+        { max: 80000, rate: 0.35, deduction: 7160 },
+        { rate: 0.45, deduction: 15160 }
+    ];
+    for (let i = 0; i < taxBrackets.length; i++) {
+        if (taxableIncome <= taxBrackets[i].max || !taxBrackets[i].max) {
+            const tax = (taxableIncome * taxBrackets[i].rate) - taxBrackets[i].deduction;
+            taxResult.textContent = "应缴个人所得税: " + (Math.max(tax, 0)).toFixed(2) + " 元";
+            return;
+        }
+    }
+
+}
+
+//DAC计算器
+function calculateDAC() {
+    const monthlyInvestment = Number(document.getElementById('monthly-investment').value);
+    const investmentPeriod = Number(document.getElementById('investment-period').value);
+    const annualReturnRate = Number(document.getElementById('annual-return-rate').value) / 100;
+
+    if (isNaN(monthlyInvestment) || isNaN(investmentPeriod) || isNaN(annualReturnRate)) {
+        alert("请输入有效的数值！");
+        return;
+    }
+
+    let totalAmount = 0;
+    let monthlyReturnRate = Math.pow(1 + annualReturnRate, 1 / 12) - 1;
+
+    for (let i = 0; i < investmentPeriod; i++) {
+        // 每个月的投资金额加上之前投资的复利增长
+        totalAmount = (totalAmount + monthlyInvestment) * (1 + monthlyReturnRate);
+    }
+
+    DACresult.textContent = `定投 ${investmentPeriod} 个月后的累计金额为: ${totalAmount.toFixed(2)} 元`;
+}
+
+//贷款还款计算器
+function calculateloan() {
+    // 获取输入值  
+    const loanAmount = parseFloat(document.getElementById("loanAmount").value); // 贷款总额  
+    const annualInterestRate = parseFloat(document.getElementById("annualInterestRate").value); // 年利率  
+    const loanTermInYears = parseInt(document.getElementById("loanTermInYears").value); // 贷款期限（年）  
+    const monthlyPayment = parseFloat(document.getElementById("monthlyPayment").value); // 每月还款额（如果是等额本息还款）  
+    const prepaymentAmount = parseFloat(document.getElementById("prepaymentAmount").value); // 提前还款金额  
+    const monthsPaid = parseInt(document.getElementById("monthsPaid").value); // 已还款月数  
+
+    // 检查输入是否有效  
+    if (isNaN(loanAmount) || isNaN(annualInterestRate) || isNaN(loanTermInYears) || isNaN(monthlyPayment) || isNaN(prepaymentAmount) || isNaN(monthsPaid)) {
+        alert("请输入有效的数字！");
+        return;
+    }
+
+    // 利率转换为月利率  
+    const monthlyInterestRate = annualInterestRate / 12 / 100;
+
+    // 计算总的还款月数  
+    const totalMonths = loanTermInYears * 12;
+
+    // 剩余本金计算（等额本息还款方式）   
+    const remainingPrincipal = loanAmount;
+    for (let i = 0; i < monthsPaid; i++) {
+        var monthlyInterest = remainingPrincipal * monthlyInterestRate;
+        remainingPrincipal -= (monthlyPayment - monthlyInterest);
+    }
+    remainingPrincipal -= prepaymentAmount;
+
+    for (let i = monthsPaid; i < totalMonths; i++) {
+        if (remainingPrincipal <= 0) {
+            break;
+        }
+        var monthlyInterest = remainingPrincipal * monthlyInterestRate;
+        if (monthlyInterest > remainingPrincipal) {
+            monthlyInterest = remainingPrincipal; // 防止利息超过剩余本金  
+        }
+        remainingPrincipal -= monthlyInterest;
+    }
+
+    // 如果剩余本金小于0，则设置为0  
+    if (remainingPrincipal < 0) {
+        remainingPrincipal = 0;
+    }
+
+    // 显示结果  
+    document.getElementById("loanResult").innerText = "剩余本金: " + remainingPrincipal.toFixed(2) + " 元";
+}
+
+//预算管理计算器
+function calculateBudget() {
+    const BudgetIncome = parseFloat(document.getElementById('salaryIncome').value) || 0;
+    const otherIncome = parseFloat(document.getElementById('otherIncome').value) || 0;
+    const fixedExpenses = parseFloat(document.getElementById('fixedExpenses').value) || 0;
+    const variableExpenses = parseFloat(document.getElementById('variableExpenses').value) || 0;
+    const savingsTarget = parseFloat(document.getElementById('savingsTarget').value) || 0;
+
+    const totalIncome = BudgetIncome + otherIncome;
+    const totalExpenses = fixedExpenses + variableExpenses;
+    const savingsNeeded = savingsTarget - (totalIncome - totalExpenses);
+
+    const resultDiv = document.getElementById('BudgetResult');
+    resultDiv.innerHTML = `  
+        <p>总收入: ${totalIncome.toFixed(2)} 元;总支出: ${totalExpenses.toFixed(2)} 元；需要节省的金额: ${savingsNeeded.toFixed(2)} 元</p>   
+    `;
+}
 
 
 
@@ -280,9 +315,20 @@ function openCalculator(calculater) {
     else if (calculater === '退休年龄计算器') {
         document.getElementById('retirement-age-calculater-content').style.display = 'block';
     }
-
     else if (calculater === '投资计算器') {
         document.getElementById('investment-calculater-content').style.display = 'block';
+    }
+    else if (calculater === '税收计算器') {
+        document.getElementById('tax-calculater-content').style.display = 'block';
+    }
+    else if (calculater === 'DAC计算器') {
+        document.getElementById('DAC-calculater-content').style.display = 'block';
+    }
+    else if (calculater === '贷款还款计算器') {
+        document.getElementById('loan-calculater-content').style.display = 'block';
+    }
+    else if (calculater === '预算管理计算器') {
+        document.getElementById('Budget-calculater-content').style.display = 'block';
     }
 
     // 根据需要添加其他计算器的内容显示逻辑
@@ -306,6 +352,15 @@ function closeModal() {
     document.getElementById('investment-calculater-content').style.display = 'none';
     document.getElementById('NPVResult').textContent = '';
     cashFlowInput.style.display = 'block';
+    document.getElementById('tax-calculater-content').style.display = 'none';
+    document.getElementById('taxResult').textContent = '';
+    document.getElementById('DAC-calculater-content').style.display = 'none';
+    document.getElementById('DACResult').textContent = '';
+    document.getElementById('loan-calculater-content').style.display = 'none';
+    document.getElementById('loanResult').textContent = '';
+    document.getElementById('Budget-calculater-content').style.display = 'none';
+    document.getElementById('BudgetResult').textContent = '';
+
     // 可以添加其他计算器内容的隐藏逻辑，例如 document.getElementById('other-calculator-content').style.display = 'none';
 }
 1
