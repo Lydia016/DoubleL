@@ -513,12 +513,13 @@ header h2 {
     margin-left: 10px;
 }
 
-#taxResult {
+
+.Result {
     margin-left: 10px;
     font-weight: bolder;
 }
 
-#DACresult {
+#loanResult {
     margin-left: 10px;
     font-weight: bolder;
 }

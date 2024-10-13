@@ -306,6 +306,57 @@ function calculateDAC() {
     DACresult.textContent = `定投 ${investmentPeriod} 个月后的累计金额为: ${totalAmount.toFixed(2)} 元`;
 }
 
+//贷款还款计算器
+function calculateloan() {
+    // 获取输入值  
+    const loanAmount = parseFloat(document.getElementById("loanAmount").value); // 贷款总额  
+    const annualInterestRate = parseFloat(document.getElementById("annualInterestRate").value); // 年利率  
+    const loanTermInYears = parseInt(document.getElementById("loanTermInYears").value); // 贷款期限（年）  
+    const monthlyPayment = parseFloat(document.getElementById("monthlyPayment").value); // 每月还款额（如果是等额本息还款）  
+    const prepaymentAmount = parseFloat(document.getElementById("prepaymentAmount").value); // 提前还款金额  
+    const monthsPaid = parseInt(document.getElementById("monthsPaid").value); // 已还款月数  
+
+    // 检查输入是否有效  
+    if (isNaN(loanAmount) || isNaN(annualInterestRate) || isNaN(loanTermInYears) || isNaN(monthlyPayment) || isNaN(prepaymentAmount) || isNaN(monthsPaid)) {
+        alert("请输入有效的数字！");
+        return;
+    }
+
+    // 利率转换为月利率  
+    const monthlyInterestRate = annualInterestRate / 12 / 100;
+
+    // 计算总的还款月数  
+    const totalMonths = loanTermInYears * 12;
+
+    // 剩余本金计算（等额本息还款方式）   
+    const remainingPrincipal = loanAmount;
+    for (let i = 0; i < monthsPaid; i++) {
+        var monthlyInterest = remainingPrincipal * monthlyInterestRate;
+        remainingPrincipal -= (monthlyPayment - monthlyInterest);
+    }
+    remainingPrincipal -= prepaymentAmount;
+
+    for (let i = monthsPaid; i < totalMonths; i++) {
+        if (remainingPrincipal <= 0) {
+            break;
+        }
+        var monthlyInterest = remainingPrincipal * monthlyInterestRate;
+        if (monthlyInterest > remainingPrincipal) {
+            monthlyInterest = remainingPrincipal; // 防止利息超过剩余本金  
+        }
+        remainingPrincipal -= monthlyInterest;
+    }
+
+    // 如果剩余本金小于0，则设置为0  
+    if (remainingPrincipal < 0) {
+        remainingPrincipal = 0;
+    }
+
+    // 显示结果  
+    document.getElementById("loanResult").innerText = "剩余本金: " + remainingPrincipal.toFixed(2) + " 元";
+}
+
+
 
 
 // 打开模态窗口并显示相应的计算器
@@ -340,6 +391,9 @@ function openCalculator(calculater) {
     else if (calculater === 'DAC计算器') {
         document.getElementById('DAC-calculater-content').style.display = 'block';
     }
+    else if (calculater === '贷款还款计算器') {
+        document.getElementById('loan-calculater-content').style.display = 'block';
+    }
 
     // 根据需要添加其他计算器的内容显示逻辑
 }
@@ -366,6 +420,8 @@ function closeModal() {
     document.getElementById('taxResult').textContent = '';
     document.getElementById('DAC-calculater-content').style.display = 'none';
     document.getElementById('DACResult').textContent = '';
+    document.getElementById('loan-calculater-content').style.display = 'none';
+    document.getElementById('loanResult').textContent = '';
 
     // 可以添加其他计算器内容的隐藏逻辑，例如 document.getElementById('other-calculator-content').style.display = 'none';
 }

@@ -43,7 +43,7 @@
             <div class="circle-container">
                 <img src="https://marketplace.canva.cn/d5B34/MACKkEd5B34/2/tl/canva-MACKkEd5B34.png" alt="Center Image">
                 <div class="card" onclick="openCalculator('DAC计算器')">DAC计算器</div>
-                <div class="card" onclick="openCalculator('loan-calculator')">Loan Calculator</div>
+                <div class="card" onclick="openCalculator('贷款还款计算器')">贷款还款计算器</div>
                 <div class="card" onclick="openCalculator('税收计算器')">税收计算器</div>
                 <div class="card" onclick="openCalculator('currency-converter')">Currency Converter</div>
                 <div class="card" onclick="openCalculator('日期间隔计算器')">日期间隔计算器（改）</div>
@@ -149,7 +149,19 @@
                     <input type="number" id="investment-period" class="input" placeholder="投资期限 (月)">
                     <input type="number" id="annual-return-rate" class="input" placeholder="预期年化收益率 (%)">
                     <button id="DAC-button" class="Basic-button" onclick="calculateDAC()">计算累计金额</button>
-                    <div id="DACresult" class="Result"></div>
+                    <div id="DACResult" class="Result"></div>
+                </div>
+                <!--贷款还款计算器-->
+                <div id="loan-calculater-content" style="display : none;">
+                    <input type="number" id="loanAmount" class="input" placeholder="贷款本金 (元)">
+                    <input type="number" id="annualInterestRate" class="input" placeholder="年利率 (%)">
+                    <input type="number" id="loanTermInYears" class="input" placeholder="贷款期限 (年)">
+                    <input type="number" id="monthlyPayment" class="input" placeholder="每月还款额">
+                    <input type="number" id="prepaymentAmount" class="input" placeholder="提前还款金额 (元)">
+                    <input type="number" id="monthsPaid" class="input" placeholder="已还款月数">
+                    <button id="loan-button" class="Basic-button" onclick="calculateloan()">计算剩余贷款金额</button>
+                    <p id="loanResult" class="Result"></p>
+
                 </div>
 
 
