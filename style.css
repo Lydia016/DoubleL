@@ -539,10 +539,6 @@ header h2 {
 
 .Result {
     margin-left: 10px;
-    font-weight: bolder;
-}
-
-#loanResult {
-    margin-left: 10px;
+    color: rgb(254, 252, 252);
     font-weight: bolder;
 }

@@ -52,7 +52,7 @@
                 <div class="card" onclick="openCalculator('DAC计算器')">DAC计算器</div>
                 <div class="card" onclick="openCalculator('贷款还款计算器')">贷款还款计算器</div>
                 <div class="card" onclick="openCalculator('税收计算器')">税收计算器</div>
-                <div class="card" onclick="openCalculator('currency-converter')">Currency Converter</div>
+                <div class="card" onclick="openCalculator('预算管理计算器')">预算管理计算器</div>
                 <div class="card" onclick="openCalculator('日期间隔计算器')">日期间隔计算器（改）</div>
                 <div class="card" onclick="openCalculator('退休年龄计算器')">退休年龄计算器</div>
                 <div class="card" onclick="openCalculator('工资计算器')">工资计算器</div>
@@ -152,6 +152,7 @@
                 </div>
                 <!--DAC计算器-->
                 <div id="DAC-calculater-content" style="display : none;">
+                    <h3>DAC计算器</h3>
                     <input type="number" id="monthly-investment" class="input" placeholder="每月投资金额 (元)">
                     <input type="number" id="investment-period" class="input" placeholder="投资期限 (月)">
                     <input type="number" id="annual-return-rate" class="input" placeholder="预期年化收益率 (%)">
@@ -160,6 +161,7 @@
                 </div>
                 <!--贷款还款计算器-->
                 <div id="loan-calculater-content" style="display : none;">
+                    <h3>贷款还款计算器</h3>
                     <input type="number" id="loanAmount" class="input" placeholder="贷款本金 (元)">
                     <input type="number" id="annualInterestRate" class="input" placeholder="年利率 (%)">
                     <input type="number" id="loanTermInYears" class="input" placeholder="贷款期限 (年)">
@@ -169,8 +171,17 @@
                     <button id="loan-button" class="Basic-button" onclick="calculateloan()">计算剩余贷款金额</button>
                     <p id="loanResult" class="Result"></p>
                 </div>
-                <!--贷款还款计算器-->
-
+                <!--预算管理计算器-->
+                <div id="Budget-calculater-content" style="display : none;">
+                    <h3>预算管理计算器</h3>
+                    <input type="number" id="salaryIncome" class="input" placeholder="工资 (元)">
+                    <input type="number" id="otherIncome" class="input" placeholder="其他收入 (元)">
+                    <input type="number" id="fixedExpenses" class="input" placeholder="固定支出（元）">
+                    <input type="number" id="variableExpenses" class="input" placeholder="可变支出（元）">
+                    <input type="number" id="savingsTarget" class="input" placeholder="储蓄目标（元）">
+                    <button id="Budget-button" class="Basic-button" onclick="calculateBudget()">预算管理计算</button>
+                    <p id="BudgetResult" class="Result"></p>
+                </div>
 
             </div>
         </div>

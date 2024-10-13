@@ -272,6 +272,23 @@ function calculateloan() {
     document.getElementById("loanResult").innerText = "剩余本金: " + remainingPrincipal.toFixed(2) + " 元";
 }
 
+//预算管理计算器
+function calculateBudget() {
+    const BudgetIncome = parseFloat(document.getElementById('salaryIncome').value) || 0;
+    const otherIncome = parseFloat(document.getElementById('otherIncome').value) || 0;
+    const fixedExpenses = parseFloat(document.getElementById('fixedExpenses').value) || 0;
+    const variableExpenses = parseFloat(document.getElementById('variableExpenses').value) || 0;
+    const savingsTarget = parseFloat(document.getElementById('savingsTarget').value) || 0;
+
+    const totalIncome = BudgetIncome + otherIncome;
+    const totalExpenses = fixedExpenses + variableExpenses;
+    const savingsNeeded = savingsTarget - (totalIncome - totalExpenses);
+
+    const resultDiv = document.getElementById('BudgetResult');
+    resultDiv.innerHTML = `  
+        <p>总收入: ${totalIncome.toFixed(2)} 元;总支出: ${totalExpenses.toFixed(2)} 元；需要节省的金额: ${savingsNeeded.toFixed(2)} 元</p>   
+    `;
+}
 
 
 
@@ -310,6 +327,9 @@ function openCalculator(calculater) {
     else if (calculater === '贷款还款计算器') {
         document.getElementById('loan-calculater-content').style.display = 'block';
     }
+    else if (calculater === '预算管理计算器') {
+        document.getElementById('Budget-calculater-content').style.display = 'block';
+    }
 
     // 根据需要添加其他计算器的内容显示逻辑
 }
@@ -338,6 +358,8 @@ function closeModal() {
     document.getElementById('DACResult').textContent = '';
     document.getElementById('loan-calculater-content').style.display = 'none';
     document.getElementById('loanResult').textContent = '';
+    document.getElementById('Budget-calculater-content').style.display = 'none';
+    document.getElementById('BudgetResult').textContent = '';
 
     // 可以添加其他计算器内容的隐藏逻辑，例如 document.getElementById('other-calculator-content').style.display = 'none';
 }
