@@ -1,4 +1,4 @@
-// Open Exchange Rates API 密钥
+//汇率API
 const appId = '431402e48d944926be7d0b1c49836008';
 
 // 基础加减乘除计算器
@@ -62,13 +62,11 @@ async function convertCurrency() {
     const fromCurrency = document.getElementById('fromCurrency').value;
     const toCurrency = document.getElementById('toCurrency').value;
     const conversionResult = document.getElementById('conversionResult');
-
     if (amount === '' || isNaN(amount)) {
         conversionResult.textContent = '请输入有效金额。';
         return;
     }
-
-    try {
+    try {       //实时汇率API
         const response = await fetch(`https://openexchangerates.org/api/latest.json?app_id=${appId}`);
         const data = await response.json();
         const rates = data.rates;
@@ -85,10 +83,11 @@ async function convertCurrency() {
     document.getElementById('amount').value = '';
 }
 
+
 //工资计算器
 let mid_d = 0;
 let mid_c = 0;
-function saveExtraSalary_d() {
+function saveExtraSalary_d() {          //放贷产生的绩效工资
     let delta = 0;
     const extraSalary_d = Number(document.getElementById('extraSalary_d').value);
     if (extraSalary_d > 0 && extraSalary_d <= 50) { delta = 200; }
@@ -98,12 +97,12 @@ function saveExtraSalary_d() {
     mid_d += delta;
     document.getElementById('extraSalary_d').value = '';
 }
-function saveExtraSalary_c1() {
+function saveExtraSalary_c1() {         //揽储产生的绩效工资（定期）
     const extraSalary_c1 = Number(document.getElementById('extraSalary_c1').value);
     mid_c += 10 * extraSalary_c1;
     document.getElementById('extraSalary_c1').value = '';
 }
-function saveExtraSalary_c2() {
+function saveExtraSalary_c2() {         //揽储产生的绩效工资（活期）
     const extraSalary_c2 = Number(document.getElementById('extraSalary_c2').value);
     mid_c += 20 * extraSalary_c2;
     document.getElementById('extraSalary_c2').value = '';
@@ -115,6 +114,8 @@ function calculateSalary() {
     salaryResult.textContent = `总工资为${totalSalary}元`;
     document.getElementById('basicSalary').value = '';
 }
+
+
 //退休年龄计算器
 function calculateAge() {
     let month = 0;
@@ -124,25 +125,28 @@ function calculateAge() {
     const birthYear = Number(document.getElementById('birthYear').value);
     const birthMonth = Number(document.getElementById('birthMonth').value);
     const ageResult = document.getElementById('ageResult');
-    if (document.getElementById('type').value === 'a') {
+    if (document.getElementById('type').value === 'a') {        //男职员
         month = Math.floor(((birthYear + 60 - 2025) * 12 + (birthMonth - 1)) / 4) + 1;
         retireYear = birthYear + 60 + Math.floor((birthMonth + month - 1) / 12);
         age = 60 + Math.floor(month / 12);
         retireMonth = (birthMonth + month) % 12;
     }
-    else if (document.getElementById('type').value === 'b') {
+    else if (document.getElementById('type').value === 'b') {   //原55岁退休女职员
         month = Math.floor(((birthYear + 55 - 2025) * 12 + (birthMonth - 1)) / 4) + 1;
         retireYear = birthYear + 55 + Math.floor((birthMonth + month - 1) / 12);
         age = 55 + Math.floor(month / 12);
         retireMonth = (birthMonth + month) % 12;
     }
-    else {
+    else {                                                      //原50岁退休女职员
         month = Math.floor(((birthYear + 50 - 2025) * 12 + (birthMonth - 1)) / 2) + 1;
         retireYear = birthYear + 50 + Math.floor((birthMonth + month - 1) / 12);
         age = 50 + Math.floor(month / 12);
         retireMonth = (birthMonth + month) % 12;
     }
-    ageResult.textContent = `您的改革后法定退休年龄为${age}岁${month % 12}月，您的改革后退休时间为${retireYear}年${retireMonth}月`;
+    ageResult.innerHTML = `
+    <p>您的改革后法定退休年龄为${age}岁${month % 12}月</p>
+    <p>您的改革后退休时间为${retireYear}年${retireMonth}月</p>
+    `;
 }
 function resetAge() {
     document.getElementById('birthYear').value = '';
@@ -152,47 +156,39 @@ function resetAge() {
 
 //投资计算器
 let currentPeriod = 1;
-let cashFlows = [];      // 存储每期的现金流
+let cashFlows = [];      // 存储每期现金流
 const NPVResult = document.getElementById('NPVResult');
 const saveButton = document.getElementById('saveButton');
 const cashFlowInput = document.getElementById('cashFlowInput');
-
-
+//保存当期现金流
 function saveCashFlow() {
-    console.log('saveCashFlow 被调用'); // 确认是否触发了函数
-    const cashFlowValue = Number(cashFlowInput.value); // 获取当前输入框的值
+    const cashFlowValue = Number(cashFlowInput.value);
     const nper = Number(document.getElementById('nper').value);
-
-    console.log('当前现金流:', cashFlowValue); // 输出现金流的值
-    console.log('当前期数:', currentPeriod); // 输出当前期数
-
-    // 检查输入的现金流是否有效
+    
     if (currentPeriod <= nper && !isNaN(cashFlowValue)) {
-        cashFlows.push(cashFlowValue); // 将当前期的现金流保存到数组中
-        currentPeriod++; // 更新当前期数
+        cashFlows.push(cashFlowValue);
+        currentPeriod++; 
         cashFlowInput.value = '';
-        console.log('清空后的输入框:', cashFlowInput.value);
         if (currentPeriod <= nper) {
             cashFlowInput.placeholder = `请输入第${currentPeriod}期现金流`;
         }
         else {
             saveButton.innerText = '计算净现值';
-            saveButton.onclick = calculateNPV;  // 修改按钮的功能，点击后计算NPV
-            cashFlowInput.style.display = 'none'; // 隐藏输入框
+            saveButton.onclick = calculateNPV;  // 按钮由“保存”变为“计算”
+            cashFlowInput.style.display = 'none';
         }
-    } else {
-        alert('请输入有效的现金流');
-    }
+    } 
+    else { alert('请输入有效的现金流'); }
 }
-
 function calculateNPV() {
     let initialCashFlow = Number(document.getElementById('initialCashFlow').value);
     const rate = Number(document.getElementById('rate').value);
     for (let i = 0; i < cashFlows.length; i++) {
-        initialCashFlow += cashFlows[i] / Math.pow((1 + rate), i + 1);
+        initialCashFlow += cashFlows[i] / Math.pow((1 + rate), i + 1);//现金流贴现公式
     }
     NPVResult.textContent = `净现值为: ${Math.round(initialCashFlow)}`;
 }
+
 
 //税收计算器
 function calculateTax() {
@@ -230,20 +226,16 @@ function calculateDAC() {
     const monthlyInvestment = Number(document.getElementById('monthly-investment').value);
     const investmentPeriod = Number(document.getElementById('investment-period').value);
     const annualReturnRate = Number(document.getElementById('annual-return-rate').value) / 100;
-
     if (isNaN(monthlyInvestment) || isNaN(investmentPeriod) || isNaN(annualReturnRate)) {
         alert("请输入有效的数值！");
         return;
     }
-
     let totalAmount = 0;
     let monthlyReturnRate = Math.pow(1 + annualReturnRate, 1 / 12) - 1;
-
     for (let i = 0; i < investmentPeriod; i++) {
         // 每个月的投资金额加上之前投资的复利增长
         totalAmount = (totalAmount + monthlyInvestment) * (1 + monthlyReturnRate);
     }
-
     DACresult.textContent = `定投 ${investmentPeriod} 个月后的累计金额为: ${totalAmount.toFixed(2)} 元`;
 }
 
@@ -309,89 +301,117 @@ function calculateBudget() {
     const totalExpenses = fixedExpenses + variableExpenses;
     const savingsNeeded = savingsTarget - (totalIncome - totalExpenses);
 
-    const resultDiv = document.getElementById('BudgetResult');
-    resultDiv.innerHTML = `  
-        <p>总收入: ${totalIncome.toFixed(2)} 元;总支出: ${totalExpenses.toFixed(2)} 元；需要节省的金额: ${savingsNeeded.toFixed(2)} 元</p>   
+document.getElementById('budgetResult').innerHTML = `  
+        <p>总收入: ${totalIncome.toFixed(2)} 元</p>
+        <p>总支出: ${totalExpenses.toFixed(2)} 元</p>
+        <p>需要节省的金额: ${savingsNeeded.toFixed(2)} 元</p>   
     `;
 }
 
-// 定义每个省份的五险一金缴费比例（假设比例为企业缴纳部分的百分比）
-const rates = {
-    "beijing": {
-        "pension": 0.16,  // 养老保险
-        "medical": 0.1,   // 医疗保险
-        "unemployment": 0.005, // 失业保险
-        "injury": 0.002,  // 工伤保险
-        "maternity": 0.008, // 生育保险
-        "housing": 0.12   // 住房公积金
-    },
-    "shanghai": {
-        "pension": 0.16,
-        "medical": 0.095,
-        "unemployment": 0.005,
-        "injury": 0.002,
-        "maternity": 0.008,
-        "housing": 0.07
-    },
-    "guangdong": {
-        "pension": 0.14,
-        "medical": 0.08,
-        "unemployment": 0.005,
-        "injury": 0.002,
-        "maternity": 0.008,
-        "housing": 0.05
-    },
-    "sichuan": {
-        "pension": 0.18,
-        "medical": 0.09,
-        "unemployment": 0.005,
-        "injury": 0.002,
-        "maternity": 0.01,
-        "housing": 0.06
+
+//五险一金
+let insuranceData = {};
+let housingFundData = {};
+//读取excel表中的社保和公积金数据信息
+window.onload = function() {
+    fetchExcelData('/data/social.xlsx');
+}
+function fetchExcelData(url) {
+    fetch(url)
+        .then(response => response.arrayBuffer())
+        .then(data => {
+            const workbook = XLSX.read(data, { type: 'array' });
+            // 社保数据（第1个工作表）
+            const insuranceSheet = workbook.Sheets[workbook.SheetNames[0]];
+            insuranceData = XLSX.utils.sheet_to_json(insuranceSheet);
+            // 公积金数据（第2个工作表）
+            const housingFundSheet = workbook.Sheets[workbook.SheetNames[1]];
+            housingFundData = XLSX.utils.sheet_to_json(housingFundSheet);
+        })
+        .catch(error => {
+            console.error("读取Excel文件失败:", error);
+        });
+}
+//社保计算器
+function updateInsuranceInfo() {
+    const city = document.getElementById("city").value;
+    const cityData = insuranceData.find(row => row['城市'] === city);
+    if (cityData) {
+        document.getElementById("baseRangeInfo").innerHTML = 
+            `该城市的社保基数下限为 ${cityData['社保基数下限']} 元，上限为 ${cityData['社保基数上限']} 元。`;
     }
-};
-
-// 获取HTML元素
-const provinceSelect = document.getElementById("province");
-const salaryInput = document.getElementById("salary");
-const resultDiv = document.getElementById("InsuranceResult");
-const InsuranceResult = document.getElementById('InsuranceResult');
-
-// 添加点击事件处理器
-function calculateInsurance(){
-    const province = provinceSelect.value; // 获取选择的省份
-    const salary = parseFloat(salaryInput.value); // 获取输入的月薪并转换为数字
-
+}
+function calculateInsurance() {
+    const city = document.getElementById("city").value;
+    const salary = parseFloat(document.getElementById("salary").value);
+    const cityData = insuranceData.find(row => row['城市'] === city);
     if (isNaN(salary) || salary <= 0) {
-        resultDiv.textContent = "请输入有效的月薪！";
+        document.getElementById("result").innerHTML = "请输入有效的工资基数。";
         return;
     }
-
-    // 获取对应省份的五险一金比例
-    const provinceRates = rates[province];
+   if(cityData){
+    const actualBase = Math.max(cityData['社保基数下限'], Math.min(cityData['社保基数上限'], salary));
     
-    // 计算各项费用
-    const pension = salary * provinceRates.pension;
-    const medical = salary * provinceRates.medical;
-    const unemployment = salary * provinceRates.unemployment;
-    const injury = salary * provinceRates.injury;
-    const maternity = salary * provinceRates.maternity;
-    const housing = salary * provinceRates.housing;
+    const p_Pension = actualBase * cityData['养老个人比例'];
+    const e_Pension = actualBase * cityData['养老单位比例'];
+    const p_Medical = actualBase * cityData['医疗个人比例'];
+    const e_Medical = actualBase * cityData['医疗单位比例'];
+    const p_Unemployment = actualBase * cityData['失业个人比例'];
+    const e_Unemployment = actualBase * cityData['失业单位比例'];
+    const e_Injury = actualBase * cityData['工伤单位比例'];
+    const e_Maternity = actualBase * cityData['生育单位比例'];
+    const p_Total = p_Pension + p_Medical + p_Unemployment;
+    const e_Total = e_Pension + e_Medical + e_Unemployment + e_Injury + e_Maternity;
+    const totalContribution = p_Total + e_Total;
 
-    // 计算总额
-    const total = pension + medical + unemployment + injury + maternity + housing;
-    resultDiv.innerHTML = `
-        <p>养老保险: ${pension.toFixed(2)} 元</p>
-        <p>医疗保险: ${medical.toFixed(2)} 元</p>
-        <p>失业保险: ${unemployment.toFixed(2)} 元</p>
-        <p>工伤保险: ${injury.toFixed(2)} 元</p>
-        <p>生育保险: ${maternity.toFixed(2)} 元</p>
-        <p>住房公积金: ${housing.toFixed(2)} 元</p>
-        <p><strong>总计: ${total.toFixed(2)} 元</strong></p>
+    document.getElementById("insuranceResult").innerHTML = `
+        <p>个人总缴费：${p_Total.toFixed(2)} 元</p>
+        <p>单位总缴费：${e_Total.toFixed(2)} 元</p>
+        <p>总缴费：${totalContribution.toFixed(2)} 元</p>
     `;
-};
+   }
+}
+//公积金计算器
+function updateHousingFundInfo() {
+    console.log(housingFundData);
+    const city = document.getElementById("housingCity").value;
+    const cityData = housingFundData.find(row => row['城市'] === city);
+    console.log(cityData);  // 确认获取的数据是否正确
+    if (cityData) {
+        document.getElementById("baseRangeInfo").innerHTML = 
+            `该城市的公积金基数下限为 ${cityData['公积金基数下限']} 元，上限为 ${cityData['公积金基数上限']} 元。`;
+        const rateSelection = document.getElementById("rateSelection");
+        rateSelection.innerHTML = `
+            <option value="low">缴费比例：${cityData['缴费比例低'] * 100}%</option>
+            <option value="high">缴费比例：${cityData['缴费比例高'] * 100}%</option>
+        `;
+    }
+}
+console.log(city);  // 输出用户选择的城市
+function calculateHousingFund() {
+    const city = document.getElementById("housingCity").value;
+    const salary = parseFloat(document.getElementById("housingSalary").value);
+    const rateSelection = document.getElementById("rateSelection").value;
+    const cityData = housingFundData.find(row => row['城市'] === city);
 
+    if (isNaN(salary) || salary <= 0) {
+        document.getElementById("housingResult").innerHTML = "请输入有效的工资基数。";
+        return;
+    }
+    if (cityData) {
+        const actualBase = Math.max(cityData['公积金基数下限'], Math.min(cityData['公积金基数上限'], salary));
+        const selectedRate = rateSelection === "low" ? cityData['缴费比例低'] : cityData['缴费比例高'];
 
+        const personalContribution = actualBase * selectedRate;
+        const employerContribution = actualBase * selectedRate;
+
+        document.getElementById("housingResult").innerHTML = `
+            <p>个人缴费：${personalContribution.toFixed(2)} 元</p>
+            <p>单位缴费：${employerContribution.toFixed(2)} 元</p>
+            <p>总缴费：${(personalContribution + employerContribution).toFixed(2)} 元</p>
+        `;
+    }
+}
 
 
 // 打开模态窗口并显示相应的计算器
@@ -430,13 +450,14 @@ function openCalculator(calculater) {
         document.getElementById('loan-calculater-content').style.display = 'block';
     }
     else if (calculater === '预算管理计算器') {
-        document.getElementById('Budget-calculater-content').style.display = 'block';
+        document.getElementById('budget-calculater-content').style.display = 'block';
     }
-    else if (calculater === '五险一金计算器') {
-        document.getElementById('Insurance-calculater-content').style.display = 'block';
+    else if (calculater === '社保计算器') {
+        document.getElementById('insurance-calculater-content').style.display = 'block';
     }
-
-    // 根据需要添加其他计算器的内容显示逻辑
+    else {
+        document.getElementById('housingFund-calculater-content').style.display = 'block';
+    }
 }
 
 // 关闭模态窗口并恢复背景
@@ -463,9 +484,12 @@ function closeModal() {
     document.getElementById('DACResult').textContent = '';
     document.getElementById('loan-calculater-content').style.display = 'none';
     document.getElementById('loanResult').textContent = '';
-    document.getElementById('Budget-calculater-content').style.display = 'none';
-    document.getElementById('BudgetResult').textContent = '';
-    document.getElementById('Insurance-calculater-content').style.display = 'none';
+    document.getElementById('budget-calculater-content').style.display = 'none';
+    document.getElementById('budgetResult').textContent = '';
+    document.getElementById('insurance-calculater-content').style.display = 'none';
+    document.getElementById('insuranceResult').textContent = '';
+    document.getElementById('housingFund-calculater-content').style.display = 'none';
+    document.getElementById('housingResult').textContent = '';
     // 可以添加其他计算器内容的隐藏逻辑，例如 document.getElementById('other-calculator-content').style.display = 'none';
 }
 1
