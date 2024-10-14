@@ -2,27 +2,6 @@
 const appId = '431402e48d944926be7d0b1c49836008';
 
 // 基础加减乘除计算器
-// 点击括号按钮时弹出选择框
-document.getElementById('bracket-button').addEventListener('click', function(e) {
-    let popup = document.getElementById('bracket-popup');
-    popup.style.display = 'block';
-
-    // 根据按钮位置动态定位弹窗
-    let rect = e.target.getBoundingClientRect();
-    popup.style.left = `${rect.left}px`;
-    popup.style.top = `${rect.bottom + window.scrollY}px`;
-});
-
-// 点击页面其他地方时关闭弹窗
-document.addEventListener('click', function(e) {
-    let popup = document.getElementById('bracket-popup');
-    let bracketButton = document.getElementById('bracket-button');
-
-    if (!popup.contains(e.target) && e.target !== bracketButton) {
-        popup.style.display = 'none';
-    }
-});
-
 // 添加内容到屏幕
 function appendToScreen(value) {
     document.getElementById('calculator-screen').value += value;
@@ -192,17 +171,27 @@ function calculateNPV() {
 
 //税收计算器
 function calculateTax() {
-    const income = Number(document.getElementById('income').value);
-
-    if (isNaN(income)) {
+      const personalIncome = Number(document.getElementById('personalIncome').value);
+      const unexpectedIncome = Number(document.getElementById('unexpectedIncome').value);
+    
+      if (isNaN(personalIncome) || isNaN(unexpectedIncome)) {
         alert("请输入有效的收入金额！");
         return;
-    }
-    // 个税起征点为5000元
-    const taxableIncome = Math.max(0, income);
-
-    // 税率及速算扣除数
-    const taxBrackets = [
+      }
+      // 检查个人所得是否达到起征点 
+      const threshold = 5000;
+      if (personalIncome < threshold) {
+        alert("个人所得未达到起征点，无需缴纳个人所得税！");
+        document.getElementById('taxResult').textContent = ""; // 清空之前的结果 
+        return; // 退出函数，不执行后续计算 
+      }
+    
+      // 计算个人所得的税额 
+      let personalTax = 0;
+      const taxablePersonalIncome = Math.max(0, personalIncome - 5000); // 个人所得起征点为5000元 
+    
+      // 税率及速算扣除数 
+      const personalTaxBrackets = [
         { max: 3000, rate: 0.03, deduction: 0 },
         { max: 12000, rate: 0.1, deduction: 210 },
         { max: 25000, rate: 0.2, deduction: 1410 },
@@ -210,16 +199,21 @@ function calculateTax() {
         { max: 55000, rate: 0.3, deduction: 4410 },
         { max: 80000, rate: 0.35, deduction: 7160 },
         { rate: 0.45, deduction: 15160 }
-    ];
-    for (let i = 0; i < taxBrackets.length; i++) {
-        if (taxableIncome <= taxBrackets[i].max || !taxBrackets[i].max) {
-            const tax = (taxableIncome * taxBrackets[i].rate) - taxBrackets[i].deduction;
-            taxResult.textContent = "应缴个人所得税: " + (Math.max(tax, 0)).toFixed(2) + " 元";
-            return;
+      ];
+      for (let i = 0; i < personalTaxBrackets.length; i++) {
+        if (personalTaxBrackets[i].max !== undefined && taxablePersonalIncome > personalTaxBrackets[i].max) {
+          continue; // 如果当前收入超过此区间的最大值，则继续检查下一个区间 
         }
+        // 对于最后一个区间，或者当前收入在此区间内的情况 
+        personalTax = (taxablePersonalIncome * personalTaxBrackets[i].rate) - personalTaxBrackets[i].deduction;
+        break; // 找到适用的税率区间后退出循环 
+      }
+      // 计算意外所得的税额（20%税率） 
+      const unexpectedTax = unexpectedIncome * 0.2;
+      const totalTax = personalTax + unexpectedTax;
+      document.getElementById('taxResult').textContent = `应缴个人所得税: ${totalTax.toFixed(2)} 元`;
+    
     }
-
-}
 
 //DAC计算器
 function calculateDAC() {
@@ -236,58 +230,63 @@ function calculateDAC() {
         // 每个月的投资金额加上之前投资的复利增长
         totalAmount = (totalAmount + monthlyInvestment) * (1 + monthlyReturnRate);
     }
-    DACresult.textContent = `定投 ${investmentPeriod} 个月后的累计金额为: ${totalAmount.toFixed(2)} 元`;
+    DACResult.textContent = `定投 ${investmentPeriod} 个月后的累计金额为: ${totalAmount.toFixed(2)} 元`;
 }
 
 //贷款还款计算器
-function calculateloan() {
+function calculateloan() {  
     // 获取输入值  
     const loanAmount = parseFloat(document.getElementById("loanAmount").value); // 贷款总额  
     const annualInterestRate = parseFloat(document.getElementById("annualInterestRate").value); // 年利率  
-    const loanTermInYears = parseInt(document.getElementById("loanTermInYears").value); // 贷款期限（年）  
-    const monthlyPayment = parseFloat(document.getElementById("monthlyPayment").value); // 每月还款额（如果是等额本息还款）  
+    const loanTermInYears = parseInt(document.getElementById("loanTermInYears").value); // 贷款期限（年）    
     const prepaymentAmount = parseFloat(document.getElementById("prepaymentAmount").value); // 提前还款金额  
     const monthsPaid = parseInt(document.getElementById("monthsPaid").value); // 已还款月数  
-
+  
     // 检查输入是否有效  
-    if (isNaN(loanAmount) || isNaN(annualInterestRate) || isNaN(loanTermInYears) || isNaN(monthlyPayment) || isNaN(prepaymentAmount) || isNaN(monthsPaid)) {
-        alert("请输入有效的数字！");
-        return;
-    }
-
+    if (isNaN(loanAmount) || isNaN(annualInterestRate) || isNaN(loanTermInYears)  || isNaN(prepaymentAmount) || isNaN(monthsPaid)) {  
+        alert("请输入有效的数字！");  
+        return;  
+    }  
+  
     // 利率转换为月利率  
-    const monthlyInterestRate = annualInterestRate / 12 / 100;
-
+    const monthlyInterestRate = annualInterestRate / 12 / 100;  
+  
     // 计算总的还款月数  
-    const totalMonths = loanTermInYears * 12;
-
-    // 剩余本金计算（等额本息还款方式）   
-    const remainingPrincipal = loanAmount;
-    for (let i = 0; i < monthsPaid; i++) {
-        var monthlyInterest = remainingPrincipal * monthlyInterestRate;
-        remainingPrincipal -= (monthlyPayment - monthlyInterest);
-    }
-    remainingPrincipal -= prepaymentAmount;
-
-    for (let i = monthsPaid; i < totalMonths; i++) {
-        if (remainingPrincipal <= 0) {
-            break;
-        }
-        var monthlyInterest = remainingPrincipal * monthlyInterestRate;
-        if (monthlyInterest > remainingPrincipal) {
-            monthlyInterest = remainingPrincipal; // 防止利息超过剩余本金  
-        }
-        remainingPrincipal -= monthlyInterest;
-    }
-
-    // 如果剩余本金小于0，则设置为0  
-    if (remainingPrincipal < 0) {
-        remainingPrincipal = 0;
-    }
-
+    const totalMonths = loanTermInYears * 12;  
+  
+    // 使用等额本息还款公式计算每月还款额（这里其实已经给了monthlyPayment，但为了完整性还是列出）  
+     const monthlyPayment = (loanAmount * monthlyInterestRate * Math.pow(1 + monthlyInterestRate, totalMonths)) / (Math.pow(1 + monthlyInterestRate, totalMonths) - 1);  
+  
+    // 剩余本金计算  
+    let remainingPrincipal = loanAmount;  
+    for (let i = 0; i < monthsPaid; i++) {  
+        const monthlyInterest = remainingPrincipal * monthlyInterestRate;  
+        const principalPaid = monthlyPayment - monthlyInterest;  
+        remainingPrincipal -= principalPaid;  
+    }  
+  
+    // 处理提前还款  
+    if (monthsPaid > 0 && prepaymentAmount > 0) {  
+        remainingPrincipal -= prepaymentAmount;  
+        // 如果提前还款后没有剩余本金了，则设置为0  
+        if (remainingPrincipal < 0) {  
+            remainingPrincipal = 0;  
+        }  
+    }  
+  
+    // 后续月份的利息计算（实际上如果提前还款后已经还清了，这里就不需要再计算了）  
+    // 但为了完整性，我们还是保留这部分代码，并添加了一个判断来提前退出循环  
+    for (let i = monthsPaid + 1; i <= totalMonths; i++) {  
+        if (remainingPrincipal <= 0) {  
+            break;  
+        }  
+        const monthlyInterest = remainingPrincipal * monthlyInterestRate;  
+    }  
+  
     // 显示结果  
-    document.getElementById("loanResult").innerText = "剩余本金: " + remainingPrincipal.toFixed(2) + " 元";
+    document.getElementById("loanResult").innerText = "剩余本金: " + remainingPrincipal.toFixed(2) + " 元";  
 }
+
 
 //预算管理计算器
 function calculateBudget() {
@@ -302,9 +301,7 @@ function calculateBudget() {
     const savingsNeeded = savingsTarget - (totalIncome - totalExpenses);
 
 document.getElementById('budgetResult').innerHTML = `  
-        <p>总收入: ${totalIncome.toFixed(2)} 元</p>
-        <p>总支出: ${totalExpenses.toFixed(2)} 元</p>
-        <p>需要节省的金额: ${savingsNeeded.toFixed(2)} 元</p>   
+        <p>总收入: ${totalIncome.toFixed(2)} 元;总支出: ${totalExpenses.toFixed(2)} 元;需要节省的金额: ${savingsNeeded.toFixed(2)} 元</p>   
     `;
 }
 
@@ -492,4 +489,3 @@ function closeModal() {
     document.getElementById('housingResult').textContent = '';
     // 可以添加其他计算器内容的隐藏逻辑，例如 document.getElementById('other-calculator-content').style.display = 'none';
 }
-1

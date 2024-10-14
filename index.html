@@ -17,31 +17,26 @@
                 <h3>基础计算器</h3>
                 <input type="text" id="calculator-screen" disabled>
                 <div class="buttons">
-                <button onclick="clearScreen()">C</button>
-                <button onclick="deleteFromScreen()">←</button>
-                <button onclick="appendToScreen('%')">%</button>
-                <button onclick="appendToScreen('+')">+</button>
-                <button onclick="appendToScreen('7')">7</button>
-                <button onclick="appendToScreen('8')">8</button>
-                <button onclick="appendToScreen('9')">9</button>
-                <button onclick="appendToScreen('-')">-</button>
-                <button onclick="appendToScreen('4')">4</button>
-                <button onclick="appendToScreen('5')">5</button>
-                <button onclick="appendToScreen('6')">6</button>
-                <button onclick="appendToScreen('*')">*</button>
-                <button onclick="appendToScreen('1')">1</button>
-                <button onclick="appendToScreen('2')">2</button>
-                <button onclick="appendToScreen('3')">3</button>
-                <button onclick="appendToScreen('/')">/</button>
-                <button onclick="appendToScreen('.')">.</button>
-                <button onclick="appendToScreen('0')">0</button>
-                <button id="bracket-button">(/)</button>
-                <div id="bracket-popup" class="popup">
+                    <button onclick="clearScreen()">C</button>
+                    <button onclick="appendToScreen('.')">.</button>
+                    <button onclick="deleteFromScreen()">←</button>
+                    <button onclick="appendToScreen('+')">+</button>
+                    <button onclick="appendToScreen('7')">7</button>
+                    <button onclick="appendToScreen('8')">8</button>
+                    <button onclick="appendToScreen('9')">9</button>
+                    <button onclick="appendToScreen('-')">-</button>
+                    <button onclick="appendToScreen('4')">4</button>
+                    <button onclick="appendToScreen('5')">5</button>
+                    <button onclick="appendToScreen('6')">6</button>
+                    <button onclick="appendToScreen('*')">*</button>
+                    <button onclick="appendToScreen('1')">1</button>
+                    <button onclick="appendToScreen('2')">2</button>
+                    <button onclick="appendToScreen('3')">3</button>
+                    <button onclick="appendToScreen('/')">/</button>
                     <button onclick="appendToScreen('(')">(</button>
-                    <button onclick="appendToScreen(')')"> )</button>
-                </div>
-                <button onclick="calculateResult()">=</button>
-                <br>
+                    <button onclick="appendToScreen('0')">0</button>
+                    <button onclick="appendToScreen(')')">)</button>
+                    <button onclick="calculateResult()">=</button>
                 </div>
             </div>
         </div>
@@ -144,7 +139,8 @@
                 <!--税收计算器-->
                 <div id="tax-calculater-content" style="display : none;">
                     <h3>税收计算器</h3>
-                    <input type="number" id="income" class="input" placeholder="请输入月工资应交税金额">
+                    <input type="number" id="personalIncome" class="input" placeholder="请输入应纳税收入">
+                    <input type="number" id="unexpectedIncome" class="input" placeholder="请输入意外所得">
                     <button id="tax-button" class="Basic-button" onclick="calculateTax()">计算应缴税收</button>
                     <div id="taxResult" class="Result"></div>
                 </div>
@@ -163,7 +159,6 @@
                     <input type="number" id="loanAmount" class="input" placeholder="贷款本金 (元)">
                     <input type="number" id="annualInterestRate" class="input" placeholder="年利率 (%)">
                     <input type="number" id="loanTermInYears" class="input" placeholder="贷款期限 (年)">
-                    <input type="number" id="monthlyPayment" class="input" placeholder="每月还款额">
                     <input type="number" id="prepaymentAmount" class="input" placeholder="提前还款金额 (元)">
                     <input type="number" id="monthsPaid" class="input" placeholder="已还款月数">
                     <button id="loan-button" class="Basic-button" onclick="calculateloan()">计算剩余贷款金额</button>

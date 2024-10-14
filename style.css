@@ -25,7 +25,6 @@ header h2 {
     align-items: center;
     padding-right: 20px;
 }
-
 .buttons {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -80,6 +79,26 @@ header h2 {
 .calculator button:hover {
     background-color: #38889a;
 }
+
+.button-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.button-row button {
+    width: 80px; /* 设置每个按钮为正方形 */
+    height: 80px;
+    margin: 5px; /* 可选：调整按钮间距 */
+    font-size: 24px; /* 设置按钮字体大小 */
+    border-radius: 10px; /* 设置圆角 */
+    background-color: #4BC8A5;
+}
+
+.chang {
+    flex-grow: 2; /* 占据两个按钮的宽度 */
+}
+
 
 /* 右侧功能计算器圆形布局，70% */
 .right-container {
@@ -198,7 +217,7 @@ header h2 {
     background-color: #363333;
     padding: 20px;
     border-radius: 10px;
-    width: 380px;
+    width: 270px;
     height: 500px;
     position: relative;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -213,10 +232,10 @@ header h2 {
     font-size: 24px;
     color: #ffffff;
 }
-/* 货币换算器容器样式 */
-.inputCurrency {
+
+#amount{
     display: flex;
-    width:100px;
+    width:170px;
     padding: 10px;
     font-size: 16px;
     border-radius: 5px;
@@ -247,19 +266,20 @@ header h2 {
 .input-group {
     display: flex;
     align-items: center;
-    margin:10px;
-    line-height:normal;
+    margin-left: 10px;
 }
-.inputSalary {
+
+#basicSalary{
     display: flex;
-    width: 50px;
+    width: 200px;
     padding: 10px;
     font-size: 16px;
     border-radius: 5px;
     border: 1px solid #ccc;
-}
+    margin-left: 10px;
+} 
 .save {
-    padding: 10px;
+    padding: 8.5px;
     background-color: #4fe0b5;
     color: rgb(0, 0, 0);
     border: 1px;
@@ -351,7 +371,7 @@ header h2 {
 
 .inputRate {
     display: flex;
-    width: 170px;
+    width: 50%;
     /* 输入框的宽度 */
     padding: 10px;
     /* 输入框内部的填充 */
@@ -361,7 +381,7 @@ header h2 {
     /* 设置圆角边框 */
     border: 1px solid #ccc;
     /* 边框样式 */
-    margin: 10px;
+    margin-right: 180px;
 }
 
 .cashFlow-group {
@@ -376,11 +396,13 @@ header h2 {
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
-    width: 170px;
-    margin: 10px;
+    width: 120px;
+    margin: 8px;
     margin-bottom: 12px;
-    ;
+    margin-left: 3%;
+    
 }
+
 
 .input {
     width: 1px;
@@ -388,7 +410,7 @@ header h2 {
     font-size: 16px;
     border-radius: 5px;
     border: 1px solid #ccc;
-    margin: 10px;
+    margin-bottom: 5px;
 }
 
 .Basic-button {
