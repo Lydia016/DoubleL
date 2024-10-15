@@ -2,7 +2,7 @@ body {
     font-family: "SimSun", sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #141313;
+    background-color: #1f1d1d;
 }
 header h2 {
     font-size: 28px;
@@ -160,7 +160,7 @@ header h2 {
 .card:nth-of-type(3) {
     width: 90px;
     height: 90px;
-    transform: rotate(72deg) translate(235px) rotate(-72deg);
+    transform: rotate(72deg) translate(230px) rotate(-72deg);
 }
 .card:nth-of-type(4) {
     width: 100px;
@@ -178,8 +178,8 @@ header h2 {
     transform: rotate(180deg) translate(250px) rotate(-180deg);
 }
 .card:nth-of-type(7) {
-    width: 90px;
-    height: 90px;
+    width: 97px;
+    height: 97px;
     transform: rotate(216deg) translate(240px) rotate(-216deg);
 }
 .card:nth-of-type(8) {
@@ -218,7 +218,7 @@ header h2 {
     padding: 20px;
     border-radius: 10px;
     width: 270px;
-    height: 500px;
+    height: 510px;
     position: relative;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
@@ -262,11 +262,22 @@ header h2 {
     width: 170px;
     margin: 10px;
 }
-/*工资计算器样式*/
+#salary-calculater-content{
+    width:100%;
+    max-width: 260px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    margin-bottom: 10px;
+    font-size: 20px;
+    color: white;
+}
 .input-group {
     display: flex;
     align-items: center;
-    margin-left: 10px;
+    width:100%;
 }
 
 #basicSalary{
@@ -276,8 +287,11 @@ header h2 {
     font-size: 16px;
     border-radius: 5px;
     border: 1px solid #ccc;
-    margin-left: 10px;
 } 
+.inputSalary{
+    display:flex;
+    width:400%;
+}
 .save {
     padding: 8.5px;
     background-color: #4fe0b5;
@@ -286,25 +300,19 @@ header h2 {
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
-    width: 60px;
+    width: auto;
     margin-left: 10px;
+    white-space: nowrap;
 }
 .calculate-button {
     padding: 10px;
-    /* 设置按钮的内边距 */
     background-color: #4fe0b5;
-    /* 按钮背景颜色 */
     color: rgb(0, 0, 0);
-    /* 按钮文字颜色 */
     border: 1px;
-    /* 移除默认边框 */
     border-radius: 5px;
-    /* 按钮圆角 */
     cursor: pointer;
-    /* 鼠标悬停时显示手形 */
     font-size: 16px;
     width: 170px;
-    margin: 10px;
 }
 .convert-button:hover ,
 .save:hover,
@@ -351,43 +359,40 @@ header h2 {
     width: 170px;
     margin: 10px;
 }
-
+#investment-calculater-content{
+    width:100%;
+    max-width: 240px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    margin-bottom: 10px;
+    font-size: 20px;
+    color: white;
+}
 .typeBox {
     display: inline-block;
     width: 194px;
-    /* 选择框的宽度 */
     padding: 10px;
-    /* 选择框内部的填充 */
     font-size: 16px;
-    /* 设置字体大小 */
     border-radius: 5px;
-    /* 设置圆角边框 */
     border: 1px solid #ccc;
-    /* 边框样式 */
     margin-left: 10px;
 }
-
-/*投资计算器*/
-
 .inputRate {
     display: flex;
-    width: 50%;
-    /* 输入框的宽度 */
+    width: 500%;
     padding: 10px;
-    /* 输入框内部的填充 */
     font-size: 16px;
-    /* 设置字体大小 */
     border-radius: 5px;
-    /* 设置圆角边框 */
     border: 1px solid #ccc;
-    /* 边框样式 */
-    margin-right: 180px;
 }
-
 .cashFlow-group {
     display: flex;
+    align-items: center; 
+    width:100%;
 }
-
 .saveButton {
     padding: 10px;
     background-color: #4fe0b5;
@@ -396,23 +401,20 @@ header h2 {
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
-    width: 120px;
-    margin: 8px;
-    margin-bottom: 12px;
-    margin-left: 3%;
-    
+    width:auto;
+    margin-left: 5px;
+    white-space: nowrap;
 }
 
 
-.input {
-    width: 1px;
-    padding: 10px;
+ .input {
+    width: 10%;
+    flex:none;
     font-size: 16px;
     border-radius: 5px;
     border: 1px solid #ccc;
-    margin-bottom: 5px;
-}
-
+    margin-bottom: 1px;
+} 
 .Basic-button {
     padding: 10px;
     background-color: #4fe0b5;
@@ -421,14 +423,21 @@ header h2 {
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
-    width: 170px;
-    margin-top: 10px;
-    margin-left: 10px;
+    width: 75%;
 }
-#currency-converter-content,
-#salary-calculater-content,
+#currency-converter-content{
+    width:100%;
+    max-width: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    margin-bottom: 10px;
+    font-size: 20px;
+    color: white;
+}
 #retirement-age-calculater-content,
-#investment-calculater-content,
 #tax-calculater-content,
 #DAC-calculater-content,
 #loan-calculater-content,
@@ -436,6 +445,8 @@ header h2 {
 #insurance-calculater-content,
 #housingFund-calculater-content
 {
+    width:100%;
+    max-width: 230px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -448,7 +459,7 @@ header h2 {
 
 label {
     font-size: 16px;
-    color: #555;
+    color: #b3b3b3;
     margin-bottom: 8px;
     display: block;
 }

@@ -375,7 +375,7 @@ function updateHousingFundInfo() {
     const cityData = housingFundData.find(row => row['城市'] === city);
     console.log(cityData);  // 确认获取的数据是否正确
     if (cityData) {
-        document.getElementById("baseRangeInfo").innerHTML = 
+        document.getElementById("baseRangeInfo2").innerHTML = 
             `该城市的公积金基数下限为 ${cityData['公积金基数下限']} 元，上限为 ${cityData['公积金基数上限']} 元。`;
         const rateSelection = document.getElementById("rateSelection");
         rateSelection.innerHTML = `
@@ -384,7 +384,6 @@ function updateHousingFundInfo() {
         `;
     }
 }
-console.log(city);  // 输出用户选择的城市
 function calculateHousingFund() {
     const city = document.getElementById("housingCity").value;
     const salary = parseFloat(document.getElementById("housingSalary").value);
