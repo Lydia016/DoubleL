@@ -49,7 +49,6 @@ async function convertCurrency() {
         console.error('Error fetching exchange rates:', error);
         conversionResult.textContent = '无法获取汇率，请稍后重试。';
     }
-    document.getElementById('amount').value = '';
 }
 
 
@@ -414,7 +413,7 @@ function openCalculator(calculater) {
     else if (calculater === '退休年龄计算器') {
         document.getElementById('retirement-age-calculater-content').style.display = 'block';
     }
-    else if (calculater === '投资计算器') {
+    else if (calculater === '净现值计算器') {
         document.getElementById('investment-calculater-content').style.display = 'block';
     }
     else if (calculater === '税收计算器') {
@@ -443,6 +442,7 @@ function closeModal() {
     document.querySelector('.main-container').style.filter = 'none';
 
     document.getElementById('currency-converter-content').style.display = 'none';
+    document.getElementById('amount').value = '';
     document.getElementById('conversionResult').textContent = '';
     document.getElementById('salary-calculater-content').style.display = 'none';
     document.getElementById('salaryResult').textContent = '';
