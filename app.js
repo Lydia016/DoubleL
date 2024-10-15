@@ -1,26 +1,19 @@
-//汇率API
-const appId = '431402e48d944926be7d0b1c49836008';
 
 // 基础加减乘除计算器
-// 添加内容到屏幕
 function appendToScreen(value) {
     document.getElementById('calculator-screen').value += value;
-    // 输入完成后关闭弹窗
     document.getElementById('bracket-popup').style.display = 'none';
 }
-
 function clearScreen() {
     document.getElementById('calculator-screen').value = '';
 }
-
 function deleteFromScreen() {
     let screen = document.getElementById('calculator-screen');
     let currentValue = screen.value;
     if (currentValue.length > 0) {
-        screen.value = currentValue.slice(0, -1); // 删除最后一个字符  
+        screen.value = currentValue.slice(0, -1);   
     }
 }
-
 function calculateResult() {
     try {
         let result = eval(document.getElementById('calculator-screen').value);
@@ -31,11 +24,8 @@ function calculateResult() {
 }
 
 
-
-
-
-
 // 货币换算器
+const appId = '431402e48d944926be7d0b1c49836008'; //汇率API
 async function convertCurrency() {
     const amount = document.getElementById('amount').value;
     const fromCurrency = document.getElementById('fromCurrency').value;
@@ -133,7 +123,7 @@ function resetAge() {
 }
 
 
-//投资计算器
+//净现值计算器
 let currentPeriod = 1;
 let cashFlows = [];      // 存储每期现金流
 const NPVResult = document.getElementById('NPVResult');
@@ -410,22 +400,13 @@ function calculateHousingFund() {
 }
 
 
-// 打开模态窗口并显示相应的计算器
+// 多功能计算器显示
 function openCalculator(calculater) {
-    // 显示模态窗口
     document.getElementById('calculator-modal').style.display = 'flex';
-
-    // 虚化主内容，避免模态窗口也被虚化
     document.querySelector('.main-container').style.filter = 'blur(5px)';
 
-    // 重置模态窗口的内容（隐藏所有其他计算器）
-    document.getElementById('currency-converter-content').style.display = 'none';
-    // 可以添加其他计算器的内容隐藏逻辑，例如 document.getElementById('other-calculator-content').style.display = 'none';
-
-    // 显示货币换算器
     if (calculater === '货币换算器') {
         document.getElementById('currency-converter-content').style.display = 'block';
-        //document.getElementById('calculator-title').innerText = '货币换算器';
     }
     else if (calculater === '工资计算器') {
         document.getElementById('salary-calculater-content').style.display = 'block';
@@ -456,15 +437,11 @@ function openCalculator(calculater) {
     }
 }
 
-// 关闭模态窗口并恢复背景
+// 关闭窗口
 function closeModal() {
-    // 关闭模态窗口
     document.getElementById('calculator-modal').style.display = 'none';
-
-    // 取消背景虚化
     document.querySelector('.main-container').style.filter = 'none';
 
-    // 隐藏货币换算器（或者其他打开的内容）
     document.getElementById('currency-converter-content').style.display = 'none';
     document.getElementById('conversionResult').textContent = '';
     document.getElementById('salary-calculater-content').style.display = 'none';
@@ -486,5 +463,5 @@ function closeModal() {
     document.getElementById('insuranceResult').textContent = '';
     document.getElementById('housingFund-calculater-content').style.display = 'none';
     document.getElementById('housingResult').textContent = '';
-    // 可以添加其他计算器内容的隐藏逻辑，例如 document.getElementById('other-calculator-content').style.display = 'none';
+
 }
