@@ -119,6 +119,7 @@ function calculateAge() {
 function resetAge() {
     document.getElementById('birthYear').value = '';
     document.getElementById('birthMonth').value = '';
+    document.getElementById('ageResult').textContent = '';
 }
 
 
@@ -155,6 +156,10 @@ function calculateNPV() {
         initialCashFlow += cashFlows[i] / Math.pow((1 + rate), i + 1);//现金流贴现公式
     }
     NPVResult.textContent = `净现值为: ${Math.round(initialCashFlow)}`;
+    document.getElementById('initialCashFlow').value = '';
+    document.getElementById('rate').value = '';
+    document.getElementById('cashFlowInput').value = '';
+    document.getElementById('nper').value = '';
 }
 
 
@@ -447,7 +452,6 @@ function closeModal() {
     document.getElementById('salary-calculater-content').style.display = 'none';
     document.getElementById('salaryResult').textContent = '';
     document.getElementById('retirement-age-calculater-content').style.display = 'none';
-    document.getElementById('ageResult').textContent = '';
     document.getElementById('investment-calculater-content').style.display = 'none';
     document.getElementById('NPVResult').textContent = '';
     cashFlowInput.style.display = 'block';
@@ -461,7 +465,9 @@ function closeModal() {
     document.getElementById('budgetResult').textContent = '';
     document.getElementById('insurance-calculater-content').style.display = 'none';
     document.getElementById('insuranceResult').textContent = '';
+    document.getElementById("salary").value = '';
     document.getElementById('housingFund-calculater-content').style.display = 'none';
     document.getElementById('housingResult').textContent = '';
+    document.getElementById("housingSalary").value = '';
 
 }
