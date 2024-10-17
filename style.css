@@ -425,6 +425,7 @@ header h2 {
     cursor: pointer;
     font-size: 16px;
     width: 75%;
+    margin-bottom: 10px;
 }
 #currency-converter-content{
     width:100%;
